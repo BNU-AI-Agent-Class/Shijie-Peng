@@ -4,8 +4,9 @@
 
 ## 运行
 
-npm install
+```npm install
 npm run dev
+```
 
 ## 真实数据运行
 
