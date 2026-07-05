@@ -1,0 +1,20 @@
+{
+  "name": "hcai-research-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "HCAI Research Map backend and deployable static prototype.",
+  "scripts": {
+    "dev": "node src/backend/server.js",
+    "start": "node src/backend/server.js",
+    "seed": "node scripts/seed.js",
+    "maintenance:purge-seed": "node scripts/purge-seed-and-localize.js",
+    "repair:localization": "node scripts/repair-bad-localizations.js",
+    "update": "node scripts/run-update.js",
+    "backfill": "node scripts/run-backfill.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

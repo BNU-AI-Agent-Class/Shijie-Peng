@@ -1,0 +1,2914 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HCAI Research Radar · 人智交互研究方向地图</title>
+<meta name="description" content="每日追踪 HCAI、Human-AI Interaction 与 Human-Centered AI 相关论文，展示研究方向、研究问题、方法、场景和内容关系。" />
+<link rel="canonical" href="https://hcai.online/" />
+<meta property="og:title" content="HCAI Research Radar · 人智交互研究方向地图" />
+<meta property="og:description" content="每日追踪人智交互研究方向、真实论文、研究问题与内容标签。" />
+<meta property="og:url" content="https://hcai.online/" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1ece1;
+  --paper-deep:#e8e1d2;
+  --paper-light:#f7f3ea;
+  --ink:#1a1612;
+  --ink-soft:#3a342c;
+  --ink-mute:#7a7268;
+  --rule:#d4cdbc;
+  --rule-soft:#e5dfd0;
+  --accent:#8b1e2d;
+  --accent-deep:#6d1422;
+  --ochre:#a87436;
+  --teal:#2d5a5a;
+  --indigo:#2c3e60;
+  --shadow: 0 1px 0 rgba(26,22,18,.04);
+  --display:"Instrument Serif", "Times New Roman", serif;
+  --body:"Newsreader", Georgia, serif;
+  --mono:"JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{
+  font-size:15.5px;line-height:1.55;
+  background-image:
+    radial-gradient(circle at 18% 9%, rgba(168,116,54,.04) 0, transparent 40%),
+    radial-gradient(circle at 82% 88%, rgba(45,90,90,.035) 0, transparent 45%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .15  0 0 0 0 .12  0 0 0 0 .08  0 0 0 .055 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  min-height:100vh;
+}
+
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.mono{font-family:var(--mono);font-feature-settings:"tnum","ss01"}
+.tnum{font-variant-numeric:tabular-nums}
+.smallcaps{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+.serif-it{font-family:var(--display);font-style:italic}
+
+/* ============== Masthead ============== */
+.masthead{
+  border-bottom:2px solid var(--ink);
+  padding:18px 36px 14px;
+  position:relative;
+}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:10px;margin-bottom:14px;
+}
+.masthead .topline .left{display:flex;gap:24px}
+.masthead .topline .right{display:flex;gap:24px;align-items:center}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;animation:pulse 2.2s ease-in-out infinite;vertical-align:middle}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
+
+.title-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:30px}
+.title-row .side{font-family:var(--mono);font-size:11px;color:var(--ink-mute);line-height:1.7}
+.title-row .side.left{text-align:left}
+.title-row .side.right{text-align:right}
+.wordmark{
+  text-align:center;
+  font-family:var(--display);
+  font-size:clamp(56px,7.5vw,108px);
+  line-height:.95;letter-spacing:-.005em;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.wordmark em{font-style:italic;color:var(--accent)}
+.subtitle{
+  text-align:center;
+  margin-top:6px;
+  font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-soft);
+  letter-spacing:.01em;
+}
+
+
+.lang-switch{display:inline-flex;gap:0;line-height:0}
+.lang-switch .ls-btn{
+  width:24px;height:24px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.02em;font-weight:500;
+  border:1px solid var(--ink);
+  color:var(--ink);background:var(--paper);
+  text-decoration:none;
+  transition:background .12s, color .12s;
+}
+.lang-switch .ls-btn + .ls-btn{border-left:0}
+.lang-switch .ls-btn.active{background:var(--ink);color:var(--paper)}
+.lang-switch .ls-btn:not(.active):hover{background:var(--paper-deep)}
+
+/* ============== Nav ============== */
+.tabs-wrap{
+  position:relative;
+  border-top:1px solid var(--rule);
+  border-bottom:3px double var(--ink);
+  margin-top:14px;
+  /* Reserve height so layout doesn't jump as arrows fade in/out */
+  height:43px;
+}
+nav.tabs{
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  gap:0;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  /* hide native scrollbars cross-browser */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  /* smooth wheel/drag scrolling */
+  scroll-behavior:smooth;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+nav.tabs::-webkit-scrollbar{display:none;height:0;width:0}
+nav.tabs > *{flex-shrink:0;scroll-snap-align:start}
+
+nav.tabs button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:0 22px;
+  color:var(--ink-mute);
+  border-right:1px solid var(--rule);
+  transition:color .15s, background .15s;
+  position:relative;
+  height:100%;
+  white-space:nowrap;
+}
+nav.tabs button:first-child{border-left:1px solid var(--rule)}
+nav.tabs button:hover{color:var(--ink);background:rgba(26,22,18,.025)}
+nav.tabs button.active{color:var(--accent);background:var(--paper-light)}
+nav.tabs button.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);
+}
+
+/* The vertical phase I / phase II divider */
+nav.tabs .tab-divider{
+  width:0;height:100%;
+  border-left:1px solid var(--ink);
+  align-self:stretch;
+  opacity:.4;
+}
+
+/* Edge fade masks — only visible when nav is scrollable in that direction */
+.tabs-wrap::before, .tabs-wrap::after{
+  content:"";position:absolute;top:1px;bottom:3px;width:64px;
+  pointer-events:none;z-index:1;
+  opacity:0;transition:opacity .2s ease;
+}
+.tabs-wrap::before{
+  left:0;
+  background:linear-gradient(to right,
+    var(--paper) 0%, var(--paper) 30%, rgba(241,236,225,0) 100%);
+}
+.tabs-wrap::after{
+  right:0;
+  background:linear-gradient(to left,
+    var(--paper) 0%, var(--paper) 30%, rgba(241,236,225,0) 100%);
+}
+.tabs-wrap.can-left::before{opacity:1}
+.tabs-wrap.can-right::after{opacity:1}
+
+/* Arrow buttons — small editorial squares, only when scroll is possible */
+.tabs-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper-light);
+  border:1px solid var(--ink);
+  color:var(--ink);
+  font-family:var(--display);font-style:italic;font-size:16px;line-height:1;
+  cursor:pointer;
+  z-index:2;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s, background .15s, color .15s;
+  padding:0;
+  /* keep arrow from being affected by scroll */
+}
+.tabs-arrow:hover{background:var(--ink);color:var(--paper)}
+.tabs-arrow-l{left:8px}
+.tabs-arrow-r{right:8px}
+.tabs-wrap.can-left .tabs-arrow-l{opacity:1;pointer-events:auto}
+.tabs-wrap.can-right .tabs-arrow-r{opacity:1;pointer-events:auto}
+
+
+/* ZH: paper titles & cards use em for emphasis; suppress italic on CJK glyphs,
+   keep accent color and a light weight bump for legibility. */
+.paper h3 em,
+.pd-title em,
+.ctitle em,
+.sim-t em { font-style: normal; font-weight: 500; letter-spacing: .005em; }
+
+/* ============== Layout ============== */
+main{padding:30px 36px 80px;max-width:1480px;margin:0 auto}
+section.view{display:none;animation:fade .35s ease-out}
+section.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.rule{height:1px;background:var(--rule);margin:28px 0}
+.rule-thick{height:0;border-top:3px double var(--ink);margin:28px 0}
+
+/* ============== Hero Metrics ============== */
+.metrics-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+}
+.metric{
+  padding:18px 20px 16px;
+  border-right:1px solid var(--rule);
+  position:relative;
+}
+.metric:last-child{border-right:0}
+.metric .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+.metric .num{font-family:var(--display);font-size:46px;line-height:1;color:var(--ink);letter-spacing:-.01em;font-feature-settings:"tnum"}
+.metric .delta{font-family:var(--mono);font-size:11px;color:var(--ink-mute);margin-top:6px;letter-spacing:.02em}
+.metric .delta .up{color:var(--accent)}
+.metric .delta .dn{color:var(--teal)}
+.metric.special .num{color:var(--accent);font-style:italic}
+
+/* ============== Section heads ============== */
+.sec-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px;
+}
+.sec-head h2{
+  font-family:var(--display);font-size:32px;font-weight:400;letter-spacing:-.005em;
+}
+.sec-head h2 em{color:var(--accent)}
+.sec-head .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)}
+
+.kicker{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:6px;display:inline-block;
+  border-bottom:1px solid var(--accent);padding-bottom:2px;
+}
+
+/* ============== Two-col grid ============== */
+.two-col{display:grid;grid-template-columns:1.35fr 1fr;gap:48px}
+@media(max-width:1100px){.two-col{grid-template-columns:1fr;gap:36px}}
+
+/* ============== Paper cards ============== */
+.paper-list{display:flex;flex-direction:column}
+.paper{
+  padding:22px 0;
+  border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:60px 1fr 130px;gap:22px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.paper:hover{background:rgba(139,30,45,.025)}
+.paper:first-child{border-top:0}
+.paper .num-col{
+  font-family:var(--display);font-size:22px;color:var(--ink-mute);font-style:italic;
+  padding-top:4px;
+}
+.paper .main h3{
+  font-family:var(--display);font-size:24px;line-height:1.2;font-weight:400;letter-spacing:-.003em;
+  color:var(--ink);margin-bottom:8px;
+}
+.paper .main h3 em{font-style:italic;color:var(--accent)}
+.paper:hover .main h3{color:var(--accent-deep)}
+.paper .authors{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin-bottom:8px;line-height:1.45}
+.paper .meta-row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.06em}
+.paper .meta-row .sep{opacity:.5}
+.paper .excerpt{font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.55;max-width:62ch}
+
+.tag{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  padding:3px 8px;
+  border:1px solid var(--rule);
+  background:var(--paper-light);
+  color:var(--ink-soft);
+  border-radius:1px;
+}
+.tag.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tag.collab{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.tag.preprint{border-color:var(--ochre);color:var(--ochre)}
+.tag.hi-score{border-color:var(--accent);color:var(--accent);background:rgba(139,30,45,.05)}
+.tag.confirm-pending{border-color:var(--ink-mute);color:var(--ink-mute);font-style:italic}
+
+.paper .score-col{
+  text-align:right;
+  font-family:var(--display);
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;
+  gap:6px;
+}
+.paper .score-col .score{
+  font-size:42px;line-height:1;letter-spacing:-.02em;
+  color:var(--ink);font-style:italic;
+}
+.paper .score-col .score.hi{color:var(--accent)}
+.paper .score-col .score-lab{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+.paper .score-col .date{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+/* ============== Rankings sidebar ============== */
+.ranking{border-top:1px solid var(--ink)}
+.ranking-row{
+  display:grid;grid-template-columns:28px 1fr auto auto;
+  align-items:baseline;gap:14px;
+  padding:13px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;
+  transition:padding-left .2s;
+}
+.ranking-row:hover{padding-left:8px;background:rgba(139,30,45,.03)}
+.ranking-row .rank{font-family:var(--display);font-size:24px;font-style:italic;color:var(--ink-mute)}
+.ranking-row.top1 .rank,.ranking-row.top2 .rank,.ranking-row.top3 .rank{color:var(--accent)}
+.ranking-row .uni{font-family:var(--display);font-size:18px;line-height:1.1}
+.ranking-row .country{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;display:block;margin-top:3px}
+.ranking-row .count{font-family:var(--display);font-size:24px;font-style:italic;color:var(--ink);min-width:42px;text-align:right}
+.ranking-row .trend{
+  font-family:var(--mono);font-size:11px;color:var(--ink-mute);min-width:48px;text-align:right;
+}
+.ranking-row .trend .up{color:var(--accent)}
+.ranking-row .trend .dn{color:var(--teal)}
+
+.tab-switch{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--rule)}
+.tab-switch button{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 16px;color:var(--ink-mute);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.tab-switch button.on{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ============== Direction heat (bars) ============== */
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.bar-row{display:grid;grid-template-columns:170px 1fr 38px;gap:14px;align-items:center}
+.bar-row .lab{font-family:var(--body);font-size:13.5px;color:var(--ink-soft);text-align:right;font-style:italic}
+.bar-row .track{
+  height:18px;background:var(--paper-deep);position:relative;border:1px solid var(--rule);
+}
+.bar-row .fill{
+  height:100%;background:linear-gradient(90deg,var(--accent) 0%, var(--accent-deep) 100%);
+  position:relative;
+}
+.bar-row .fill::after{
+  content:"";position:absolute;right:-1px;top:-3px;bottom:-3px;width:1px;background:var(--ink);
+}
+.bar-row .num{font-family:var(--mono);font-size:12px;color:var(--ink);text-align:right;font-weight:500}
+
+/* ============== Collab list ============== */
+.collab-list{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+.collab-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:start;
+  padding:16px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;
+}
+.collab-item:hover .ctitle{color:var(--accent-deep)}
+.collab-num{font-family:var(--display);font-size:42px;line-height:.9;font-style:italic;color:var(--accent);min-width:64px}
+.collab-num small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-mute);font-style:normal;margin-top:4px;text-transform:uppercase}
+.ctitle{font-family:var(--display);font-size:21px;line-height:1.2;margin-bottom:6px}
+.cunis{font-family:var(--body);font-size:13px;color:var(--ink-soft);margin-bottom:6px;font-style:italic}
+.cmeta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-mute);text-transform:uppercase}
+.cdate{font-family:var(--mono);font-size:11px;color:var(--ink-mute);white-space:nowrap}
+
+/* ============== Filter bar ============== */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:14px 16px;
+  background:var(--paper-light);
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+  align-items:center;
+}
+.filter-bar .flabel{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-right:6px;
+}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  padding:5px 12px;border:1px solid var(--rule);background:var(--paper);
+  border-radius:1px;cursor:pointer;
+  transition:all .15s;
+}
+.chip:hover{border-color:var(--ink);}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on:hover{background:var(--accent);border-color:var(--accent)}
+
+.search{
+  flex:1;min-width:200px;
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--rule);background:var(--paper);
+  padding:8px 12px;
+}
+.search input{
+  flex:1;background:transparent;border:0;outline:0;
+  font:inherit;font-size:13.5px;color:var(--ink);
+}
+.search svg{flex:0 0 14px;color:var(--ink-mute)}
+.search input::placeholder{color:var(--ink-mute);font-style:italic}
+
+#view-papers .filter-bar{display:block}
+.paper-filter-toolbar{display:grid;gap:12px}
+.paper-filter-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.active-filter-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--rule);padding-top:10px}
+.filter-select{position:relative}
+.filter-select summary{
+  list-style:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink);
+  padding:7px 28px 7px 12px;border:1px solid var(--rule);background:var(--paper);
+  cursor:pointer;min-height:32px;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.filter-select summary::-webkit-details-marker{display:none}
+.filter-select summary::after{content:"⌄";position:absolute;right:10px;top:7px;color:var(--ink-mute)}
+.filter-select[open] summary{border-color:var(--ink);background:var(--paper-light)}
+.filter-select[open] summary::after{content:"⌃";color:var(--accent)}
+.filter-menu{
+  position:absolute;z-index:40;top:calc(100% + 6px);left:0;
+  width:max-content;min-width:240px;max-width:min(360px,88vw);max-height:340px;overflow:auto;
+  padding:10px;background:var(--paper-light);border:1px solid var(--ink);
+  box-shadow:0 12px 28px rgba(26,22,18,.14);
+}
+.filter-menu label{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;
+  font-size:13.5px;padding:6px 4px;color:var(--ink-soft);cursor:pointer;font-family:var(--body);
+}
+.filter-menu label:hover{color:var(--ink);background:rgba(139,30,45,.04)}
+.filter-menu label input{accent-color:var(--accent);width:13px;height:13px}
+.filter-menu label span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filter-menu label .ct{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);padding-left:12px}
+.score-select .filter-menu{min-width:260px}
+
+.sort-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:6px;
+}
+.sort-row .count{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.sort-options{display:flex;gap:18px;align-items:center}
+.sort-options .so{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-mute);
+  cursor:pointer;padding-bottom:2px;
+}
+.sort-options .so.on{color:var(--ink);border-bottom:1px solid var(--ink)}
+
+/* ============== Paper list filters ============== */
+.list-layout{display:block}
+.fside{display:none}
+.fside h4{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:12px;margin-top:22px;
+}
+.fside h4:first-child{margin-top:0}
+.fside label{
+  display:flex;align-items:center;gap:8px;
+  font-size:13.5px;padding:5px 0;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--body);
+}
+.fside label:hover{color:var(--ink)}
+.fside label input{accent-color:var(--accent);width:13px;height:13px}
+.fside label .ct{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute)}
+.slider-wrap{padding:8px 0}
+.slider-wrap input[type=range]{width:100%;accent-color:var(--accent)}
+.slider-vals{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+/* ============== University Table ============== */
+.uni-table{
+  width:100%;border-collapse:collapse;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.uni-table thead th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:10px 12px;border-bottom:1px solid var(--ink);
+  cursor:pointer;background:var(--paper-light);
+}
+.uni-table thead th:hover{color:var(--ink)}
+.uni-table thead th.num{text-align:right}
+.uni-table thead th .arr{margin-left:4px;color:var(--accent)}
+.uni-table tbody tr{border-bottom:1px solid var(--rule);cursor:pointer;transition:background .15s}
+.uni-table tbody tr:hover{background:rgba(139,30,45,.04)}
+.uni-table tbody td{padding:14px 12px;vertical-align:middle}
+.uni-table td.rank-cell{
+  font-family:var(--display);font-size:26px;font-style:italic;color:var(--ink-mute);
+  width:50px;
+}
+.uni-table tr.top3 td.rank-cell{color:var(--accent)}
+.uni-table td.uname{font-family:var(--display);font-size:20px;line-height:1.15;letter-spacing:-.005em}
+.uni-table td.uname .cn{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;margin-top:3px}
+.uni-table td.num{font-family:var(--mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.uni-table td.dirs{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);max-width:280px}
+.uni-table td.cr{font-family:var(--display);font-size:22px;font-style:italic}
+.cr-bar{
+  display:inline-block;width:50px;height:5px;background:var(--paper-deep);border:1px solid var(--rule);
+  margin-left:8px;vertical-align:middle;position:relative;
+}
+.cr-bar .crf{display:block;height:100%;background:var(--accent)}
+
+/* ============== Paper Detail ============== */
+.pd-grid{display:grid;grid-template-columns:1fr 320px;gap:50px}
+@media(max-width:1000px){.pd-grid{grid-template-columns:1fr}}
+.pd-title{
+  font-family:var(--display);font-size:clamp(36px,4.2vw,58px);line-height:1.05;
+  letter-spacing:-.012em;margin-bottom:24px;color:var(--ink);
+}
+.pd-title em{font-style:italic;color:var(--accent)}
+.pd-byline{
+  font-family:var(--body);font-style:italic;font-size:18px;color:var(--ink-soft);
+  line-height:1.45;margin-bottom:18px;max-width:60ch;
+}
+.pd-affil{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:.04em;line-height:1.7;margin-bottom:24px;
+}
+.pd-affil .num{
+  display:inline-block;width:18px;height:18px;border-radius:50%;
+  background:var(--ink);color:var(--paper);text-align:center;line-height:18px;
+  font-family:var(--mono);font-size:10px;margin-right:6px;vertical-align:middle;
+}
+.pd-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+
+.pd-abstract{
+  font-family:var(--body);font-size:17px;line-height:1.65;color:var(--ink);
+  border-left:3px double var(--ink);padding:4px 0 4px 20px;margin-bottom:30px;
+  max-width:64ch;
+}
+.pd-abstract::first-line{font-variant:small-caps;letter-spacing:.04em;color:var(--accent-deep)}
+
+.pd-block{margin-bottom:30px}
+.pd-block h3{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px;
+}
+.reason{
+  font-family:var(--body);font-style:italic;font-size:15.5px;line-height:1.6;color:var(--ink-soft);
+  max-width:62ch;
+}
+
+.score-bigbox{
+  border:2px solid var(--ink);
+  padding:20px 22px;background:var(--paper-light);
+  margin-bottom:24px;
+}
+.score-bigbox .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.score-bigbox .big{
+  font-family:var(--display);font-size:90px;line-height:.95;color:var(--accent);font-style:italic;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:8px;
+}
+.score-bigbox .big small{font-size:18px;color:var(--ink-mute);font-style:italic}
+.score-bigbox .desc{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+
+.aside-block{
+  border-top:1px solid var(--rule);padding:16px 0;
+}
+.aside-block .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+.aside-block .val{font-family:var(--display);font-size:18px;font-style:italic}
+.aside-block ul{list-style:none}
+.aside-block li{font-family:var(--mono);font-size:12px;color:var(--ink-soft);padding:4px 0;letter-spacing:.02em}
+.aside-block a.lnk{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11.5px;padding:8px 0;letter-spacing:.06em;
+  border-bottom:1px solid var(--rule-soft);
+}
+.aside-block a.lnk:last-child{border-bottom:0}
+.aside-block a.lnk:hover{color:var(--accent)}
+.aside-block a.lnk .arr{color:var(--ink-mute);transition:transform .15s}
+.aside-block a.lnk:hover .arr{transform:translateX(3px);color:var(--accent)}
+
+.similar{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.sim-item{padding:14px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.sim-item:hover .sim-t{color:var(--accent)}
+.sim-t{font-family:var(--display);font-size:17px;line-height:1.2;margin-bottom:4px}
+.sim-m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-mute);text-transform:uppercase}
+
+.back-link{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:18px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+}
+.back-link:hover{color:var(--accent)}
+
+/* ============== University Detail ============== */
+.ud-hero{
+  display:grid;grid-template-columns:1fr auto;gap:30px;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:32px 0;margin-bottom:30px;
+  background:var(--paper-light);padding-left:28px;padding-right:28px;
+}
+.ud-hero .country-stamp{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-mute);text-transform:uppercase;margin-bottom:14px;
+  display:flex;gap:14px;align-items:center;
+}
+.ud-hero .country-stamp .flag{
+  display:inline-block;width:24px;height:16px;background:var(--ink);border-radius:1px;
+}
+.ud-hero h1{
+  font-family:var(--display);font-size:clamp(48px,6vw,80px);line-height:.98;letter-spacing:-.015em;
+}
+.ud-hero h1 em{font-style:italic;color:var(--accent)}
+.ud-hero .cn{font-family:var(--display);font-size:30px;font-style:italic;color:var(--ink-mute);margin-top:6px}
+.ud-hero .aliases{font-family:var(--mono);font-size:11px;color:var(--ink-mute);margin-top:16px;letter-spacing:.04em;line-height:1.7}
+
+.ud-stats{display:flex;flex-direction:column;gap:14px;text-align:right;border-left:1px solid var(--rule);padding-left:30px}
+.ud-stat{display:flex;gap:14px;align-items:baseline;justify-content:flex-end}
+.ud-stat .v{font-family:var(--display);font-size:38px;font-style:italic;line-height:1;color:var(--ink)}
+.ud-stat .v.acc{color:var(--accent)}
+.ud-stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;min-width:80px;text-align:left}
+
+.ud-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:36px}
+@media(max-width:900px){.ud-grid{grid-template-columns:1fr}}
+
+.donut-row{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:center}
+.donut{position:relative;width:160px;height:160px}
+.donut svg{transform:rotate(-90deg);overflow:visible}
+.donut circle{fill:none;stroke-width:24;cx:80;cy:80;r:65}
+.donut .seg{transition:stroke-width .2s;stroke-linecap:butt}
+.donut .seg:hover{stroke-width:30}
+.donut .ctr{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.donut .ctr .num{font-family:var(--display);font-size:36px;font-style:italic;line-height:1;color:var(--ink)}
+.donut .ctr .lab{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;margin-top:4px}
+.donut-legend{display:flex;flex-direction:column;gap:6px}
+.donut-legend .dl{display:flex;align-items:center;gap:10px;font-size:13px;font-family:var(--body)}
+.donut-legend .dl .sw{width:12px;height:12px;flex:0 0 12px}
+.donut-legend .dl .pct{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-mute)}
+
+.partners-tbl{width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.partners-tbl tr{border-bottom:1px solid var(--rule);cursor:pointer}
+.partners-tbl tr:hover{background:rgba(139,30,45,.04)}
+.partners-tbl td{padding:10px 0;font-family:var(--body)}
+.partners-tbl td.u{font-family:var(--display);font-size:17px;font-style:italic}
+.partners-tbl td.n{font-family:var(--display);font-size:24px;font-style:italic;color:var(--accent);text-align:right;width:60px}
+.partners-tbl td.d{font-family:var(--mono);font-size:11px;color:var(--ink-mute);text-align:right;letter-spacing:.04em}
+
+/* ============== Footer ============== */
+footer{
+  border-top:3px double var(--ink);
+  padding:32px 36px;
+  margin-top:60px;background:var(--paper-light);
+}
+footer .row{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
+footer .col h5{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+footer .col p{font-family:var(--body);font-size:13.5px;color:var(--ink-soft);line-height:1.6;max-width:50ch}
+footer .col.brand{font-family:var(--display);font-size:32px;font-style:italic}
+footer .colophon{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.06em;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+
+
+
+/* ============== Phase 2 · Shared ============== */
+.p2-hero{
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+  padding:24px 28px;margin-bottom:30px;
+  position:relative;overflow:hidden;
+}
+.p2-hero::before{
+  content:"II";position:absolute;right:-10px;bottom:-40px;
+  font-family:var(--display);font-style:italic;font-size:200px;line-height:1;
+  color:var(--ink);opacity:.04;letter-spacing:-.02em;pointer-events:none;
+}
+.p2-hero h2{font-family:var(--display);font-size:48px;letter-spacing:-.01em;font-weight:400}
+.p2-hero h2 em{color:var(--accent)}
+.p2-hero .lead{
+  font-family:var(--body);font-style:italic;color:var(--ink-soft);
+  margin-top:10px;max-width:60ch;font-size:16px;line-height:1.55;
+}
+
+/* ============== Collaboration Network ============== */
+.net-wrap{
+  display:grid;grid-template-columns:1fr 320px;gap:32px;
+  margin-bottom:36px;
+}
+@media(max-width:1100px){.net-wrap{grid-template-columns:1fr}}
+
+.net-canvas{
+  border:1px solid var(--rule);background:var(--paper-light);
+  position:relative;
+}
+.net-canvas svg{display:block;width:100%;height:auto}
+.net-canvas .edge{stroke:var(--rule);stroke-width:1;fill:none;transition:stroke .15s, stroke-width .15s}
+.net-canvas .edge.cross{stroke:var(--accent);stroke-opacity:.55}
+.net-canvas .edge.thick{stroke-width:2}
+.net-canvas .edge.thicker{stroke-width:3}
+.net-canvas .edge.thickest{stroke-width:4}
+.net-canvas g.node circle{
+  stroke:var(--ink);stroke-width:1;transition:stroke-width .15s;
+}
+.net-canvas g.node:hover circle{stroke-width:2.5;cursor:pointer}
+.net-canvas g.node:hover ~ g.node circle{opacity:.35;transition:opacity .15s}
+.net-canvas g.node text{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;
+  fill:var(--ink);pointer-events:none;
+}
+.net-canvas g.node.us circle{fill:#1a1612}
+.net-canvas g.node.eu circle{fill:#a87436}
+.net-canvas g.node.asia circle{fill:#8b1e2d}
+
+.net-canvas .axis-label{
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;fill:var(--ink-mute);
+}
+
+.net-side{display:flex;flex-direction:column;gap:24px}
+.net-side .panel{
+  border:1px solid var(--rule);background:var(--paper-light);
+  padding:14px 16px;
+}
+.net-side .panel h4{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:10px;
+}
+.legend-item{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:3px 0;font-family:var(--body)}
+.legend-item .sw{width:14px;height:14px;flex:0 0 14px;border:1px solid var(--ink)}
+.legend-item .sw.us{background:#1a1612}
+.legend-item .sw.eu{background:#a87436}
+.legend-item .sw.asia{background:#8b1e2d}
+.legend-item .line-sw{width:24px;height:1px;background:var(--rule);flex:0 0 24px}
+.legend-item .line-sw.cross{background:var(--accent);opacity:.55;height:1.5px}
+.legend-item .size-row{display:flex;align-items:center;gap:6px}
+
+.insight-row{
+  display:grid;grid-template-columns:1fr auto;gap:8px;
+  padding:8px 0;border-bottom:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+}
+.insight-row:last-child{border-bottom:0}
+.insight-row .il{color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em;font-size:9.5px;align-self:center}
+.insight-row .iv{
+  font-family:var(--display);font-style:italic;font-size:15px;
+  color:var(--ink);text-align:right;letter-spacing:-.005em;
+}
+.insight-row .iv.acc{color:var(--accent)}
+
+.toppair-tbl{width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.toppair-tbl thead th{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:8px 4px;border-bottom:1px solid var(--ink);
+}
+.toppair-tbl thead th.r{text-align:right}
+.toppair-tbl td{padding:10px 4px;border-bottom:1px solid var(--rule);font-size:13px}
+.toppair-tbl tr:last-child td{border-bottom:0}
+.toppair-tbl td.pair{font-family:var(--display);font-size:15px;line-height:1.2}
+.toppair-tbl td.pair small{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);letter-spacing:.06em;display:block;margin-top:2px}
+.toppair-tbl td.n{font-family:var(--display);font-style:italic;font-size:22px;color:var(--accent);text-align:right}
+.toppair-tbl td.dir{font-family:var(--body);font-style:italic;font-size:12.5px;color:var(--ink-soft);text-align:right;max-width:130px}
+
+/* ============== Research Trends ============== */
+.trend-chart{
+  border:1px solid var(--rule);background:var(--paper-light);
+  padding:20px 24px;margin-bottom:30px;
+}
+.trend-chart .ct-head{
+  display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;
+}
+.trend-chart h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em}
+.trend-chart .note{font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:.06em;max-width:50ch;text-align:right}
+.trend-chart svg{display:block;width:100%;height:auto;font-family:var(--mono);font-size:10px}
+.trend-chart svg .grid{stroke:var(--rule-soft);stroke-width:.5}
+.trend-chart svg .axis-line{stroke:var(--ink);stroke-width:1}
+.trend-chart svg .axis-text{fill:var(--ink-mute);font-size:10px;letter-spacing:.04em}
+.trend-chart svg .line{fill:none;stroke-width:2;transition:stroke-width .15s}
+.trend-chart svg .line:hover{stroke-width:3.5}
+.trend-chart svg .dot{stroke:var(--paper-light);stroke-width:1.5}
+.trend-chart .legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)}
+.trend-chart .legend .li{display:flex;align-items:center;gap:8px;font-size:12px;font-family:var(--body)}
+.trend-chart .legend .li .sw{width:18px;height:3px}
+.trend-chart .legend .li .ct{font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-left:4px}
+
+.trend-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;margin-bottom:36px}
+@media(max-width:1000px){.trend-grid{grid-template-columns:1fr}}
+
+.trend-tbl{
+  width:100%;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.trend-tbl thead th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:9px 8px;border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+}
+.trend-tbl thead th.r{text-align:right}
+.trend-tbl td{padding:11px 8px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.trend-tbl td.dir{font-family:var(--display);font-style:italic;font-size:16px;line-height:1.2}
+.trend-tbl td.n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
+.trend-tbl td.delta{font-family:var(--display);font-style:italic;font-size:18px;text-align:right}
+.trend-tbl td.delta.up{color:var(--accent)}
+.trend-tbl td.delta.dn{color:var(--teal)}
+.trend-tbl td.delta.flat{color:var(--ink-mute)}
+.trend-tbl td.spark{text-align:right}
+.trend-tbl td.spark svg{display:inline-block;vertical-align:middle}
+
+.emerging{
+  border:1px solid var(--rule);padding:18px 20px;background:var(--paper-light);
+}
+.emerging h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em;margin-bottom:4px}
+.emerging .sub{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);margin-bottom:14px}
+.emerging .topic{
+  display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);
+}
+.emerging .topic:last-child{border-bottom:0}
+.emerging .topic .rank{font-family:var(--display);font-size:18px;color:var(--ink-mute);font-style:italic;min-width:28px}
+.emerging .topic .name{font-family:var(--display);font-size:17px;line-height:1.25;flex:1;font-style:italic}
+.emerging .topic .ct{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:500}
+
+.growth-schools{
+  border:1px solid var(--rule);padding:18px 20px;background:var(--paper-light);
+}
+.growth-schools h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em;margin-bottom:4px}
+.growth-schools .sub{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);margin-bottom:14px}
+.growth-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule)}
+.growth-row:last-child{border-bottom:0}
+.growth-row .gn{font-family:var(--display);font-size:16px;font-style:italic}
+.growth-row .gv{font-family:var(--display);font-size:18px;font-style:italic;color:var(--accent)}
+.growth-row .gd{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.04em}
+
+/* ============== School Comparison ============== */
+.cmp-selector{
+  padding:18px 20px;background:var(--paper-light);
+  border:1px solid var(--rule);margin-bottom:30px;
+}
+.cmp-selector .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.cmp-selector .pool{display:flex;flex-wrap:wrap;gap:6px}
+.cmp-chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.02em;
+  padding:5px 11px;border:1px solid var(--rule);background:var(--paper);
+  cursor:pointer;transition:all .15s;border-radius:1px;
+}
+.cmp-chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cmp-chip:hover:not(.on){border-color:var(--ink)}
+.cmp-selector .status{
+  margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.08em;
+}
+.cmp-selector .reset{
+  color:var(--accent);border-bottom:1px solid var(--accent);
+  text-transform:uppercase;letter-spacing:.16em;cursor:pointer;padding-bottom:1px;
+}
+
+.cmp-grid{
+  display:grid;grid-template-columns:160px repeat(4, 1fr);gap:0;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  margin-bottom:30px;
+}
+@media(max-width:1100px){
+  .cmp-grid{grid-template-columns:130px repeat(4, 1fr)}
+}
+@media(max-width:780px){
+  .cmp-grid{grid-template-columns:110px repeat(2, 1fr);overflow-x:auto}
+}
+.cmp-row{display:contents}
+.cmp-cell{
+  padding:14px 14px;border-bottom:1px solid var(--rule);
+  border-right:1px solid var(--rule);
+  background:var(--paper);
+  font-family:var(--body);
+}
+.cmp-cell.head{
+  background:var(--paper-light);
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.cmp-cell.school-head{
+  background:var(--ink);color:var(--paper);
+  padding:18px 14px;text-align:center;
+  border-right:1px solid var(--rule-soft);
+}
+.cmp-cell.school-head .name{font-family:var(--display);font-size:22px;line-height:1.1;letter-spacing:-.005em}
+.cmp-cell.school-head .name em{font-style:italic;color:var(--accent)}
+.cmp-cell.school-head .meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;margin-top:4px;color:#cfc3a8}
+.cmp-cell .big{font-family:var(--display);font-style:italic;font-size:32px;color:var(--ink);line-height:1.1;letter-spacing:-.01em}
+.cmp-cell .big.acc{color:var(--accent)}
+.cmp-cell .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:3px;letter-spacing:.06em}
+.cmp-cell .dir-list{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.cmp-cell .pmini{font-family:var(--body);font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+.cmp-cell .pmini b{color:var(--ink);font-weight:500}
+.cmp-cell .rep-paper{font-family:var(--display);font-size:14px;font-style:italic;line-height:1.3;color:var(--ink)}
+.cmp-cell .rep-paper:hover{color:var(--accent);cursor:pointer}
+.cmp-cell .rep-meta{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);margin-top:6px;letter-spacing:.04em}
+
+.cmp-cell.row-label{
+  background:var(--paper-deep);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);align-content:center;
+}
+
+/* mini direction bars used inside compare cell */
+.minibars{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.minibars .mb{display:grid;grid-template-columns:1fr 28px;gap:6px;align-items:center}
+.minibars .mb .ml{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);letter-spacing:.04em;text-transform:uppercase}
+.minibars .mb .mtrack{height:5px;background:var(--paper-deep);position:relative;border:1px solid var(--rule)}
+.minibars .mb .mfill{height:100%;background:var(--accent)}
+.minibars .mb .mn{font-family:var(--mono);font-size:10px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ============== Weekly Digest ============== */
+.weekly-hero{
+  border-top:3px double var(--ink);border-bottom:3px double var(--ink);
+  padding:30px 32px;margin-bottom:36px;background:var(--paper-light);
+  position:relative;
+}
+.weekly-hero .issue-no{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  border-bottom:1px solid var(--accent);padding-bottom:3px;display:inline-block;margin-bottom:12px;
+}
+.weekly-hero h1{
+  font-family:var(--display);font-size:clamp(48px,5.5vw,76px);line-height:.98;letter-spacing:-.012em;
+}
+.weekly-hero h1 em{font-style:italic;color:var(--accent)}
+.weekly-hero .lead{
+  font-family:var(--body);font-style:italic;font-size:18px;color:var(--ink-soft);line-height:1.5;
+  margin-top:14px;max-width:62ch;
+}
+.weekly-hero .export-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 16px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  margin-top:20px;cursor:pointer;
+  transition:background .15s;
+}
+.weekly-hero .export-btn:hover{background:var(--accent);border-color:var(--accent)}
+.weekly-hero .export-btn svg{width:13px;height:13px}
+
+.weekly-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:36px;
+}
+.weekly-strip .ws{
+  padding:14px 18px;border-right:1px solid var(--rule);
+}
+.weekly-strip .ws:last-child{border-right:0}
+.weekly-strip .ws .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.weekly-strip .ws .v{font-family:var(--display);font-style:italic;font-size:42px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.weekly-strip .ws .v.acc{color:var(--accent)}
+.weekly-strip .ws .d{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:6px;letter-spacing:.04em}
+
+.weekly-body{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;margin-bottom:36px}
+@media(max-width:1000px){.weekly-body{grid-template-columns:1fr}}
+
+.weekly-section{margin-bottom:32px}
+.weekly-section h3{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px;
+}
+.weekly-headline{
+  display:grid;grid-template-columns:42px 1fr;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--rule);cursor:pointer;
+}
+.weekly-headline:hover .wh-t{color:var(--accent-deep)}
+.weekly-headline .wh-num{font-family:var(--display);font-size:30px;font-style:italic;color:var(--accent);line-height:.95}
+.weekly-headline .wh-t{
+  font-family:var(--display);font-size:20px;line-height:1.22;margin-bottom:5px;
+}
+.weekly-headline .wh-t em{font-style:italic;color:var(--accent-deep)}
+.weekly-headline .wh-m{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.04em;margin-bottom:6px}
+.weekly-headline .wh-c{
+  font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);
+  line-height:1.5;max-width:62ch;
+}
+
+.weekly-mini{font-family:var(--body);font-size:13.5px;line-height:1.6;color:var(--ink)}
+.weekly-mini ul{list-style:none;padding:0}
+.weekly-mini ul li{
+  padding:8px 0;border-bottom:1px solid var(--rule-soft);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline;
+}
+.weekly-mini ul li:last-child{border-bottom:0}
+.weekly-mini ul li .ln{font-family:var(--display);font-style:italic;font-size:16px}
+.weekly-mini ul li .lv{font-family:var(--display);font-style:italic;font-size:18px;color:var(--accent)}
+.weekly-mini p{font-family:var(--body);font-size:14px;line-height:1.65;color:var(--ink);margin-bottom:8px}
+.weekly-mini p em{font-style:italic;color:var(--accent-deep)}
+
+.weekly-vs{
+  border-left:3px double var(--ink);padding:6px 0 6px 18px;margin-top:8px;
+  font-family:var(--body);font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.5;
+}
+
+.weekly-foot{
+  padding-top:24px;border-top:1px solid var(--ink);
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.08em;
+  text-align:center;
+}
+
+/* ============== Direction Profile ============== */
+.dir-hero{
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:30px 28px;background:var(--paper-light);margin-bottom:30px;
+  display:grid;grid-template-columns:1.4fr 1fr;gap:36px;
+  position:relative;overflow:hidden;
+}
+@media(max-width:900px){.dir-hero{grid-template-columns:1fr}}
+.dir-hero::after{
+  content:"TRUST";position:absolute;right:-30px;bottom:-30px;
+  font-family:var(--display);font-style:italic;font-size:180px;line-height:1;
+  color:var(--ink);opacity:.04;letter-spacing:-.01em;pointer-events:none;
+}
+.dir-hero h1{font-family:var(--display);font-size:clamp(48px,6vw,80px);line-height:.98;letter-spacing:-.015em}
+.dir-hero h1 em{font-style:italic;color:var(--accent)}
+.dir-hero .definition{
+  font-family:var(--body);font-style:italic;font-size:16px;color:var(--ink-soft);
+  line-height:1.55;margin-top:14px;max-width:60ch;
+}
+.dir-stats{display:flex;flex-direction:column;gap:14px;border-left:1px solid var(--rule);padding-left:30px;align-self:start}
+.dir-stat{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline}
+.dir-stat .v{font-family:var(--display);font-size:34px;font-style:italic;line-height:1;letter-spacing:-.01em}
+.dir-stat .v.acc{color:var(--accent)}
+.dir-stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase}
+
+.dir-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;margin-bottom:36px}
+@media(max-width:1000px){.dir-grid{grid-template-columns:1fr}}
+
+.dir-tops table{
+  width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  border-collapse:collapse;
+}
+.dir-tops tr{border-bottom:1px solid var(--rule);cursor:pointer}
+.dir-tops tr:hover{background:rgba(139,30,45,.04)}
+.dir-tops td{padding:10px 4px;font-family:var(--body)}
+.dir-tops td.r{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-mute);width:38px}
+.dir-tops td.u{font-family:var(--display);font-size:17px;font-style:italic;line-height:1.2}
+.dir-tops td.n{font-family:var(--display);font-size:22px;font-style:italic;color:var(--accent);text-align:right;width:50px}
+.dir-tops td.pc{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);text-align:right;letter-spacing:.04em}
+
+.subtopics-chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0}
+.st-chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  padding:6px 11px;border:1px solid var(--ink);background:var(--paper);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.st-chip .ct{color:var(--accent);font-weight:500}
+.st-chip:hover{background:var(--paper-deep);cursor:pointer}
+
+.adjacent-list{display:flex;flex-direction:column;gap:0}
+.adj-row{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;
+  padding:10px 0;border-bottom:1px solid var(--rule);cursor:pointer;
+}
+.adj-row:last-child{border-bottom:0}
+.adj-row .an{font-family:var(--display);font-size:17px;font-style:italic;line-height:1.2}
+.adj-row .av{font-family:var(--display);font-size:18px;font-style:italic;color:var(--accent)}
+.adj-row .av small{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);font-style:normal;display:block;text-align:right;letter-spacing:.06em;margin-top:2px}
+
+
+
+/* ============== Misc ============== */
+.scroll-hint{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;
+  text-align:center;margin-top:30px;
+}
+.divider-orn{
+  text-align:center;font-family:var(--display);font-style:italic;color:var(--ink-mute);
+  margin:18px 0;letter-spacing:1em;font-size:14px;
+}
+
+.tag-chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+
+/* Subtle hover animation on rows */
+.paper{transition:background .15s, transform .25s}
+.paper:hover .num-col{color:var(--accent)}
+
+/* tabular nums everywhere appropriate */
+.uni-table td,.metric .num,.score,.ranking-row .count{font-variant-numeric:tabular-nums}
+
+html:not([data-live-ready="true"]) body > header,
+html:not([data-live-ready="true"]) body > main,
+html:not([data-live-ready="true"]) body > footer{visibility:hidden}
+.live-loading-screen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+  padding:8vw;
+  background:var(--paper);
+  color:var(--ink);
+}
+.live-loading-screen .kicker{color:var(--accent)}
+.live-loading-screen h1{
+  margin:0;
+  max-width:780px;
+  font-family:var(--serif);
+  font-size:clamp(42px,8vw,92px);
+  font-weight:500;
+  line-height:.96;
+  letter-spacing:0;
+}
+.live-loading-screen p{
+  margin:0;
+  max-width:680px;
+  font-size:20px;
+  line-height:1.6;
+  color:var(--ink-soft);
+}
+.live-loading-detail{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-mute);
+  letter-spacing:.05em;
+}
+html[data-live-ready="true"] .live-loading-screen{display:none}
+
+/* ============== Mobile tweaks ============== */
+@media(max-width:760px){
+  .masthead{padding:14px 18px 10px}
+  .title-row{grid-template-columns:1fr;gap:4px}
+  .title-row .side{display:none}
+  main{padding:24px 18px 60px}
+  .metrics-strip{grid-template-columns:repeat(3,1fr)}
+  .metric{padding:14px}
+  .metric .num{font-size:32px}
+  .paper{grid-template-columns:1fr;gap:8px}
+  .paper .num-col{font-size:14px;padding:0}
+  .paper .score-col{flex-direction:row;align-items:baseline;justify-content:flex-start;text-align:left;gap:14px;margin-top:8px}
+  .paper .score-col .score{font-size:24px}
+  .pd-title{font-size:32px}
+  .ud-hero{grid-template-columns:1fr;padding:24px 18px}
+  .ud-stats{border-left:0;border-top:1px solid var(--rule);padding-left:0;padding-top:18px;text-align:left}
+  .ud-stat{justify-content:flex-start}
+  .ranking-row{grid-template-columns:24px 1fr auto;gap:10px}
+  .ranking-row .trend{display:none}
+  nav.tabs button{padding:0 14px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="live-loading-screen" role="status" aria-live="polite">
+  <span class="kicker">真实数据加载中</span>
+  <h1>正在加载真实论文数据</h1>
+  <div class="live-loading-detail">HCAI Research Radar · live data hydration</div>
+</div>
+
+<!-- ============================ MASTHEAD ============================ -->
+<header class="masthead">
+  <div class="topline">
+    <div class="left">
+      <span><span class="live-dot"></span>正在更新 · 北京时间 0:00</span>
+    </div>
+    <div class="right">
+      <span>2026 年 5 月 31 日 · 星期日</span>
+      <span class="lang-switch"><a href="./hcai-radar-zh.html" class="ls-btn active">中</a><a href="./hcai-radar-en.html" class="ls-btn">EN</a></span>
+    </div>
+  </div>
+  <div class="title-row">
+    <div class="side left">
+      每日追踪 HCAI 领域的<br>研究方向、研究问题与<br>论文内容的演化
+    </div>
+    <div>
+      <h1 class="wordmark">HCAI <em>Research</em> Radar</h1>
+      <div class="subtitle">人智交互 · 研究方向地图 · 论文与内容关系看板</div>
+    </div>
+    <div class="side right">
+      数据来源 ·<br>OpenAlex · arXiv ·<br>Semantic Scholar · Crossref
+    </div>
+  </div>
+  <div class="tabs-wrap"><button class="tabs-arrow tabs-arrow-l" aria-label="scroll left" tabindex="-1">‹</button><nav class="tabs">
+    <button data-view="home" class="active">看板首页</button>
+    <button data-view="papers">论文列表</button>
+    <button data-view="universities">研究方向</button>
+    <button data-view="paper-detail">论文详情</button>
+    <button data-view="uni-detail">方向详情</button>
+  <span class="tab-divider"></span><button data-view="collab">方向关系图</button><button data-view="trends">研究趋势</button><button data-view="compare">方向对比</button><button data-view="weekly">每周摘要</button><button data-view="direction">方向详情</button></nav><button class="tabs-arrow tabs-arrow-r" aria-label="scroll right" tabindex="-1">›</button></div>
+</header>
+
+<main>
+
+<!-- ============================ HOMEPAGE ============================ -->
+<section class="view active" id="view-home">
+
+  <!-- Hero metrics strip -->
+  <div class="metrics-strip">
+    <div class="metric special">
+      <div class="lab">今日入库</div>
+      <div class="num">12</div>
+      <div class="delta">较昨日 <span class="up">+ 3</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">近 7 日</div>
+      <div class="num">86</div>
+      <div class="delta">较上 7 日 <span class="up">+ 18%</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">近 30 日</div>
+      <div class="num">312</div>
+      <div class="delta">较上 30 日 <span class="up">+ 11%</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">覆盖研究方向</div>
+      <div class="num">18</div>
+      <div class="delta">一级方向 · 二级问题 142</div>
+    </div>
+    <div class="metric">
+      <div class="lab">新增研究问题</div>
+      <div class="num">24</div>
+      <div class="delta">近 30 日 · <span class="up">+ 9</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">最近更新</div>
+      <div class="num" style="font-size:22px;line-height:1.3;letter-spacing:0">00:00<br><small style="font-size:13px;color:var(--ink-mute);font-style:italic">北京时间 · 5 月 31 日</small></div>
+      <div class="delta">4 个数据源全部 <span class="up">正常</span></div>
+    </div>
+  </div>
+
+  <div class="divider-orn">· · ·</div>
+
+  <!-- TWO COL: today's papers + rankings -->
+  <div class="two-col">
+
+    <!-- LEFT: Today's new papers -->
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">今日 0:00（北京时间）抓取入库</span>
+          <h2>今日 <em>入库</em></h2>
+        </div>
+        <div class="meta">12 篇 · 按 HCAI 分数排序</div>
+      </div>
+
+      <div class="paper-list" id="todays-papers">
+        <!-- Paper 01 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">01</div>
+          <div class="main">
+            <h3><em>校准依赖</em>：临床医生如何在诊断中使用 AI 生成的解释</h3>
+            <div class="authors">Maya R. Kapoor、Lin Wei、A. P. Sundaram、Daniel Foster、Sarah Greene、J. Mukherjee、R. Park 等</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Explainable AI</span>
+              <span class="tag">AI-assisted Decision</span>
+              <span class="tag preprint">arXiv 预印本</span>
+            </div>
+            <p class="excerpt">一项覆盖两家医院 84 名放射科医生的混合方法研究，考察 AI 解释中的置信区间如何改变诊断一致性——发现在模糊场景中占主导的并非过度依赖，而是系统性的不足依赖……</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">94</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·31</div>
+          </div>
+        </div>
+
+        <!-- Paper 02 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">02</div>
+          <div class="main">
+            <h3>当 Agent 接管：为大模型协同编程设计<em>交接时刻</em></h3>
+            <div class="authors">Jonas Berg、T. Yamamoto、Pei Chen、Eleanor Whitfield、M. de Sá</div>
+            <div class="meta-row">
+              <span class="tag primary">AI Agents</span>
+              <span class="tag">LLM User Study</span>
+              <span class="tag">Mixed-Initiative</span>
+            </div>
+            <p class="excerpt">通过对 24 名软件工程师为期三周的日记研究，作者归纳出人与 Agent 之间四种典型交接模式，以及它们在生产环境中的失效方式……</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">91</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·31</div>
+          </div>
+        </div>
+
+        <!-- Paper 03 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">03</div>
+          <div class="main">
+            <h3>「<em>它听见了，但听懂了吗？</em>」——AI 心理健康对话机器人中的情感错位</h3>
+            <div class="authors">周文华、R. Banerjee、K. Iwata、Sofia Allen</div>
+            <div class="meta-row">
+              <span class="tag">单校</span>
+              <span class="tag primary">AI in Mental Health</span>
+              <span class="tag">Affective Computing</span>
+              <span class="tag">LLM User Study</span>
+            </div>
+            <p class="excerpt">在 142 名大学生中开展的 6 周田野部署，揭示用户感知的共情度与临床评估的恰当性之间存在系统性差距，对安全护栏设计具有启示意义……</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">89</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·30</div>
+          </div>
+        </div>
+
+        <!-- Paper 04 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">04</div>
+          <div class="main">
+            <h3>算法<em>欣赏</em>再审视：当用户在准确率相同时仍偏好 AI</h3>
+            <div class="authors">Hannah Brooks、J. Tanaka、Ravi Iyengar、S. Ostrowski</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Algorithm Aversion</span>
+              <span class="tag">Human Factors</span>
+            </div>
+            <p class="excerpt">在四个任务领域对 Logg 等（2019）的预注册复现发现：问责框架下「算法欣赏」效应会反转——对该效应的可推广性提出挑战……</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">87</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·30</div>
+          </div>
+        </div>
+
+        <!-- Paper 05 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">05</div>
+          <div class="main">
+            <h3>驾驭多个心智：面向 AI Agent 团队的人类<em>监督控制界面</em></h3>
+            <div class="authors">Ada Nakamura、Ben Olson、K. Pillai、Y. Zhao、M. Rashid</div>
+            <div class="meta-row">
+              <span class="tag primary">Multi-Agent Collaboration</span>
+              <span class="tag">AI Agents</span>
+              <span class="tag">AI UX Evaluation</span>
+              <span class="tag confirm-pending">机构待确认</span>
+            </div>
+            <p class="excerpt">提出一种可视化控制语言，用于监控并干预 Agent 团队；通过覆盖三种任务复杂度、96 名参与者的对照实验进行评估……</p>
+          </div>
+          <div class="score-col">
+            <div class="score">82</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·29</div>
+          </div>
+        </div>
+
+        <!-- Paper 06 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">06</div>
+          <div class="main">
+            <h3>教师作为共同设计者：为包容性课堂改造<em>生成式 AI</em></h3>
+            <div class="authors">L. Ferreira、林玫、J. Hardcastle、P. Quattrocchi</div>
+            <div class="meta-row">
+              <span class="tag primary">AI in Education</span>
+              <span class="tag">Human-AI Collaboration</span>
+              <span class="tag">Responsible AI</span>
+            </div>
+            <p class="excerpt">与两国 18 名教师的参与式设计，揭示了改造生成式工具时的张力——涉及教学权威、透明性与公平性等问题……</p>
+          </div>
+          <div class="score-col">
+            <div class="score">78</div>
+            <div class="score-lab">HCAI 分数</div>
+            <div class="date">2026·05·29</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Sidebar with rankings + heat -->
+    <div>
+
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Hot &amp; Emerging</span>
+          <h2>热门 <em>研究方向</em></h2>
+        </div>
+      </div>
+
+      <div class="tab-switch" id="rank-tabs">
+        <button class="on" data-r="7">近 7 日</button>
+        <button data-r="30">近 30 日</button>
+        <button data-r="year">近 1 年</button>
+      </div>
+
+      <div class="ranking" id="ranking-list">
+        <div class="ranking-row top1" onclick="show('uni-detail')">
+          <div class="rank">01</div>
+          <div><div class="uni">Human-AI Interaction</div><span class="country">人智交互 · 一级方向</span></div>
+          <div class="count">68</div>
+          <div class="trend"><span class="up">↑ 10</span></div>
+        </div>
+        <div class="ranking-row top2" onclick="show('uni-detail')">
+          <div class="rank">02</div>
+          <div><div class="uni">Trust &amp; Reliance</div><span class="country">信任与依赖</span></div>
+          <div class="count">49</div>
+          <div class="trend"><span class="up">↑ 11</span></div>
+        </div>
+        <div class="ranking-row top3" onclick="show('uni-detail')">
+          <div class="rank">03</div>
+          <div><div class="uni">AI Agents</div><span class="country">智能体 · 高增长</span></div>
+          <div class="count">44</div>
+          <div class="trend"><span class="up">↑ 13</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">04</div>
+          <div><div class="uni">Explainable AI</div><span class="country">可解释 AI · 用户研究</span></div>
+          <div class="count">35</div>
+          <div class="trend"><span class="up">↑ 4</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">05</div>
+          <div><div class="uni">AI-assisted Decision</div><span class="country">AI 辅助决策</span></div>
+          <div class="count">31</div>
+          <div class="trend"><span class="up">↑ 5</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">06</div>
+          <div><div class="uni">LLM User Study</div><span class="country">大模型用户研究</span></div>
+          <div class="count">29</div>
+          <div class="trend"><span class="up">↑ 8</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">07</div>
+          <div><div class="uni">Multi-Agent Collaboration</div><span class="country">多智能体协作</span></div>
+          <div class="count">23</div>
+          <div class="trend"><span class="up">↑ 9</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">08</div>
+          <div><div class="uni">AI in Mental Health</div><span class="country">AI 心理健康</span></div>
+          <div class="count">20</div>
+          <div class="trend"><span class="up">↑ 2</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">09</div>
+          <div><div class="uni">Responsible AI</div><span class="country">责任 AI · 用户视角</span></div>
+          <div class="count">17</div>
+          <div class="trend"><span class="up">↑ 2</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">10</div>
+          <div><div class="uni">AI in Education</div><span class="country">AI 教育</span></div>
+          <div class="count">15</div>
+          <div class="trend"><span class="up">↑ 3</span></div>
+        </div>
+      </div>
+
+      <button onclick="show('universities')" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:14px;border-bottom:1px solid var(--accent);padding-bottom:2px">查看全部 18 个方向 →</button>
+
+      <!-- 新兴研究问题 -->
+      <div class="sec-head" style="margin-top:46px">
+        <div>
+          <span class="kicker">Emerging questions · 新兴</span>
+          <h2>新兴 <em>研究问题</em></h2>
+        </div>
+      </div>
+      <div class="ranking" id="emerging-q">
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Human Control of AI Agents</div><span class="country">人如何控制 AI 智能体 · 关联 AI Agents</span></div>
+          <div class="count" style="color:var(--accent)">18</div>
+          <div class="trend"><span class="up">+ 120%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">LLM Feedback in Education</div><span class="country">大模型反馈对学习 · 关联 AI in Education</span></div>
+          <div class="count" style="color:var(--accent)">15</div>
+          <div class="trend"><span class="up">+ 75%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Overreliance on AI Explanations</div><span class="country">用户为何过度依赖解释 · 关联 Trust / XAI</span></div>
+          <div class="count" style="color:var(--accent)">12</div>
+          <div class="trend"><span class="up">+ 60%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Agentic Workflow UX</div><span class="country">智能体工作流体验 · 关联 AI Agents</span></div>
+          <div class="count" style="color:var(--accent)">11</div>
+          <div class="trend"><span class="up">+ 58%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Sycophancy in Chatbots</div><span class="country">对话机器人迎合行为 · 关联 LLM User Study</span></div>
+          <div class="count" style="color:var(--accent)">9</div>
+          <div class="trend"><span class="up">+ 50%</span></div>
+        </div>
+      </div>
+
+      <!-- Direction heat -->
+      <div class="sec-head" style="margin-top:50px">
+        <div>
+          <span class="kicker">近 30 日 · 方向热度</span>
+          <h2>方向 <em>热度</em></h2>
+        </div>
+      </div>
+      <div class="bars">
+        <div class="bar-row"><div class="lab">Human-AI Interaction</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num">68</div></div>
+        <div class="bar-row"><div class="lab">Trust &amp; Reliance</div><div class="track"><div class="fill" style="width:72%"></div></div><div class="num">49</div></div>
+        <div class="bar-row"><div class="lab">AI Agents</div><div class="track"><div class="fill" style="width:64%"></div></div><div class="num">44</div></div>
+        <div class="bar-row"><div class="lab">Explainable AI</div><div class="track"><div class="fill" style="width:52%"></div></div><div class="num">35</div></div>
+        <div class="bar-row"><div class="lab">AI-assisted Decision</div><div class="track"><div class="fill" style="width:46%"></div></div><div class="num">31</div></div>
+        <div class="bar-row"><div class="lab">LLM User Study</div><div class="track"><div class="fill" style="width:43%"></div></div><div class="num">29</div></div>
+        <div class="bar-row"><div class="lab">Multi-Agent Collab</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="num">23</div></div>
+        <div class="bar-row"><div class="lab">AI in Mental Health</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="num">20</div></div>
+        <div class="bar-row"><div class="lab">Responsible AI</div><div class="track"><div class="fill" style="width:25%"></div></div><div class="num">17</div></div>
+        <div class="bar-row"><div class="lab">AI in Education</div><div class="track"><div class="fill" style="width:22%"></div></div><div class="num">15</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider-orn">· · ·</div>
+
+  <!-- LATEST COLLAB PAPERS -->
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Latest high-relevance</span>
+      <h2>最新 <em>高相关论文</em> · HCAI ≥ 85</h2>
+    </div>
+    <div class="meta">按 HCAI 分数 · 跨方向汇集</div>
+  </div>
+
+  <div class="collab-list">
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">94<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">校准依赖：临床医生如何在诊断中使用 AI 生成的解释</div>
+        <div class="cunis">方向 · Trust &amp; Reliance / XAI / Decision Support</div>
+        <div class="cmeta">研究问题 · 用户是否会过度依赖 AI 解释 · 84 名放射科医生 · 用户实验</div>
+      </div>
+      <div class="cdate">2026·05·31</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">91<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">当 Agent 接管：为大模型协同编程设计交接时刻</div>
+        <div class="cunis">方向 · AI Agents / Human Control / Mixed-Initiative</div>
+        <div class="cmeta">研究问题 · 人如何控制 AI 智能体 · 24 名工程师 · 日记研究 3 周</div>
+      </div>
+      <div class="cdate">2026·05·31</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">89<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">「它听见了，但听懂了吗？」——AI 心理健康对话机器人中的情感错位</div>
+        <div class="cunis">方向 · AI in Mental Health / Affective Computing</div>
+        <div class="cmeta">研究问题 · 用户感知共情与临床恰当性差距 · 142 名学生 · 田野部署 6 周</div>
+      </div>
+      <div class="cdate">2026·05·30</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">87<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">算法欣赏再审视：当用户在准确率相同时仍偏好 AI</div>
+        <div class="cunis">方向 · Trust &amp; Reliance / Algorithm Aversion</div>
+        <div class="cmeta">研究问题 · 问责框架对依赖的影响 · 预注册复现 · 四领域用户实验</div>
+      </div>
+      <div class="cdate">2026·05·30</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">86<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">劝服性默认：AI 生成的推荐如何重塑线上消费推理</div>
+        <div class="cunis">方向 · AI UX Evaluation / Human Factors</div>
+        <div class="cmeta">研究问题 · 生成式默认值的劝服效应 · N=1,247 · 三项实验</div>
+      </div>
+      <div class="cdate">2026·05·28</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">首页到此 · 翻至论文列表 →</div>
+
+</section>
+
+
+<!-- ============================ PAPERS LIST ============================ -->
+<section class="view" id="view-papers">
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">可筛选论文库</span>
+      <h2>全部 <em>论文</em></h2>
+    </div>
+    <div class="meta">近 30 日 · 312 篇</div>
+  </div>
+
+  <div class="list-layout">
+
+    <!-- Filter sidebar -->
+    <aside class="fside">
+
+      <h4>发表时间</h4>
+      <label><input type="radio" name="time" /> 今天发表<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> 近 7 日发表<span class="ct">0</span></label>
+      <label><input type="radio" name="time" checked /> 近 30 日发表<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> 近 90 日发表<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> 近 1 年发表<span class="ct">0</span></label>
+
+      <h4>HCAI 分数</h4>
+      <div class="slider-wrap">
+        <input type="range" min="50" max="100" value="70" />
+        <div class="slider-vals"><span>50</span><span>≥ <strong>70</strong></span><span>100</span></div>
+      </div>
+
+      <h4>研究方向</h4>
+      <label><input type="checkbox" checked /> Human-AI Interaction<span class="ct">68</span></label>
+      <label><input type="checkbox" /> Trust &amp; Reliance<span class="ct">49</span></label>
+      <label><input type="checkbox" /> AI Agents<span class="ct">44</span></label>
+      <label><input type="checkbox" /> Explainable AI<span class="ct">35</span></label>
+      <label><input type="checkbox" /> AI-assisted Decision<span class="ct">31</span></label>
+      <label><input type="checkbox" /> LLM User Study<span class="ct">29</span></label>
+      <label><input type="checkbox" /> Multi-Agent Collab.<span class="ct">23</span></label>
+      <label><input type="checkbox" /> AI in Mental Health<span class="ct">20</span></label>
+      <label><input type="checkbox" /> Responsible AI<span class="ct">17</span></label>
+      <label><input type="checkbox" /> AI in Education<span class="ct">15</span></label>
+
+      <h4>研究问题</h4>
+      <label><input type="checkbox" /> 信任校准<span class="ct">28</span></label>
+      <label><input type="checkbox" /> 过度依赖<span class="ct">21</span></label>
+      <label><input type="checkbox" /> 人控制智能体<span class="ct">18</span></label>
+      <label><input type="checkbox" /> 解释理解<span class="ct">16</span></label>
+      <label><input type="checkbox" /> AI 反馈解读<span class="ct">15</span></label>
+      <label><input type="checkbox" /> AI 接受与采纳<span class="ct">12</span></label>
+      <label><input type="checkbox" /> 人–AI 责任分配<span class="ct">10</span></label>
+
+      <h4>研究方法</h4>
+      <label><input type="checkbox" /> 用户实验<span class="ct">142</span></label>
+      <label><input type="checkbox" /> 访谈<span class="ct">68</span></label>
+      <label><input type="checkbox" /> 问卷<span class="ct">54</span></label>
+      <label><input type="checkbox" /> 日志分析<span class="ct">38</span></label>
+      <label><input type="checkbox" /> 原型系统<span class="ct">71</span></label>
+      <label><input type="checkbox" /> 田野研究<span class="ct">29</span></label>
+      <label><input type="checkbox" /> 日记研究<span class="ct">14</span></label>
+
+      <h4>应用场景</h4>
+      <label><input type="checkbox" /> 医疗决策<span class="ct">42</span></label>
+      <label><input type="checkbox" /> 教育<span class="ct">31</span></label>
+      <label><input type="checkbox" /> 编程<span class="ct">28</span></label>
+      <label><input type="checkbox" /> 写作<span class="ct">22</span></label>
+      <label><input type="checkbox" /> 心理健康<span class="ct">20</span></label>
+      <label><input type="checkbox" /> 团队协作<span class="ct">18</span></label>
+      <label><input type="checkbox" /> 推荐 / 消费<span class="ct">12</span></label>
+
+      <h4>用户群体</h4>
+      <label><input type="checkbox" /> 普通用户<span class="ct">98</span></label>
+      <label><input type="checkbox" /> 学生<span class="ct">62</span></label>
+      <label><input type="checkbox" /> 医生 / 医学生<span class="ct">31</span></label>
+      <label><input type="checkbox" /> 工程师 / 开发者<span class="ct">27</span></label>
+      <label><input type="checkbox" /> 教师<span class="ct">14</span></label>
+      <label><input type="checkbox" /> 设计师<span class="ct">9</span></label>
+
+      <h4>AI 系统类型</h4>
+      <label><input type="checkbox" /> LLM<span class="ct">128</span></label>
+      <label><input type="checkbox" /> AI Agent<span class="ct">52</span></label>
+      <label><input type="checkbox" /> 决策支持系统<span class="ct">38</span></label>
+      <label><input type="checkbox" /> 生成式 AI 工具<span class="ct">36</span></label>
+      <label><input type="checkbox" /> 推荐系统<span class="ct">14</span></label>
+
+      <h4>成果类型</h4>
+      <label><input type="checkbox" /> 实证发现<span class="ct">182</span></label>
+      <label><input type="checkbox" /> 系统设计<span class="ct">71</span></label>
+      <label><input type="checkbox" /> 评估框架<span class="ct">31</span></label>
+      <label><input type="checkbox" /> 理论模型<span class="ct">18</span></label>
+      <label><input type="checkbox" /> 设计建议<span class="ct">42</span></label>
+
+      <h4>状态</h4>
+      <label><input type="checkbox" /> 开放获取<span class="ct">208</span></label>
+      <label><input type="checkbox" /> 预印本<span class="ct">122</span></label>
+      <label><input type="checkbox" /> 正式发表<span class="ct">190</span></label>
+
+    </aside>
+
+    <!-- Right: filter chips + sort + list -->
+    <div>
+      <div class="filter-bar">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="text" placeholder="搜索标题、作者、关键词…">
+        </div>
+        <span class="flabel">国家</span>
+        <span class="chip on">全部</span>
+        <span class="chip">US</span>
+        <span class="chip">UK / EU</span>
+        <span class="chip">CN</span>
+        <span class="chip">JP</span>
+        <span class="chip">SG</span>
+      </div>
+
+      <div class="sort-row">
+        <div class="count">共 312 篇 · 当前显示 1–10</div>
+        <div class="sort-options">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:.18em;text-transform:uppercase">排序</span>
+          <span class="so on">最新</span>
+          <span class="so">HCAI 分数</span>
+          <span class="so">引用数</span>
+          <span class="so">合作校数</span>
+        </div>
+      </div>
+
+      <div class="paper-list">
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">01</div>
+          <div class="main">
+            <h3><em>校准依赖</em>：临床医生如何在诊断中使用 AI 生成的解释</h3>
+            <div class="authors">Maya R. Kapoor、Lin Wei、A. P. Sundaram 等 · 斯坦福 / CMU / 华盛顿大学</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Explainable AI</span>
+              <span class="tag hi-score">高相关度 ≥ 90</span>
+              <span>arXiv:2406.18234</span><span class="sep">·</span><span>2026·05·31</span>
+            </div>
+            <p class="excerpt">对 84 名放射科医生的混合方法研究表明，AI 置信度会改变诊断一致性，模糊场景中以不足依赖为主……</p>
+          </div>
+          <div class="score-col"><div class="score hi">94</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·31</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">02</div>
+          <div class="main">
+            <h3>当 Agent 接管：为大模型协同编程设计<em>交接时刻</em></h3>
+            <div class="authors">Jonas Berg、T. Yamamoto、Pei Chen 等 · CMU / 乔治亚理工</div>
+            <div class="meta-row">
+              <span class="tag primary">AI Agents</span>
+              <span class="tag">LLM User Study</span>
+              <span>CHI 2026 LBW</span><span class="sep">·</span><span>2026·05·31</span>
+            </div>
+            <p class="excerpt">对 24 名软件工程师的日记研究提出四种典型交接模式及其在生产环境中的失效方式。</p>
+          </div>
+          <div class="score-col"><div class="score hi">91</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·31</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">03</div>
+          <div class="main">
+            <h3>「<em>它听见了，但听懂了吗？</em>」——AI 心理健康对话机器人中的情感错位</h3>
+            <div class="authors">周文华、R. Banerjee、K. Iwata · 浙江大学</div>
+            <div class="meta-row">
+              <span class="tag">单校</span>
+              <span class="tag primary">AI in Mental Health</span>
+              <span class="tag">Affective Computing</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+            </div>
+            <p class="excerpt">在 142 名学生中开展的 6 周田野部署，揭示用户感知共情度与临床评估恰当性之间的系统性差距。</p>
+          </div>
+          <div class="score-col"><div class="score hi">89</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·30</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">04</div>
+          <div class="main">
+            <h3>算法<em>欣赏</em>再审视：当用户在准确率相同时仍偏好 AI</h3>
+            <div class="authors">Hannah Brooks、J. Tanaka、Ravi Iyengar · 西北大学 / 东京大学</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Algorithm Aversion</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+            </div>
+            <p class="excerpt">在四个任务领域对 Logg 等（2019）的预注册复现发现：问责框架下「算法欣赏」效应会反转。</p>
+          </div>
+          <div class="score-col"><div class="score hi">87</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·30</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">05</div>
+          <div class="main">
+            <h3>劝服性默认：<em>AI 生成</em>的推荐如何重塑线上消费推理</h3>
+            <div class="authors">A. Bhattacharya、L. Tremblay、R. Goh · 密歇根大学 / 伯克利 / NUS</div>
+            <div class="meta-row">
+              <span class="tag primary">AI UX Evaluation</span>
+              <span class="tag">Human Factors</span>
+              <span>CHI 2026</span><span class="sep">·</span><span>2026·05·28</span>
+            </div>
+            <p class="excerpt">三项实验（N=1,247）表明：大模型生成的表述会系统性收窄候选集，即使用户自认为未受影响。</p>
+          </div>
+          <div class="score-col"><div class="score">86</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·28</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">06</div>
+          <div class="main">
+            <h3>驾驭多个心智：面向 AI Agent 团队的人类<em>监督控制界面</em></h3>
+            <div class="authors">Ada Nakamura、Ben Olson、K. Pillai · MIT / 康奈尔 / ETH / 东京大学</div>
+            <div class="meta-row">
+              <span class="tag primary">Multi-Agent Collaboration</span>
+              <span class="tag confirm-pending">机构待确认</span>
+              <span>UIST 2026</span><span class="sep">·</span><span>2026·05·29</span>
+            </div>
+            <p class="excerpt">面向 Agent 团队的可视化监控与干预语言，由 96 名参与者跨三种任务复杂度的实验进行评估。</p>
+          </div>
+          <div class="score-col"><div class="score">82</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·29</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">07</div>
+          <div class="main">
+            <h3>生成式 AI 的心智模型：一项<em>跨文化</em>用户研究</h3>
+            <div class="authors">Y. Saito、P. Andersson、M. Chowdhury · 东京大学 / KTH / IIIT-D</div>
+            <div class="meta-row">
+              <span class="tag primary">Human-AI Interaction</span>
+              <span class="tag">LLM User Study</span>
+              <span>arXiv:2405.14021</span><span class="sep">·</span><span>2026·05·27</span>
+            </div>
+            <p class="excerpt">对日本、瑞典、印度共 60 名参与者的访谈，揭示了对大模型能动性、错误归因与信任形成的不同心智模型。</p>
+          </div>
+          <div class="score-col"><div class="score">81</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·27</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">08</div>
+          <div class="main">
+            <h3>教师作为共同设计者：为包容性课堂改造<em>生成式 AI</em></h3>
+            <div class="authors">L. Ferreira、林玫、J. Hardcastle · UCL / 南洋理工</div>
+            <div class="meta-row">
+              <span class="tag primary">AI in Education</span>
+              <span class="tag">Responsible AI</span>
+              <span>CHI 2026</span><span class="sep">·</span><span>2026·05·29</span>
+            </div>
+            <p class="excerpt">与两国 18 名教师的参与式设计，揭示了在教学权威、透明性与公平性方面的张力。</p>
+          </div>
+          <div class="score-col"><div class="score">78</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·29</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">09</div>
+          <div class="main">
+            <h3><em>无声</em>的交接：AI 辅助外科机器人中的认知负荷模式</h3>
+            <div class="authors">R. Singh、T. Sato、刘洋 · 帝国理工 / 东京大学 / 上海交大</div>
+            <div class="meta-row">
+              <span class="tag primary">Human Factors</span>
+              <span class="tag">AI-assisted Decision</span>
+              <span>FAccT 2026</span><span class="sep">·</span><span>2026·05·26</span>
+            </div>
+            <p class="excerpt">28 名外科医生模拟手术中的眼动与脑电数据，刻画 Agent 接管时刻的认知负荷变化。</p>
+          </div>
+          <div class="score-col"><div class="score">77</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·26</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">10</div>
+          <div class="main">
+            <h3>超越准确率：长期 AI 陪伴应用中的<em>信任校准</em></h3>
+            <div class="authors">S. Park、N. Oliveira、F. Müller · KAIST / EPFL / TUM</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Affective Computing</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·25</span>
+            </div>
+            <p class="excerpt">312 名用户为期 12 个月的纵向数据显示：信任轨迹在三个交互阶段产生分化，与以准确率为驱动的模型相悖。</p>
+          </div>
+          <div class="score-col"><div class="score">75</div><div class="score-lab">HCAI 分数</div><div class="date">2026·05·25</div></div>
+        </div>
+
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:14px;margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)">
+        <span style="cursor:pointer">‹ 上一页</span>
+        <span style="color:var(--ink);border-bottom:1px solid var(--ink)">1</span>
+        <span style="cursor:pointer">2</span>
+        <span style="cursor:pointer">3</span>
+        <span>…</span>
+        <span style="cursor:pointer">32</span>
+        <span style="cursor:pointer">下一页 ›</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================ UNIVERSITY LIST ============================ -->
+<section class="view" id="view-universities">
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">第一期 · 18 个一级方向</span>
+      <h2>研究 <em>方向</em></h2>
+    </div>
+    <div class="meta">默认按近 30 日论文数</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">范畴</span>
+    <span class="chip on">全部 18</span>
+    <span class="chip">强相关 22</span>
+    <span class="chip">中等相关 13</span>
+    <span class="flabel" style="margin-left:24px">排序</span>
+    <span class="chip on">近 30 日</span>
+    <span class="chip">近 7 日</span>
+    <span class="chip">增长率</span>
+    <span class="chip">平均分</span>
+  </div>
+
+  <table class="uni-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>研究方向</th>
+        <th>分级</th>
+        <th class="num">今日 <span class="arr">↓</span></th>
+        <th class="num">近 7 日</th>
+        <th class="num">近 30 日</th>
+        <th class="num">近 1 年</th>
+        <th class="num">问题数</th>
+        <th class="num">增长率</th>
+        <th class="num">平均分</th>
+        <th>高频研究问题</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">01</td>
+        <td class="uname">Human-AI Interaction<span class="cn">人智交互 · 一级方向</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">5</td><td class="num">18</td><td class="num">68</td><td class="num">412</td>
+        <td class="num">24</td>
+        <td class="cr">+ 17%<span class="cr-bar"><span class="crf" style="width:62%"></span></span></td>
+        <td class="num">82</td>
+        <td class="dirs">人–AI 协作 · 角色分配 · 控制 · 心智模型</td>
+      </tr>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">02</td>
+        <td class="uname">Trust &amp; Reliance<span class="cn">信任与依赖</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">3</td><td class="num">11</td><td class="num">49</td><td class="num">204</td>
+        <td class="num">18</td>
+        <td class="cr">+ 29%<span class="cr-bar"><span class="crf" style="width:72%"></span></span></td>
+        <td class="num">84</td>
+        <td class="dirs">过度依赖 · 信任校准 · 算法欣赏 · 解释影响</td>
+      </tr>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">03</td>
+        <td class="uname">AI Agents<span class="cn">AI 智能体 · 高增长</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">4</td><td class="num">12</td><td class="num">44</td><td class="num">186</td>
+        <td class="num">16</td>
+        <td class="cr">+ 42%<span class="cr-bar"><span class="crf" style="width:88%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">人控制智能体 · 交接时刻 · 智能体工作流</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">04</td>
+        <td class="uname">Explainable AI<span class="cn">可解释 AI · 用户研究</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">2</td><td class="num">9</td><td class="num">35</td><td class="num">198</td>
+        <td class="num">14</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:42%"></span></span></td>
+        <td class="num">79</td>
+        <td class="dirs">解释理解 · 解释长度 · 置信展示</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">05</td>
+        <td class="uname">AI-assisted Decision<span class="cn">AI 辅助决策</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">2</td><td class="num">8</td><td class="num">31</td><td class="num">156</td>
+        <td class="num">12</td>
+        <td class="cr">+ 19%<span class="cr-bar"><span class="crf" style="width:52%"></span></span></td>
+        <td class="num">80</td>
+        <td class="dirs">人–AI 责任分配 · 接受决策 · 推翻行为</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">06</td>
+        <td class="uname">LLM User Study<span class="cn">大模型用户研究</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">1</td><td class="num">7</td><td class="num">29</td><td class="num">142</td>
+        <td class="num">13</td>
+        <td class="cr">+ 38%<span class="cr-bar"><span class="crf" style="width:82%"></span></span></td>
+        <td class="num">78</td>
+        <td class="dirs">迎合行为 · 心智模型 · 跨文化使用</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">07</td>
+        <td class="uname">Multi-Agent Collab.<span class="cn">多智能体协作 UX</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">1</td><td class="num">6</td><td class="num">23</td><td class="num">96</td>
+        <td class="num">9</td>
+        <td class="cr">+ 100%<span class="cr-bar"><span class="crf" style="width:100%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">监督控制 · 团队任务 · 信任传播</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">08</td>
+        <td class="uname">AI in Mental Health<span class="cn">AI 心理健康 · 含用户交互</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">中等相关</td>
+        <td class="num">1</td><td class="num">5</td><td class="num">20</td><td class="num">108</td>
+        <td class="num">10</td>
+        <td class="cr">+ 11%<span class="cr-bar"><span class="crf" style="width:38%"></span></span></td>
+        <td class="num">76</td>
+        <td class="dirs">情感错位 · 求助意愿 · 长期陪伴信任</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">09</td>
+        <td class="uname">Responsible AI<span class="cn">责任 AI · 用户视角</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">1</td><td class="num">4</td><td class="num">17</td><td class="num">88</td>
+        <td class="num">8</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:40%"></span></span></td>
+        <td class="num">77</td>
+        <td class="dirs">问责 · 公平感知 · 透明性需求</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">10</td>
+        <td class="uname">AI in Education<span class="cn">AI 教育 · 含交互</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">中等相关</td>
+        <td class="num">1</td><td class="num">4</td><td class="num">15</td><td class="num">94</td>
+        <td class="num">9</td>
+        <td class="cr">+ 25%<span class="cr-bar"><span class="crf" style="width:65%"></span></span></td>
+        <td class="num">75</td>
+        <td class="dirs">LLM 反馈解读 · 学习节奏 · 教师再设计</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">11</td>
+        <td class="uname">Affective Computing<span class="cn">情感计算</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">中等相关</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">14</td><td class="num">76</td>
+        <td class="num">7</td>
+        <td class="cr">+ 0%<span class="cr-bar"><span class="crf" style="width:25%"></span></span></td>
+        <td class="num">74</td>
+        <td class="dirs">情感识别 · 共情设计 · 错位响应</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">12</td>
+        <td class="uname">Human Factors<span class="cn">人因工程</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">12</td><td class="num">82</td>
+        <td class="num">9</td>
+        <td class="cr">+ 33%<span class="cr-bar"><span class="crf" style="width:78%"></span></span></td>
+        <td class="num">78</td>
+        <td class="dirs">认知负荷 · 情境感知 · 错误恢复</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">13</td>
+        <td class="uname">Algorithm Aversion<span class="cn">算法厌恶 / 欣赏</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">1</td><td class="num">3</td><td class="num">11</td><td class="num">54</td>
+        <td class="num">6</td>
+        <td class="cr">+ 83%<span class="cr-bar"><span class="crf" style="width:95%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">问责框架 · 准确率知觉 · 接受性</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">14</td>
+        <td class="uname">AI UX Evaluation<span class="cn">AI UX 评估</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">10</td><td class="num">68</td>
+        <td class="num">7</td>
+        <td class="cr">+ 11%<span class="cr-bar"><span class="crf" style="width:38%"></span></span></td>
+        <td class="num">76</td>
+        <td class="dirs">评估框架 · 启发式 · 长期使用</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">15</td>
+        <td class="uname">Mixed-Initiative<span class="cn">混合主动系统</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">强相关</td>
+        <td class="num">0</td><td class="num">2</td><td class="num">9</td><td class="num">52</td>
+        <td class="num">6</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:42%"></span></span></td>
+        <td class="num">79</td>
+        <td class="dirs">主动权切换 · 控制粒度</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="scroll-hint">当前展示前 15 · 共 18 个一级方向 · 翻页查看更多 →</div>
+
+</section>
+
+
+<!-- ============================ PAPER DETAIL ============================ -->
+<section class="view" id="view-paper-detail">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="pd-grid">
+    <article>
+
+      <span class="kicker">方向 · 信任与依赖</span>
+      <h1 class="pd-title">校准<em>依赖</em>：临床医生如何在诊断中使用 AI 生成的解释</h1>
+
+      <p class="pd-byline">作者：Maya R. Kapoor、Lin Wei、A. P. Sundaram、Daniel Foster、Sarah Greene、J. Mukherjee、R. Park 等 14 位。2026 年 5 月 31 日发表于 arXiv，CHI 2026 LBW 预印本。</p>
+
+      <div class="pd-affil">
+        <div><span class="num">1</span>Stanford HAI · Stanford University</div>
+        <div><span class="num">2</span>Human-Computer Interaction Institute · Carnegie Mellon University</div>
+        <div><span class="num">3</span>Paul G. Allen School of CSE · University of Washington</div>
+      </div>
+
+      <div class="pd-tags">
+        <span class="tag primary">Trust &amp; Reliance</span>
+        <span class="tag">Explainable AI</span>
+        <span class="tag">AI-assisted Decision Making</span>
+        <span class="tag">Human Factors</span>
+        <span class="tag preprint">arXiv 预印本</span>
+        <span class="tag hi-score">高相关 ≥ 90</span>
+      </div>
+
+      <p class="pd-abstract">本研究采用混合方法考察 AI 生成解释中置信区间如何影响临床放射科诊断决策。在两家医院 84 名放射科医生参与的研究中，我们发现：在模糊场景下的主要失效模式并非过度依赖，而是系统性的不足依赖——当解释长度超过工作记忆阈值时，医生会折扣良好校准的 AI 输出。我们提出依赖校准的三条设计原则：时序节奏、证据框架、情境化分歧呈现。文末讨论了对临床 AI 部署与解释界面设计的意义。</p>
+
+      <div class="pd-block">
+        <h3>分类理由 · 为什么属于 HCAI</h3>
+        <p class="reason">这篇论文同时满足看板多个强相关条件：研究对象是<em>人与 AI 辅助决策系统的真实交互</em>；包含 84 名临床用户参与的混合方法实证研究；聚焦<em>信任校准</em>、<em>解释理解</em>与<em>依赖行为</em>等核心研究问题；并给出针对用户体验的可解释设计原则。摘要不偏向算法性能 benchmark，包含用户实验、AI 系统类型、评价指标（信任、依赖、认知负荷）等多维内容信息。综合 7 个评分维度给出 <strong>94</strong> 分。</p>
+      </div>
+
+      <div class="pd-block">
+        <h3>相似论文 · 同方向相关工作</h3>
+        <div class="similar">
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">超越准确率：长期 AI 陪伴应用中的信任校准</div><div class="sim-m">KAIST / EPFL / TUM · score 75 · 2026·05·25</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">算法欣赏再审视：当用户在准确率相同时仍偏好 AI</div><div class="sim-m">Northwestern / U-Tokyo · score 87 · 2026·05·30</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">无声的交接：AI 辅助外科机器人中的认知负荷</div><div class="sim-m">Imperial / U-Tokyo / SJTU · score 77 · 2026·05·26</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">从分歧到决策：呈现医生–AI 冲突的一个框架</div><div class="sim-m">UCL / Oxford · score 73 · 2026·05·22</div></div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Aside column -->
+    <aside>
+
+      <div class="score-bigbox">
+        <div class="lab">HCAI 相关性分数</div>
+        <div class="big">94<small>/100</small></div>
+        <div class="desc">明确属于 HCAI · 自动分类已通过 · 90 分以上为高置信</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">研究问题</div>
+        <ul style="list-style:none">
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">用户是否会过度依赖 AI 生成的解释</li>
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">解释长度如何影响信任校准</li>
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">问责框架对依赖行为的修正作用</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">应用场景</div>
+        <div class="val">临床放射学诊断</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">用户群体</div>
+        <div class="val">医生 · 84 名放射科医生 (2 医院)</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">AI 系统类型</div>
+        <div class="val">AI 决策支持系统 · 带解释</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">交互模式</div>
+        <div class="val">AI 辅助决策</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">研究方法</div>
+        <div class="val">混合方法 · 用户实验 + 半结构访谈</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">评价指标</div>
+        <ul style="font-family:var(--mono);font-size:11.5px;letter-spacing:.04em">
+          <li>· 信任 trust</li>
+          <li>· 依赖 reliance</li>
+          <li>· 诊断准确率 accuracy</li>
+          <li>· 认知负荷 cognitive load</li>
+          <li>· 决策时间 decision time</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">成果类型</div>
+        <div class="val">实证发现 + 设计建议</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">链接</div>
+        <a class="lnk"><span>arXiv 预印本</span><span class="arr">→</span></a>
+        <a class="lnk"><span>PDF（12 MB）</span><span class="arr">→</span></a>
+        <a class="lnk"><span>项目主页</span><span class="arr">→</span></a>
+        <a class="lnk"><span>DOI · 10.48550/…</span><span class="arr">→</span></a>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">数据源</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em">
+          <li>✓ arXiv · 主源</li>
+          <li>✓ OpenAlex · DOI 匹配</li>
+          <li>✓ Semantic Scholar · 0 引用</li>
+          <li>– Crossref · 待回填</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">参与机构</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)">
+          <li>· Stanford University</li>
+          <li>· Carnegie Mellon University</li>
+          <li>· University of Washington</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">数据质量</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em">
+          <li style="color:var(--teal)">✓ 自动分类已通过</li>
+          <li style="color:var(--teal)">✓ 研究问题已提取</li>
+          <li style="color:var(--teal)">✓ 摘要完整</li>
+          <li style="color:var(--teal)">✓ DOI 一致</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">首次发现</div>
+        <div class="val">2026·05·31 · 本地时间 00:14</div>
+      </div>
+
+    </aside>
+  </div>
+
+</section>
+
+
+<!-- ============================ UNIVERSITY DETAIL ============================ -->
+<section class="view" id="view-uni-detail">
+
+  <div class="back-link" onclick="show('universities')">‹ 返回方向列表</div>
+
+  <!-- Hero -->
+  <div class="ud-hero">
+    <div>
+      <div class="country-stamp">
+        <span class="flag" style="background:var(--accent)"></span>
+        一级方向 · TIER · 强相关
+        <span style="margin-left:10px">·</span>
+        <span>排名 <strong>02</strong> · 近 30 日</span>
+      </div>
+      <h1>Trust &amp; <em>Reliance</em></h1>
+      <div class="cn">信任与依赖</div>
+      <div class="aliases">
+        定义 · 研究用户如何信任、依赖、校准或拒绝 AI 系统的输出，<br>
+        以及解释、置信度展示、问责框架对依赖行为的影响。<br>
+        归并别名 · Trust in AI · Reliance · Overreliance · Algorithm Aversion · Algorithm Appreciation
+      </div>
+    </div>
+    <div class="ud-stats">
+      <div class="ud-stat"><div class="v acc">11</div><div class="l">近 7 日</div></div>
+      <div class="ud-stat"><div class="v">49</div><div class="l">近 30 日</div></div>
+      <div class="ud-stat"><div class="v">204</div><div class="l">近 1 年</div></div>
+      <div class="ud-stat"><div class="v">18</div><div class="l">研究问题</div></div>
+      <div class="ud-stat"><div class="v acc">+ 29%</div><div class="l">vs 上 30 日</div></div>
+      <div class="ud-stat"><div class="v">84</div><div class="l">平均 HCAI 分</div></div>
+    </div>
+  </div>
+
+  <!-- Donut + research-question cluster -->
+  <div class="ud-grid">
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">方向内研究问题构成</span>
+          <h2>研究 <em>问题</em></h2>
+        </div>
+      </div>
+
+      <div class="donut-row">
+        <div class="donut">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="65" stroke="#e8e1d2" stroke-width="24" fill="none"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#8b1e2d" stroke-width="24" fill="none"
+              stroke-dasharray="114.4 294.0" stroke-dashoffset="0"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#a87436" stroke-width="24" fill="none"
+              stroke-dasharray="85.8 322.6" stroke-dashoffset="-114.4"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#2c3e60" stroke-width="24" fill="none"
+              stroke-dasharray="65.3 343.1" stroke-dashoffset="-200.2"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#2d5a5a" stroke-width="24" fill="none"
+              stroke-dasharray="53.1 355.3" stroke-dashoffset="-265.5"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#6d1422" stroke-width="24" fill="none"
+              stroke-dasharray="44.9 363.5" stroke-dashoffset="-318.6"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#3a342c" stroke-width="24" fill="none"
+              stroke-dasharray="44.9 363.5" stroke-dashoffset="-363.5"/>
+          </svg>
+          <div class="ctr"><div class="num">204</div><div class="lab">篇 · 近 1 年</div></div>
+        </div>
+        <div class="donut-legend">
+          <div class="dl"><span class="sw" style="background:#8b1e2d"></span>过度依赖 / 不足依赖 <span class="pct">57 · 28%</span></div>
+          <div class="dl"><span class="sw" style="background:#a87436"></span>信任校准 <span class="pct">43 · 21%</span></div>
+          <div class="dl"><span class="sw" style="background:#2c3e60"></span>解释对信任的影响 <span class="pct">33 · 16%</span></div>
+          <div class="dl"><span class="sw" style="background:#2d5a5a"></span>算法欣赏 / 厌恶 <span class="pct">27 · 13%</span></div>
+          <div class="dl"><span class="sw" style="background:#6d1422"></span>问责框架的修正 <span class="pct">22 · 11%</span></div>
+          <div class="dl"><span class="sw" style="background:#3a342c"></span>其他 (6 个问题) <span class="pct">22 · 11%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">方向内容结构</span>
+          <h2>高频 <em>内容</em></h2>
+        </div>
+      </div>
+      <table class="partners-tbl">
+        <tr>
+          <td class="u">用户实验</td>
+          <td class="d">研究方法</td>
+          <td class="n">68%</td>
+        </tr>
+        <tr>
+          <td class="u">问卷 + 行为日志</td>
+          <td class="d">研究方法</td>
+          <td class="n">31%</td>
+        </tr>
+        <tr>
+          <td class="u">医疗决策</td>
+          <td class="d">应用场景</td>
+          <td class="n">28%</td>
+        </tr>
+        <tr>
+          <td class="u">AI 写作 / 编程辅助</td>
+          <td class="d">应用场景</td>
+          <td class="n">19%</td>
+        </tr>
+        <tr>
+          <td class="u">推荐系统决策</td>
+          <td class="d">应用场景</td>
+          <td class="n">14%</td>
+        </tr>
+        <tr>
+          <td class="u">医生 / 医学生</td>
+          <td class="d">用户群体</td>
+          <td class="n">22%</td>
+        </tr>
+        <tr>
+          <td class="u">普通用户</td>
+          <td class="d">用户群体</td>
+          <td class="n">51%</td>
+        </tr>
+        <tr>
+          <td class="u">信任 trust</td>
+          <td class="d">评价指标</td>
+          <td class="n">91%</td>
+        </tr>
+        <tr>
+          <td class="u">依赖 reliance</td>
+          <td class="d">评价指标</td>
+          <td class="n">62%</td>
+        </tr>
+        <tr>
+          <td class="u">认知负荷</td>
+          <td class="d">评价指标</td>
+          <td class="n">28%</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Recent papers in this direction -->
+  <div class="sec-head">
+    <div>
+      <span class="kicker">方向代表论文</span>
+      <h2>最新 <em>论文</em></h2>
+    </div>
+    <div class="meta">近 7 日 · 11 篇</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">时间</span>
+    <span class="chip on">近 7 日</span>
+    <span class="chip">近 30 日</span>
+    <span class="chip">近 90 日</span>
+    <span class="chip">近 1 年</span>
+    <span class="flabel" style="margin-left:24px">研究问题</span>
+    <span class="chip on">全部</span>
+    <span class="chip">过度依赖</span>
+    <span class="chip">信任校准</span>
+    <span class="chip">解释影响</span>
+    <span class="chip">问责框架</span>
+  </div>
+
+  <div class="paper-list">
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">01</div>
+      <div class="main">
+        <h3>校准<em>依赖</em>：临床医生如何在诊断中使用 AI 生成的解释</h3>
+        <div class="authors">Maya R. Kapoor、A. P. Sundaram 等 · 研究问题 · 用户是否会过度依赖 AI 解释</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">用户实验</span>
+          <span class="tag">医疗决策</span>
+          <span class="tag">N = 84 医生</span>
+          <span>arXiv 预印本</span><span class="sep">·</span><span>2026·05·31</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score hi">94</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">02</div>
+      <div class="main">
+        <h3>算法<em>欣赏</em>再审视：当用户在准确率相同时仍偏好 AI</h3>
+        <div class="authors">Hannah Brooks、J. Tanaka 等 · 研究问题 · 问责框架对依赖的修正</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">预注册复现</span>
+          <span class="tag">四领域</span>
+          <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score hi">87</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">03</div>
+      <div class="main">
+        <h3>超越准确率：长期 AI 陪伴应用中的<em>信任校准</em></h3>
+        <div class="authors">S. Park、N. Oliveira 等 · 研究问题 · 长期使用中信任的阶段性分化</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">12 个月纵向</span>
+          <span class="tag">N = 312</span>
+          <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·25</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score">75</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">04</div>
+      <div class="main">
+        <h3>从分歧到决策：呈现医生–AI <em>冲突</em>的一个框架</h3>
+        <div class="authors">M. Patel、L. Akhter 等 · 研究问题 · 不同意时如何呈现冲突</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">原型系统</span>
+          <span class="tag">医疗决策</span>
+          <span>FAccT 2026</span><span class="sep">·</span><span>2026·05·22</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score">73</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+  </div>
+
+  <!-- Related directions -->
+  <div class="sec-head" style="margin-top:36px">
+    <div>
+      <span class="kicker">相关方向 · 与本方向共现频次最高</span>
+      <h2>相关 <em>方向</em></h2>
+    </div>
+  </div>
+  <div class="adjacent-list" style="border-top:1px solid var(--ink)">
+    <div class="adj-row" onclick="show('uni-detail')">
+      <div class="an">Explainable AI</div>
+      <div class="av">32<small>共现次数</small></div>
+    </div>
+    <div class="adj-row" onclick="show('uni-detail')">
+      <div class="an">AI-assisted Decision</div>
+      <div class="av">28<small>共现次数</small></div>
+    </div>
+    <div class="adj-row" onclick="show('uni-detail')">
+      <div class="an">Human-AI Interaction</div>
+      <div class="av">24<small>共现次数</small></div>
+    </div>
+    <div class="adj-row" onclick="show('uni-detail')">
+      <div class="an">Algorithm Aversion</div>
+      <div class="av">18<small>共现次数</small></div>
+    </div>
+    <div class="adj-row" onclick="show('uni-detail')">
+      <div class="an">Human Factors</div>
+      <div class="av">14<small>共现次数</small></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">展示前 4 / 49 · 加载更多论文 →</div>
+
+</section>
+
+
+
+<section class="view" id="view-collab">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · 方向之间的关系</span>
+    <h2>方向 <em>关系图</em></h2>
+    <p class="lead">18 个一级方向 · 关系类型基于研究问题、方法、应用场景的共现</p>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">时间</span>
+    <span class="chip">近 30 日</span>
+    <span class="chip">近 90 日</span>
+    <span class="chip on">近 1 年</span>
+    <span class="flabel" style="margin-left:24px">关系</span>
+    <span class="chip on">全部</span>
+    <span class="chip">共现</span>
+    <span class="chip">方法借用</span>
+    <span class="chip">演化路径</span>
+    <span class="flabel" style="margin-left:24px">类型</span>
+    <span class="chip on">全部</span>
+    <span class="chip">核心</span>
+    <span class="chip">方法</span>
+    <span class="chip">应用</span>
+  </div>
+
+  <div class="net-wrap">
+    <div class="net-canvas">
+      <svg viewBox="0 0 970 540" xmlns="http://www.w3.org/2000/svg"><text class="axis-label" x="40" y="40">核心方向 · CORE</text><text class="axis-label" x="500" y="40" text-anchor="middle">方法 / 评估 · METHOD</text><text class="axis-label" x="900" y="40" text-anchor="end">应用 · APPLIED</text><line x1="370" y1="20" x2="370" y2="510" stroke="var(--rule-soft)" stroke-dasharray="3 4"/><line x1="730" y1="20" x2="730" y2="510" stroke="var(--rule-soft)" stroke-dasharray="3 4"/><line class="edge thicker" x1="280" y1="180" x2="300" y2="320"/><line class="edge thicker" x1="280" y1="180" x2="170" y2="260"/><line class="edge thicker" x1="300" y1="320" x2="170" y2="260"/><line class="edge thick" x1="280" y1="180" x2="150" y2="410"/><line class="edge thick" x1="150" y1="410" x2="300" y2="320"/><line class="edge thicker" x1="500" y1="270" x2="280" y2="180"/><line class="edge thick" x1="500" y1="270" x2="300" y2="320"/><line class="edge thick" x1="500" y1="270" x2="170" y2="260"/><line class="edge thicker cross" x1="500" y1="270" x2="680" y2="180"/><line class="edge thick cross" x1="500" y1="270" x2="560" y2="430"/><line class="edge thick cross" x1="500" y1="270" x2="420" y2="440"/><line class="edge thicker" x1="680" y1="180" x2="820" y2="250"/><line class="edge thick" x1="680" y1="180" x2="740" y2="360"/><line class="edge" x1="820" y1="250" x2="740" y2="360"/><line class="edge thick" x1="680" y1="180" x2="560" y2="430"/><line class="edge thick cross" x1="640" y1="90" x2="500" y2="270"/><line class="edge thick" x1="640" y1="90" x2="680" y2="180"/><line class="edge" x1="640" y1="90" x2="380" y2="80"/><line class="edge cross" x1="380" y1="80" x2="500" y2="270"/><line class="edge cross" x1="380" y1="80" x2="300" y2="320"/><line class="edge cross" x1="380" y1="80" x2="870" y2="470"/><line class="edge thick" x1="870" y1="120" x2="870" y2="470"/><line class="edge cross" x1="870" y1="120" x2="500" y2="270"/><line class="edge cross" x1="870" y1="120" x2="280" y2="180"/><line class="edge thick cross" x1="890" y1="380" x2="640" y2="90"/><line class="edge cross" x1="890" y1="380" x2="500" y2="270"/><line class="edge thick" x1="870" y1="470" x2="870" y2="120"/><line class="edge" x1="780" y1="470" x2="870" y2="470"/><line class="edge cross" x1="780" y1="470" x2="680" y2="180"/><line class="edge thick cross" x1="60" y1="340" x2="640" y2="90"/><line class="edge cross" x1="60" y1="340" x2="500" y2="270"/><line class="edge cross" x1="80" y1="170" x2="500" y2="270"/><line class="edge" x1="80" y1="170" x2="890" y2="380"/><line class="edge thick cross" x1="560" y1="430" x2="280" y2="180"/><line class="edge" x1="560" y1="430" x2="680" y2="180"/><line class="edge thick cross" x1="420" y1="440" x2="500" y2="270"/><line class="edge cross" x1="420" y1="440" x2="280" y2="180"/><line class="edge thick" x1="150" y1="410" x2="280" y2="180"/><line class="edge" x1="150" y1="410" x2="500" y2="270"/><g class="node us"><circle cx="500" cy="270" r="26"/><text x="500" y="307" text-anchor="middle">Human-AI Interaction</text></g><g class="node us"><circle cx="280" cy="180" r="22"/><text x="280" y="213" text-anchor="middle">Trust &amp; Reliance</text></g><g class="node us"><circle cx="300" cy="320" r="19"/><text x="300" y="350" text-anchor="middle">Explainable AI</text></g><g class="node us"><circle cx="170" cy="260" r="18"/><text x="170" y="289" text-anchor="middle">AI-assisted Decision</text></g><g class="node us"><circle cx="150" cy="410" r="15"/><text x="150" y="436" text-anchor="middle">Algorithm Aversion</text></g><g class="node eu"><circle cx="680" cy="180" r="22"/><text x="680" y="213" text-anchor="middle">AI Agents</text></g><g class="node eu"><circle cx="820" cy="250" r="17"/><text x="820" y="278" text-anchor="middle">Multi-Agent Collab.</text></g><g class="node eu"><circle cx="740" cy="360" r="15"/><text x="740" y="386" text-anchor="middle">Mixed-Initiative</text></g><g class="node eu"><circle cx="560" cy="430" r="17"/><text x="560" y="458" text-anchor="middle">Human Factors</text></g><g class="node eu"><circle cx="420" cy="440" r="15"/><text x="420" y="466" text-anchor="middle">AI UX Evaluation</text></g><g class="node eu"><circle cx="640" cy="90" r="18"/><text x="640" y="119" text-anchor="middle">LLM User Study</text></g><g class="node eu"><circle cx="380" cy="80" r="16"/><text x="380" y="107" text-anchor="middle">Responsible AI</text></g><g class="node asia"><circle cx="870" cy="120" r="16"/><text x="870" y="147" text-anchor="middle">AI in Mental Health</text></g><g class="node asia"><circle cx="890" cy="380" r="16"/><text x="890" y="407" text-anchor="middle">AI in Education</text></g><g class="node asia"><circle cx="870" cy="470" r="14"/><text x="870" y="495" text-anchor="middle">Affective Computing</text></g><g class="node asia"><circle cx="780" cy="470" r="12"/><text x="780" y="493" text-anchor="middle">Social Robotics</text></g><g class="node asia"><circle cx="60" cy="340" r="14"/><text x="60" y="365" text-anchor="middle">Generative AI Tools</text></g><g class="node asia"><circle cx="80" cy="170" r="13"/><text x="80" y="194" text-anchor="middle">AI-mediated Comm.</text></g></svg>
+    </div>
+    <div class="net-side">
+
+      <div class="panel">
+        <h4>图例</h4>
+        <div class="legend-item"><span class="sw us"></span>核心方向 (信任 / 决策 / 解释 / 交互)</div>
+        <div class="legend-item"><span class="sw eu"></span>方法 / 评估 / 因素方向</div>
+        <div class="legend-item"><span class="sw asia"></span>应用方向 (心理 / 教育 / 情感)</div>
+        <div class="legend-item" style="margin-top:8px"><span class="line-sw"></span>同簇关系</div>
+        <div class="legend-item"><span class="line-sw cross"></span>跨簇关系（演化 / 借用）</div>
+        <div class="legend-item" style="margin-top:8px;font-style:italic;color:var(--ink-mute);font-size:11.5px">节点大小 · 近 1 年论文数</div>
+      </div>
+
+      <div class="panel">
+        <h4>关系洞察</h4>
+        <div class="insight-row"><span class="il">中心度最高</span><span class="iv acc">Human-AI Interaction · 度 11</span></div>
+<div class="insight-row"><span class="il">最强关系对</span><span class="iv">Trust × XAI · 32 篇共现</span></div>
+<div class="insight-row"><span class="il">最快演化路径</span><span class="iv acc">AI Agents → Multi-Agent Collab. · + 100%</span></div>
+<div class="insight-row"><span class="il">最新关系</span><span class="iv">LLM User Study × Responsible AI · 9 篇 / 30 日</span></div>
+<div class="insight-row"><span class="il">孤立方向</span><span class="iv">0 · 所有方向均有相邻方向</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">高频方向共现</span>
+      <h2>高频 <em>共现对</em></h2>
+    </div>
+    <div class="meta">近 1 年 · 按共同论文数</div>
+  </div>
+
+  <table class="toppair-tbl">
+    <thead><tr>
+      <th>方向对</th>
+      <th class="r">主要共享内容</th>
+      <th class="r">共现 (1Y)</th>
+    </tr></thead>
+    <tbody><tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × Explainable AI<small>跨簇</small></td><td class="dir">解释如何影响信任</td><td class="n">32</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × AI-assisted Decision<small>跨簇</small></td><td class="dir">诊断 / 决策依赖</td><td class="n">28</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI Agents × Multi-Agent Collab.<small>跨簇</small></td><td class="dir">人监督多智能体</td><td class="n">21</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI Agents × Mixed-Initiative<small>跨簇</small></td><td class="dir">交接时刻 / 主动权</td><td class="n">18</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Explainable AI × AI-assisted Decision<small>跨簇</small></td><td class="dir">解释 + 决策建议</td><td class="n">17</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">LLM User Study × Responsible AI<small>跨簇</small></td><td class="dir">迎合 / 偏见 / 误用</td><td class="n">14</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × Algorithm Aversion<small>跨簇</small></td><td class="dir">问责框架对依赖</td><td class="n">13</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI in Mental Health × Affective Computing<small>跨簇</small></td><td class="dir">共情 / 情感错位</td><td class="n">12</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI in Education × LLM User Study<small>跨簇</small></td><td class="dir">学习中的 LLM 反馈</td><td class="n">11</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Human Factors × AI Agents<small>跨簇</small></td><td class="dir">认知负荷 / 错误恢复</td><td class="n">10</td></tr></tbody>
+  </table>
+
+</section>
+
+<section class="view" id="view-trends">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · 30 日 vs 上一个 30 日</span>
+    <h2>研究 <em>趋势</em></h2>
+    <p class="lead">18 子方向 · 6 个月数据</p>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">粒度</span>
+    <span class="chip">近 7 日</span>
+    <span class="chip on">近 30 日</span>
+    <span class="chip">近 90 日</span>
+    <span class="chip">近 1 年</span>
+  </div>
+
+  <div class="trend-chart">
+    <div class="ct-head">
+      <h3>六大方向 · 月度论文数</h3>
+      <div class="note">数据为该方向当月首次进入看板的论文数</div>
+    </div>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="38" y1="270.0" x2="842" y2="270.0"/><text class="axis-text" x="30" y="273.0" text-anchor="end">0</text><line class="grid" x1="38" y1="207.0" x2="842" y2="207.0"/><text class="axis-text" x="30" y="210.0" text-anchor="end">20</text><line class="grid" x1="38" y1="144.0" x2="842" y2="144.0"/><text class="axis-text" x="30" y="147.0" text-anchor="end">40</text><line class="grid" x1="38" y1="81.0" x2="842" y2="81.0"/><text class="axis-text" x="30" y="84.0" text-anchor="end">60</text><line class="grid" x1="38" y1="18.0" x2="842" y2="18.0"/><text class="axis-text" x="30" y="21.0" text-anchor="end">80</text><text class="axis-text" x="38.0" y="286" text-anchor="middle">6 月</text><text class="axis-text" x="111.1" y="286" text-anchor="middle">7 月</text><text class="axis-text" x="184.2" y="286" text-anchor="middle">8 月</text><text class="axis-text" x="257.3" y="286" text-anchor="middle">9 月</text><text class="axis-text" x="330.4" y="286" text-anchor="middle">10 月</text><text class="axis-text" x="403.5" y="286" text-anchor="middle">11 月</text><text class="axis-text" x="476.5" y="286" text-anchor="middle">12 月</text><text class="axis-text" x="549.6" y="286" text-anchor="middle">1 月</text><text class="axis-text" x="622.7" y="286" text-anchor="middle">2 月</text><text class="axis-text" x="695.8" y="286" text-anchor="middle">3 月</text><text class="axis-text" x="768.9" y="286" text-anchor="middle">4 月</text><text class="axis-text" x="842.0" y="286" text-anchor="middle">5 月</text><line class="axis-line" x1="38" y1="270" x2="842" y2="270"/><path class="line" stroke="#8b1e2d" d="M 38.0,150.3 L 111.1,137.7 L 184.2,128.2 L 257.3,109.4 L 330.4,96.8 L 403.5,87.3 L 476.5,77.9 L 549.6,71.6 L 622.7,65.2 L 695.8,68.4 L 768.9,62.1 L 842.0,55.8"/><circle class="dot" cx="842.0" cy="55.8" r="4" fill="#8b1e2d"/><path class="line" stroke="#a87436" d="M 38.0,200.7 L 111.1,194.4 L 184.2,181.8 L 257.3,172.3 L 330.4,166.1 L 403.5,159.8 L 476.5,150.3 L 549.6,144.0 L 622.7,137.7 L 695.8,131.4 L 768.9,125.1 L 842.0,115.6"/><circle class="dot" cx="842.0" cy="115.6" r="4" fill="#a87436"/><path class="line" stroke="#2c3e60" d="M 38.0,232.2 L 111.1,222.8 L 184.2,213.3 L 257.3,200.7 L 330.4,184.9 L 403.5,172.3 L 476.5,162.9 L 549.6,156.6 L 622.7,150.3 L 695.8,144.0 L 768.9,137.7 L 842.0,131.4"/><circle class="dot" cx="842.0" cy="131.4" r="4" fill="#2c3e60"/><path class="line" stroke="#2d5a5a" d="M 38.0,181.8 L 111.1,184.9 L 184.2,181.8 L 257.3,178.7 L 330.4,175.5 L 403.5,172.3 L 476.5,175.5 L 549.6,169.2 L 622.7,166.1 L 695.8,166.1 L 768.9,162.9 L 842.0,159.8"/><circle class="dot" cx="842.0" cy="159.8" r="4" fill="#2d5a5a"/><path class="line" stroke="#6d1422" d="M 38.0,213.3 L 111.1,207.0 L 184.2,203.8 L 257.3,197.6 L 330.4,194.4 L 403.5,191.2 L 476.5,188.1 L 549.6,184.9 L 622.7,181.8 L 695.8,178.7 L 768.9,175.5 L 842.0,172.3"/><circle class="dot" cx="842.0" cy="172.3" r="4" fill="#6d1422"/><path class="line" stroke="#1a1612" d="M 38.0,254.2 L 111.1,244.8 L 184.2,235.3 L 257.3,225.9 L 330.4,216.4 L 403.5,210.2 L 476.5,203.8 L 549.6,197.6 L 622.7,191.2 L 695.8,188.1 L 768.9,181.8 L 842.0,178.7"/><circle class="dot" cx="842.0" cy="178.7" r="4" fill="#1a1612"/></svg>
+    <div class="legend"><div class="li"><span class="sw" style="background:#8b1e2d"></span>Human-AI Interaction<span class="ct">68</span></div> <div class="li"><span class="sw" style="background:#a87436"></span>Trust & Reliance<span class="ct">49</span></div> <div class="li"><span class="sw" style="background:#2c3e60"></span>AI Agents<span class="ct">44</span></div> <div class="li"><span class="sw" style="background:#2d5a5a"></span>Explainable AI<span class="ct">35</span></div> <div class="li"><span class="sw" style="background:#6d1422"></span>AI-assisted Decision<span class="ct">31</span></div> <div class="li"><span class="sw" style="background:#1a1612"></span>LLM User Study<span class="ct">29</span></div></div>
+  </div>
+
+  <div class="trend-grid">
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">方向增减表</span>
+          <h2>方向 <em>Δ</em></h2>
+        </div>
+        <div class="meta">方向增减表 · 近 30 日 vs 上一个 30 日</div>
+      </div>
+      <table class="trend-tbl">
+        <thead><tr>
+          <th>方向</th>
+          <th class="r">近 30 日</th>
+          <th class="r">上 30 日</th>
+          <th class="r">变化</th>
+          <th class="r">走势</th>
+        </tr></thead>
+        <tbody><tr><td class="dir">Human-AI Interaction</td><td class="n">68</td><td class="n">58</td><td class="delta up">+ 10</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.4 23.3,14.1 34.4,11.8 45.6,8.7 56.7,5.6 67.9,4.1 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Trust & Reliance</td><td class="n">49</td><td class="n">38</td><td class="delta up">+ 11</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.1 23.3,16.2 34.4,13.4 45.6,11.5 56.7,7.7 67.9,3.9 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI Agents</td><td class="n">44</td><td class="n">31</td><td class="delta up">+ 13</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.9 23.3,15.6 34.4,12.5 45.6,11.0 56.7,7.2 67.9,4.1 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Explainable AI</td><td class="n">35</td><td class="n">31</td><td class="delta up">+ 4</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,17.7 34.4,14.3 45.6,14.3 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI-assisted Decision</td><td class="n">31</td><td class="n">26</td><td class="delta up">+ 5</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.6 23.3,16.6 34.4,14.3 45.6,12.1 56.7,7.7 67.9,5.4 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">LLM User Study</td><td class="n">29</td><td class="n">21</td><td class="delta up">+ 8</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.3 23.3,15.7 34.4,13.0 45.6,11.7 56.7,7.7 67.9,3.7 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Multi-Agent Collab.</td><td class="n">23</td><td class="n">14</td><td class="delta up">+ 9</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.5 23.3,15.1 34.4,12.8 45.6,11.6 56.7,8.1 67.9,4.5 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI in Mental Health</td><td class="n">20</td><td class="n">18</td><td class="delta up">+ 2</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.0 23.3,16.0 34.4,16.0 45.6,11.0 56.7,11.0 67.9,6.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Responsible AI</td><td class="n">17</td><td class="n">15</td><td class="delta up">+ 2</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,14.3 34.4,11.0 45.6,7.7 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI in Education</td><td class="n">15</td><td class="n">12</td><td class="delta up">+ 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,14.3 34.4,11.0 45.6,11.0 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Affective Computing</td><td class="n">14</td><td class="n">14</td><td class="delta flat">—</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,11.0 23.3,1.0 34.4,1.0 45.6,1.0 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Human Factors</td><td class="n">12</td><td class="n">9</td><td class="delta up">+ 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,17.7 34.4,14.3 45.6,11.0 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Algorithm Aversion</td><td class="n">11</td><td class="n">6</td><td class="delta up">+ 5</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.5 23.3,18.5 34.4,16.0 45.6,13.5 56.7,8.5 67.9,6.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI UX Evaluation</td><td class="n">10</td><td class="n">9</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,7.7 34.4,7.7 45.6,7.7 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Mixed-Initiative</td><td class="n">9</td><td class="n">8</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,14.3 34.4,7.7 45.6,7.7 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Conversational UX</td><td class="n">8</td><td class="n">11</td><td class="delta dn">− 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,1.0 12.1,1.0 23.3,1.0 34.4,6.0 45.6,6.0 56.7,11.0 67.9,16.0 79.0,21.0"/><circle cx="79.0" cy="21.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Robotics UX</td><td class="n">7</td><td class="n">6</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,21.0 23.3,11.0 34.4,11.0 45.6,11.0 56.7,11.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Privacy & Surveillance</td><td class="n">6</td><td class="n">9</td><td class="delta dn">− 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,1.0 12.1,1.0 23.3,6.0 34.4,6.0 45.6,6.0 56.7,11.0 67.9,16.0 79.0,21.0"/><circle cx="79.0" cy="21.0" r="2" fill="var(--accent)"/></svg></td></tr></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <div class="emerging">
+        <h3>新兴主题</h3>
+        <div class="sub">近 90 日首次频繁出现 · 算法识别 + 人工确认</div>
+        <div class="topic"><div class="rank">01</div><div class="name">Agentic Workflow UX</div><div class="ct">+ 19</div></div><div class="topic"><div class="rank">02</div><div class="name">AI Companionship Longitudinal</div><div class="ct">+ 14</div></div><div class="topic"><div class="rank">03</div><div class="name">LLM Pair Programming Failure</div><div class="ct">+ 13</div></div><div class="topic"><div class="rank">04</div><div class="name">Cross-Cultural LLM Mental Models</div><div class="ct">+ 11</div></div><div class="topic"><div class="rank">05</div><div class="name">AI Authorship & Attribution</div><div class="ct">+ 10</div></div><div class="topic"><div class="rank">06</div><div class="name">Sycophancy in Chatbots</div><div class="ct">+ 9</div></div>
+      </div>
+
+      <div class="growth-schools">
+        <h3>高增长高校</h3>
+        <div class="sub">近 30 日参与论文数较上一个 30 日的增量</div>
+        <div class="growth-row"><span class="gn">Zhejiang University</span><span class="gv">+ 12</span><span class="gd">Trust · LLM UX</span></div><div class="growth-row"><span class="gn">UCL</span><span class="gv">+ 9</span><span class="gd">AI Mental Health · Ethics</span></div><div class="growth-row"><span class="gn">Carnegie Mellon</span><span class="gv">+ 8</span><span class="gd">Agents · Repair</span></div><div class="growth-row"><span class="gn">KAIST</span><span class="gv">+ 6</span><span class="gd">Trust Calibration</span></div><div class="growth-row"><span class="gn">Cornell</span><span class="gv">+ 5</span><span class="gd">CSCW · UX</span></div><div class="growth-row"><span class="gn">U-Tokyo</span><span class="gv">+ 5</span><span class="gd">Multi-Agent · Human Factors</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<section class="view" id="view-compare">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · 2–5 个方向 路线对照</span>
+    <h2>方向 <em>对比</em></h2>
+    <p class="lead">当前对比 4 个方向 · 横向看研究问题、方法、场景、指标和切入点的差异</p>
+  </div>
+
+  <div class="cmp-selector">
+    <div class="lab">选择对比方向 (最多 5)</div>
+    <div class="pool"><span class="cmp-chip on">Trust &amp; Reliance</span><span class="cmp-chip on">AI Agents</span><span class="cmp-chip on">Explainable AI</span><span class="cmp-chip on">LLM User Study</span><span class="cmp-chip ">AI-assisted Decision</span><span class="cmp-chip ">Multi-Agent Collab.</span><span class="cmp-chip ">AI in Mental Health</span><span class="cmp-chip ">AI in Education</span><span class="cmp-chip ">Human Factors</span><span class="cmp-chip ">Algorithm Aversion</span><span class="cmp-chip ">Responsible AI</span><span class="cmp-chip ">Affective Computing</span></div>
+    <div class="status">
+      <span>已选 · 4 / 5</span>
+      <span class="reset">重置</span>
+    </div>
+  </div>
+
+  <div class="cmp-grid">
+    <div class="cmp-cell head" style="background:var(--ink)"></div>
+    <div class="cmp-cell school-head"><div class="name">Trust &amp; <em>Reliance</em></div><div class="meta">强相关 · 一级方向</div></div><div class="cmp-cell school-head"><div class="name"><em>AI</em> Agents</div><div class="meta">强相关 · 高增长</div></div><div class="cmp-cell school-head"><div class="name">Explainable <em>AI</em></div><div class="meta">强相关 · 含用户研究</div></div><div class="cmp-cell school-head"><div class="name"><em>LLM</em> User Study</div><div class="meta">强相关 · 新方向</div></div>
+    <div class="cmp-cell row-label">近 30 日 / 近 1 年</div><div class="cmp-cell"><div><div class="big">49</div><div class="sub">30 日</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">204</div><div class="sub">1 年</div></div></div><div class="cmp-cell"><div><div class="big">44</div><div class="sub">30 日</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">186</div><div class="sub">1 年</div></div></div><div class="cmp-cell"><div><div class="big">35</div><div class="sub">30 日</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">198</div><div class="sub">1 年</div></div></div><div class="cmp-cell"><div><div class="big">29</div><div class="sub">30 日</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">142</div><div class="sub">1 年</div></div></div><div class="cmp-cell row-label">增长率</div><div class="cmp-cell"><div class="big acc">+ 29%</div><div class="sub">vs 上 30 日</div></div><div class="cmp-cell"><div class="big acc">+ 42%</div><div class="sub">vs 上 30 日</div></div><div class="cmp-cell"><div class="big acc">+ 13%</div><div class="sub">vs 上 30 日</div></div><div class="cmp-cell"><div class="big acc">+ 38%</div><div class="sub">vs 上 30 日</div></div><div class="cmp-cell row-label">平均 HCAI 分</div><div class="cmp-cell"><div class="big acc">84</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">81</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">79</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">78</div><div class="sub">/ 100</div></div><div class="cmp-cell row-label">高频研究问题</div><div class="cmp-cell"><p class="pmini">过度依赖 · 信任校准 · 解释影响 · 算法欣赏 · 问责框架</p></div><div class="cmp-cell"><p class="pmini">人控制智能体 · 交接时刻 · 智能体工作流 · 错误恢复</p></div><div class="cmp-cell"><p class="pmini">解释理解 · 解释长度 · 置信展示 · 用户感知透明</p></div><div class="cmp-cell"><p class="pmini">迎合行为 · 跨文化心智模型 · 错误恢复循环 · 长期使用</p></div><div class="cmp-cell row-label">方法偏好</div><div class="cmp-cell"><p class="pmini">用户实验 <b>68%</b> · 问卷 + 行为日志 <b>31%</b> · 长期纵向 <b>11%</b></p></div><div class="cmp-cell"><p class="pmini">原型系统 <b>52%</b> · 用户实验 <b>43%</b> · 日记 / 田野 <b>22%</b></p></div><div class="cmp-cell"><p class="pmini">用户实验 <b>74%</b> · 解释界面评估 <b>32%</b> · 启发式 <b>18%</b></p></div><div class="cmp-cell"><p class="pmini">用户实验 <b>62%</b> · 访谈 <b>41%</b> · 田野 <b>27%</b></p></div><div class="cmp-cell row-label">常见应用场景</div><div class="cmp-cell"><p class="pmini">医疗决策 · AI 写作 / 编程 · 推荐</p></div><div class="cmp-cell"><p class="pmini">编程 · 办公任务 · 多智能体团队</p></div><div class="cmp-cell"><p class="pmini">医疗 · 金融 · 推荐 · 法律</p></div><div class="cmp-cell"><p class="pmini">写作 · 编程 · 学习 · 日常对话</p></div><div class="cmp-cell row-label">常见评价指标</div><div class="cmp-cell"><p class="pmini">trust · reliance · accuracy · cognitive load · decision time</p></div><div class="cmp-cell"><p class="pmini">control · task completion · efficiency · trust handoff</p></div><div class="cmp-cell"><p class="pmini">comprehension · satisfaction · trust · reliance</p></div><div class="cmp-cell"><p class="pmini">trust · usefulness · authorship · over-trust · accuracy of LLM perception</p></div><div class="cmp-cell row-label">心理学切入点</div><div class="cmp-cell"><p class="pmini">决策与判断 · 信任理论 · 双系统理论 · 工作记忆</p></div><div class="cmp-cell"><p class="pmini">情境感知 · 心智模型 · 人因 · 自动化阶段理论</p></div><div class="cmp-cell"><p class="pmini">认知心理学 · 注意 · 信息呈现 · 个体差异</p></div><div class="cmp-cell"><p class="pmini">对话语用学 · 跨文化心理 · 元认知</p></div><div class="cmp-cell row-label">代表论文</div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">校准依赖：临床医生如何使用 AI 生成的解释</div><div class="rep-meta">Stanford · CMU · UW · HCAI 94</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">当 Agent 接管：协同编程的交接时刻</div><div class="rep-meta">CMU · GA Tech · HCAI 91</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">高维特征解释的可视化对比研究</div><div class="rep-meta">UW · MIT · HCAI 82</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">生成式 AI 的心智模型：跨文化用户研究</div><div class="rep-meta">UTokyo · KTH · IIIT-D · HCAI 81</div></div>
+  </div>
+
+</section>
+
+<section class="view" id="view-weekly">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="weekly-hero">
+    <span class="issue-no">Phase II · 2026 · Week 22 · 5/25 – 5/31</span>
+    <h1>本周 <em>HCAI</em> 研究动态</h1>
+    <p class="lead">汇编自 25–31 日新增或更新的 HCAI 相关论文。本期共收录 86 篇，覆盖 18 个方向中的 14 个，新增 5 个研究问题。</p>
+    <button class="export-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+      复制为 Markdown
+    </button>
+  </div>
+
+  <div class="weekly-strip">
+    <div class="ws"><div class="l">本周新增</div><div class="v acc">86</div><div class="d">vs 上周 78 · + 10%</div></div>
+    <div class="ws"><div class="l">合作论文</div><div class="v">38</div><div class="d">44% · 6 周高点</div></div>
+    <div class="ws"><div class="l">活跃方向</div><div class="v">14 / 18</div><div class="d">4 方向本周零新增</div></div>
+    <div class="ws"><div class="l">新兴主题</div><div class="v">2</div><div class="d">Agentic Workflow · LLM Pair Failure</div></div>
+  </div>
+
+  <div class="weekly-body">
+
+    <div>
+
+      <div class="weekly-section">
+        <h3>本周头条</h3>
+        <div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">01</div><div><div class="wh-t">校准依赖：临床医生如何在诊断中使用 <em>AI 生成的解释</em></div><div class="wh-m">Stanford · CMU · UW · arXiv · HCAI 94</div><div class="wh-c">本周看板新增最强势的一篇，84 名放射科医生混合方法研究，给出依赖校准的三条设计原则。</div></div></div><div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">02</div><div><div class="wh-t">当 Agent 接管：为大模型协同编程设计<em>交接时刻</em></div><div class="wh-m">CMU · Georgia Tech · CHI 2026 LBW · HCAI 91</div><div class="wh-c">对 24 名工程师为期 3 周的日记研究，把人–Agent 交接这件事从「无缝」拆解成 4 种典型模式。</div></div></div><div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">03</div><div><div class="wh-t">驾驭多个心智：面向 Agent 团队的<em>人类监督控制界面</em></div><div class="wh-m">MIT · Cornell · ETH · U-Tokyo · UIST 2026 · HCAI 82</div><div class="wh-c">4 校合作中规格最大的一篇——监督多个 Agent 是 2026 年 HCI 的关键话题。</div></div></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>本周重要论文</h3>
+        <div class="weekly-mini">
+          <ul><li><span class="ln">校准依赖：临床医生如何使用 AI 解释</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">Stanford × CMU × UW</span></li><li><span class="ln">驾驭多个心智：Agent 团队的监督控制界面</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">MIT × Cornell × ETH × U-Tokyo</span></li><li><span class="ln">当 Agent 接管：协同编程的交接时刻</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">CMU × Georgia Tech</span></li><li><span class="ln">AI 生成推荐如何重塑线上消费推理</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">U-Michigan × Berkeley × NUS</span></li></ul>
+        </div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>中国研究动态</h3>
+        <div class="weekly-mini"><p><em>浙江大学</em>本周新增 9 篇，方向集中在<em>信任校准</em>与<em>情感计算</em>，其中与 CMU、Imperial 的两篇合作论文进入高分段。<em>清华</em>新增 6 篇，多在 <em>AI Agents</em> 与 <em>多智能体</em>方向。<em>上海交大</em>、<em>北大</em>、<em>港大</em>各有 3–5 篇新增。</p><p>中国高校与海外合作的最强一对是 <em>Imperial × SJTU</em>（AI 辅助外科），其次是 <em>UCL × Tsinghua</em>（责任 AI / 伦理）。</p></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>海外研究动态</h3>
+        <div class="weekly-mini"><p><em>CMU</em> 与 <em>Stanford</em> 共占本周新增的 23%（12 + 11 篇）。<em>UCL</em> 在 <em>AI 心理健康</em>方向继续保持高产，新增 6 篇。<em>东京大学</em>本周参与了 4 校合作论文，是亚洲方面合作度最高的节点。</p><p>本周一个值得注意的微小信号：<em>EPFL</em> 与 <em>KAIST</em> 同时进入信任校准方向，下一期看是否成趋势。</p></div>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="weekly-section">
+        <h3>本周最活跃方向</h3>
+        <div class="weekly-mini"><ul><li><span class="ln">Carnegie Mellon</span><span class="lv">12</span></li><li><span class="ln">Stanford</span><span class="lv">11</span></li><li><span class="ln">Zhejiang</span><span class="lv">9</span></li><li><span class="ln">UW</span><span class="lv">8</span></li><li><span class="ln">MIT</span><span class="lv">7</span></li><li><span class="ln">UCL</span><span class="lv">6</span></li><li><span class="ln">Tsinghua</span><span class="lv">6</span></li></ul></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>本周高频方向</h3>
+        <div class="weekly-mini"><ul><li><span class="ln">信任与依赖</span><span class="lv">14</span></li><li><span class="ln">AI Agents</span><span class="lv">12</span></li><li><span class="ln">人智交互</span><span class="lv">11</span></li><li><span class="ln">大模型用户研究</span><span class="lv">9</span></li><li><span class="ln">AI 辅助决策</span><span class="lv">7</span></li><li><span class="ln">AI 心理健康</span><span class="lv">5</span></li></ul></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>与上周相比</h3>
+        <div class="weekly-vs">本周新增 86 篇，<em>较上周 78 篇增加 10.3%</em>。覆盖方向从 12 个上升到 14 个，是过去 6 周的高点。最显著的方向变化是 <em>AI Agents</em>，本周 12 篇，是过去 4 周平均的 1.6 倍。</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="weekly-foot">编辑：HCAI Research Radar · 自动汇编 + 人工复核</div>
+
+</section>
+
+<section class="view" id="view-direction">
+
+  <div class="back-link" onclick="show('home')">‹ 返回首页</div>
+
+  <div class="dir-hero">
+    <div>
+      <span class="kicker">Phase II · 子方向画像 · Trust & Reliance</span>
+      <h1>信任 <em>与依赖</em></h1>
+      <p class="definition">研究用户在 AI 系统输出面前的信任形成、信任校准、依赖、过度依赖与不足依赖等行为，以及解释、置信度展示、问责设计对依赖行为的影响。</p>
+    </div>
+    <div class="dir-stats">
+      <div class="dir-stat"><div class="v acc">49</div><div class="l">近 30 日</div></div>
+      <div class="dir-stat"><div class="v">204</div><div class="l">近 1 年</div></div>
+      <div class="dir-stat"><div class="v">22</div><div class="l">活跃方向</div></div>
+      <div class="dir-stat"><div class="v acc">+ 11</div><div class="l">vs 上 30 日</div></div>
+      <div class="dir-stat"><div class="v">84</div><div class="l">平均 HCAI 分</div></div>
+      <div class="dir-stat"><div class="v acc">61%</div><div class="l">合作率</div></div>
+    </div>
+  </div>
+
+  <div class="trend-chart">
+    <div class="ct-head">
+      <h3>12 个月走势</h3>
+      <div class="note">近 12 个月该方向月度论文数</div>
+    </div>
+    <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="40" y1="174.0" x2="742" y2="174.0"/><text class="axis-text" x="32" y="177.0" text-anchor="end">0</text><line class="grid" x1="40" y1="121.3" x2="742" y2="121.3"/><text class="axis-text" x="32" y="124.3" text-anchor="end">20</text><line class="grid" x1="40" y1="68.7" x2="742" y2="68.7"/><text class="axis-text" x="32" y="71.7" text-anchor="end">40</text><line class="grid" x1="40" y1="16.0" x2="742" y2="16.0"/><text class="axis-text" x="32" y="19.0" text-anchor="end">60</text><text class="axis-text" x="40.0" y="190" text-anchor="middle">6月</text><text class="axis-text" x="103.8" y="190" text-anchor="middle">7月</text><text class="axis-text" x="167.6" y="190" text-anchor="middle">8月</text><text class="axis-text" x="231.5" y="190" text-anchor="middle">9月</text><text class="axis-text" x="295.3" y="190" text-anchor="middle">10月</text><text class="axis-text" x="359.1" y="190" text-anchor="middle">11月</text><text class="axis-text" x="422.9" y="190" text-anchor="middle">12月</text><text class="axis-text" x="486.7" y="190" text-anchor="middle">1月</text><text class="axis-text" x="550.5" y="190" text-anchor="middle">2月</text><text class="axis-text" x="614.4" y="190" text-anchor="middle">3月</text><text class="axis-text" x="678.2" y="190" text-anchor="middle">4月</text><text class="axis-text" x="742.0" y="190" text-anchor="middle">5月</text><line class="axis-line" x1="40" y1="174" x2="742" y2="174"/><path d="M 40.0,174 40.0,116.1 L 103.8,110.8 L 167.6,100.3 L 231.5,92.4 L 295.3,87.1 L 359.1,81.8 L 422.9,73.9 L 486.7,68.7 L 550.5,63.4 L 614.4,58.1 L 678.2,52.9 L 742.0,45.0 L 742.0,174 Z" fill="var(--accent)" fill-opacity=".08"/><path class="line" stroke="var(--accent)" d="M 40.0,116.1 L 103.8,110.8 L 167.6,100.3 L 231.5,92.4 L 295.3,87.1 L 359.1,81.8 L 422.9,73.9 L 486.7,68.7 L 550.5,63.4 L 614.4,58.1 L 678.2,52.9 L 742.0,45.0"/><circle class="dot" cx="40.0" cy="116.1" r="3" fill="var(--accent)"/><circle class="dot" cx="103.8" cy="110.8" r="3" fill="var(--accent)"/><circle class="dot" cx="167.6" cy="100.3" r="3" fill="var(--accent)"/><circle class="dot" cx="231.5" cy="92.4" r="3" fill="var(--accent)"/><circle class="dot" cx="295.3" cy="87.1" r="3" fill="var(--accent)"/><circle class="dot" cx="359.1" cy="81.8" r="3" fill="var(--accent)"/><circle class="dot" cx="422.9" cy="73.9" r="3" fill="var(--accent)"/><circle class="dot" cx="486.7" cy="68.7" r="3" fill="var(--accent)"/><circle class="dot" cx="550.5" cy="63.4" r="3" fill="var(--accent)"/><circle class="dot" cx="614.4" cy="58.1" r="3" fill="var(--accent)"/><circle class="dot" cx="678.2" cy="52.9" r="3" fill="var(--accent)"/><circle class="dot" cx="742.0" cy="45.0" r="3" fill="var(--accent)"/></svg>
+  </div>
+
+  <div class="dir-grid">
+    <div class="dir-tops">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">方向内最活跃方向</span>
+          <h2>活跃 <em>高校</em></h2>
+        </div>
+        <div class="meta">近 1 年 · 占该方向比例</div>
+      </div>
+      <table>
+        <tbody><tr onclick="show('uni-detail')"><td class="r">01</td><td class="u">Stanford</td><td class="pc">8.8%</td><td class="n">18</td></tr><tr onclick="show('uni-detail')"><td class="r">02</td><td class="u">Carnegie Mellon</td><td class="pc">7.8%</td><td class="n">16</td></tr><tr onclick="show('uni-detail')"><td class="r">03</td><td class="u">UW</td><td class="pc">6.9%</td><td class="n">14</td></tr><tr onclick="show('uni-detail')"><td class="r">04</td><td class="u">MIT</td><td class="pc">5.4%</td><td class="n">11</td></tr><tr onclick="show('uni-detail')"><td class="r">05</td><td class="u">UCL</td><td class="pc">4.9%</td><td class="n">10</td></tr><tr onclick="show('uni-detail')"><td class="r">06</td><td class="u">Zhejiang</td><td class="pc">4.4%</td><td class="n">9</td></tr><tr onclick="show('uni-detail')"><td class="r">07</td><td class="u">ETH</td><td class="pc">3.9%</td><td class="n">8</td></tr><tr onclick="show('uni-detail')"><td class="r">08</td><td class="u">Cornell</td><td class="pc">3.4%</td><td class="n">7</td></tr><tr onclick="show('uni-detail')"><td class="r">09</td><td class="u">KAIST</td><td class="pc">2.9%</td><td class="n">6</td></tr><tr onclick="show('uni-detail')"><td class="r">10</td><td class="u">U-Tokyo</td><td class="pc">2.5%</td><td class="n">5</td></tr></tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">相邻方向</span>
+          <h2>相邻 <em>方向</em></h2>
+        </div>
+      </div>
+      <div class="adjacent-list"><div class="adj-row" onclick="show('direction')"><div class="an">Explainable AI</div><div class="av">32<small>共现次数</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">AI-assisted Decision</div><div class="av">28<small>共现次数</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Human-AI Interaction</div><div class="av">24<small>共现次数</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Algorithm Aversion</div><div class="av">18<small>共现次数</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Affective Computing</div><div class="av">11<small>共现次数</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Responsible AI</div><div class="av">9<small>共现次数</small></div></div></div>
+
+      <div class="sec-head" style="margin-top:36px">
+        <div>
+          <span class="kicker">相关子主题</span>
+          <h2>相关 <em>子主题</em></h2>
+        </div>
+      </div>
+      <div class="subtopics-chips"><span class="st-chip">Trust calibration<span class="ct">18</span></span><span class="st-chip">Reliance behavior<span class="ct">14</span></span><span class="st-chip">Algorithm aversion<span class="ct">11</span></span><span class="st-chip">Confidence display<span class="ct">9</span></span><span class="st-chip">Explanation length<span class="ct">7</span></span><span class="st-chip">Accountability framing<span class="ct">6</span></span><span class="st-chip">Under-reliance<span class="ct">6</span></span><span class="st-chip">Over-reliance<span class="ct">5</span></span><span class="st-chip">Disagreement surfacing<span class="ct">5</span></span><span class="st-chip">Longitudinal trust<span class="ct">4</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec-head" style="margin-top:36px">
+    <div>
+      <span class="kicker">方向代表论文</span>
+      <h2>方向 <em>代表作</em></h2>
+    </div>
+    <div class="meta">按 HCAI 分数排序 · 前 4 篇</div>
+  </div>
+  <div class="paper-list"><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px"><em>校准依赖</em>：临床医生如何在诊断中使用 AI 生成的解释</h3><div class="meta-row" style="margin-top:6px"><span>Stanford × CMU × UW · arXiv · HCAI 94</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">算法<em>欣赏</em>再审视：当用户在准确率相同时仍偏好 AI</h3><div class="meta-row" style="margin-top:6px"><span>Northwestern × U-Tokyo · CSCW 2026 · HCAI 87</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">超越准确率：长期 AI 陪伴应用中的<em>信任校准</em></h3><div class="meta-row" style="margin-top:6px"><span>KAIST × EPFL × TUM · CSCW 2026 · HCAI 75</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">从分歧到决策：呈现医生–AI <em>冲突</em>的一个框架</h3><div class="meta-row" style="margin-top:6px"><span>UCL × Oxford · FAccT 2026 · HCAI 73</span></div></div></div></div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="row">
+    <div class="col brand">
+      HCAI <span style="color:var(--accent)">Research</span> Radar
+      <div style="font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-top:8px;letter-spacing:.18em">— 创建于 2026 —</div>
+    </div>
+    <div class="col">
+      <h5>关于</h5>
+      <p>每天 0 点（北京时间）自动从 OpenAlex、arXiv、Semantic Scholar、Crossref 抓取最近 72 小时新增或更新的 HCAI 相关论文，经过高校归并、合作识别、HCAI 分类打分后呈现在看板。</p>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>下次更新 · 2026·06·01 · 北京时间 00:00</span>
+    <span>数据源 · 4 / 4 正常 · 最近更新 · 北京时间 00:00</span>
+  </div>
+</footer>
+
+<script>
+function show(view){
+  document.querySelectorAll('section.view').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.addEventListener('click',()=>show(b.dataset.view));
+});
+
+// Rank tab pseudo-toggle
+document.querySelectorAll('#rank-tabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#rank-tabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+  });
+});
+
+// Sort options & chips toggle
+document.querySelectorAll('.sort-options .so').forEach(s=>{
+  s.addEventListener('click',()=>{
+    s.parentElement.querySelectorAll('.so').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');
+  });
+});
+document.querySelectorAll('.filter-bar').forEach(bar=>{
+  bar.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      // toggle within sibling chip group
+      let prev=c.previousElementSibling, group=[c];
+      while(prev && prev.classList && prev.classList.contains('chip')){group.unshift(prev);prev=prev.previousElementSibling}
+      let next=c.nextElementSibling;
+      while(next && next.classList && next.classList.contains('chip')){group.push(next);next=next.nextElementSibling}
+      group.forEach(g=>g.classList.remove('on'));
+      c.classList.add('on');
+    });
+  });
+});
+
+// Pulse the live dot a touch slower if user prefers reduced motion
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('.live-dot').forEach(d=>d.style.animation='none');
+}
+
+// Editorial nav-tabs scroll controller
+(function(){
+  const wrap = document.querySelector('.tabs-wrap');
+  if (!wrap) return;
+  const nav = wrap.querySelector('nav.tabs');
+  const al = wrap.querySelector('.tabs-arrow-l');
+  const ar = wrap.querySelector('.tabs-arrow-r');
+
+  function update(){
+    const sl = nav.scrollLeft;
+    const max = nav.scrollWidth - nav.clientWidth;
+    // 2px tolerance for sub-pixel rounding
+    wrap.classList.toggle('can-left',  sl > 2);
+    wrap.classList.toggle('can-right', sl < max - 2);
+  }
+  function step(dir){
+    // scroll by ~70% of viewport width, snap to nearest tab boundary
+    const dx = Math.floor(nav.clientWidth * 0.7) * dir;
+    nav.scrollBy({left:dx, behavior:'smooth'});
+  }
+  al.addEventListener('click', ()=>step(-1));
+  ar.addEventListener('click', ()=>step(+1));
+  nav.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+
+  // Bring the active tab into view on load
+  const active = nav.querySelector('button.active');
+  if(active){
+    const tabCenter = active.offsetLeft + active.offsetWidth/2;
+    const target   = tabCenter - nav.clientWidth/2;
+    nav.scrollLeft = Math.max(0, target);
+  }
+  update();
+
+  // When show(view) is called, also center the newly active tab
+  const _origShow = window.show;
+  window.show = function(view){
+    _origShow.call(this, view);
+    const t = nav.querySelector('button[data-view="'+view+'"]');
+    if(t){
+      const tc = t.offsetLeft + t.offsetWidth/2;
+      nav.scrollTo({left: Math.max(0, tc - nav.clientWidth/2), behavior:'smooth'});
+    }
+    update();
+  };
+})();
+
+</script>
+
+<script src="/public/hcai-live.js?v=20260626-citations1" defer></script>
+</body>
+</html>

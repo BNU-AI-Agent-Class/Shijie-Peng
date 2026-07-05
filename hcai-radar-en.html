@@ -1,0 +1,2847 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HCAI Research Radar · Human-AI Interaction Research Map</title>
+<meta name="description" content="A daily research map for HCAI, Human-AI Interaction, and Human-Centered AI papers, directions, research questions, methods, contexts, and content relationships." />
+<link rel="canonical" href="https://hcai.online/en" />
+<meta property="og:title" content="HCAI Research Radar · Human-AI Interaction Research Map" />
+<meta property="og:description" content="Track real HCAI papers, research directions, questions, methods, contexts, and content tags." />
+<meta property="og:url" content="https://hcai.online/en" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1ece1;
+  --paper-deep:#e8e1d2;
+  --paper-light:#f7f3ea;
+  --ink:#1a1612;
+  --ink-soft:#3a342c;
+  --ink-mute:#7a7268;
+  --rule:#d4cdbc;
+  --rule-soft:#e5dfd0;
+  --accent:#8b1e2d;
+  --accent-deep:#6d1422;
+  --ochre:#a87436;
+  --teal:#2d5a5a;
+  --indigo:#2c3e60;
+  --shadow: 0 1px 0 rgba(26,22,18,.04);
+  --display:"Instrument Serif", "Times New Roman", serif;
+  --body:"Newsreader", Georgia, serif;
+  --mono:"JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{
+  font-size:15.5px;line-height:1.55;
+  background-image:
+    radial-gradient(circle at 18% 9%, rgba(168,116,54,.04) 0, transparent 40%),
+    radial-gradient(circle at 82% 88%, rgba(45,90,90,.035) 0, transparent 45%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .15  0 0 0 0 .12  0 0 0 0 .08  0 0 0 .055 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  min-height:100vh;
+}
+
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.mono{font-family:var(--mono);font-feature-settings:"tnum","ss01"}
+.tnum{font-variant-numeric:tabular-nums}
+.smallcaps{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+.serif-it{font-family:var(--display);font-style:italic}
+
+/* ============== Masthead ============== */
+.masthead{
+  border-bottom:2px solid var(--ink);
+  padding:18px 36px 14px;
+  position:relative;
+}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:10px;margin-bottom:14px;
+}
+.masthead .topline .left{display:flex;gap:24px}
+.masthead .topline .right{display:flex;gap:24px;align-items:center}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;animation:pulse 2.2s ease-in-out infinite;vertical-align:middle}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
+
+.title-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:30px}
+.title-row .side{font-family:var(--mono);font-size:11px;color:var(--ink-mute);line-height:1.7}
+.title-row .side.left{text-align:left}
+.title-row .side.right{text-align:right}
+.wordmark{
+  text-align:center;
+  font-family:var(--display);
+  font-size:clamp(56px,7.5vw,108px);
+  line-height:.95;letter-spacing:-.005em;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.wordmark em{font-style:italic;color:var(--accent)}
+.subtitle{
+  text-align:center;
+  margin-top:6px;
+  font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-soft);
+  letter-spacing:.01em;
+}
+
+
+.lang-switch{display:inline-flex;gap:0;line-height:0}
+.lang-switch .ls-btn{
+  width:24px;height:24px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.02em;font-weight:500;
+  border:1px solid var(--ink);
+  color:var(--ink);background:var(--paper);
+  text-decoration:none;
+  transition:background .12s, color .12s;
+}
+.lang-switch .ls-btn + .ls-btn{border-left:0}
+.lang-switch .ls-btn.active{background:var(--ink);color:var(--paper)}
+.lang-switch .ls-btn:not(.active):hover{background:var(--paper-deep)}
+
+/* ============== Nav ============== */
+.tabs-wrap{
+  position:relative;
+  border-top:1px solid var(--rule);
+  border-bottom:3px double var(--ink);
+  margin-top:14px;
+  /* Reserve height so layout doesn't jump as arrows fade in/out */
+  height:43px;
+}
+nav.tabs{
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  gap:0;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  /* hide native scrollbars cross-browser */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  /* smooth wheel/drag scrolling */
+  scroll-behavior:smooth;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+nav.tabs::-webkit-scrollbar{display:none;height:0;width:0}
+nav.tabs > *{flex-shrink:0;scroll-snap-align:start}
+
+nav.tabs button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:0 22px;
+  color:var(--ink-mute);
+  border-right:1px solid var(--rule);
+  transition:color .15s, background .15s;
+  position:relative;
+  height:100%;
+  white-space:nowrap;
+}
+nav.tabs button:first-child{border-left:1px solid var(--rule)}
+nav.tabs button:hover{color:var(--ink);background:rgba(26,22,18,.025)}
+nav.tabs button.active{color:var(--accent);background:var(--paper-light)}
+nav.tabs button.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);
+}
+
+/* The vertical phase I / phase II divider */
+nav.tabs .tab-divider{
+  width:0;height:100%;
+  border-left:1px solid var(--ink);
+  align-self:stretch;
+  opacity:.4;
+}
+
+/* Edge fade masks — only visible when nav is scrollable in that direction */
+.tabs-wrap::before, .tabs-wrap::after{
+  content:"";position:absolute;top:1px;bottom:3px;width:64px;
+  pointer-events:none;z-index:1;
+  opacity:0;transition:opacity .2s ease;
+}
+.tabs-wrap::before{
+  left:0;
+  background:linear-gradient(to right,
+    var(--paper) 0%, var(--paper) 30%, rgba(241,236,225,0) 100%);
+}
+.tabs-wrap::after{
+  right:0;
+  background:linear-gradient(to left,
+    var(--paper) 0%, var(--paper) 30%, rgba(241,236,225,0) 100%);
+}
+.tabs-wrap.can-left::before{opacity:1}
+.tabs-wrap.can-right::after{opacity:1}
+
+/* Arrow buttons — small editorial squares, only when scroll is possible */
+.tabs-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper-light);
+  border:1px solid var(--ink);
+  color:var(--ink);
+  font-family:var(--display);font-style:italic;font-size:16px;line-height:1;
+  cursor:pointer;
+  z-index:2;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s, background .15s, color .15s;
+  padding:0;
+  /* keep arrow from being affected by scroll */
+}
+.tabs-arrow:hover{background:var(--ink);color:var(--paper)}
+.tabs-arrow-l{left:8px}
+.tabs-arrow-r{right:8px}
+.tabs-wrap.can-left .tabs-arrow-l{opacity:1;pointer-events:auto}
+.tabs-wrap.can-right .tabs-arrow-r{opacity:1;pointer-events:auto}
+
+/* ============== Layout ============== */
+main{padding:30px 36px 80px;max-width:1480px;margin:0 auto}
+section.view{display:none;animation:fade .35s ease-out}
+section.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.rule{height:1px;background:var(--rule);margin:28px 0}
+.rule-thick{height:0;border-top:3px double var(--ink);margin:28px 0}
+
+/* ============== Hero Metrics ============== */
+.metrics-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+}
+.metric{
+  padding:18px 20px 16px;
+  border-right:1px solid var(--rule);
+  position:relative;
+}
+.metric:last-child{border-right:0}
+.metric .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+.metric .num{font-family:var(--display);font-size:46px;line-height:1;color:var(--ink);letter-spacing:-.01em;font-feature-settings:"tnum"}
+.metric .delta{font-family:var(--mono);font-size:11px;color:var(--ink-mute);margin-top:6px;letter-spacing:.02em}
+.metric .delta .up{color:var(--accent)}
+.metric .delta .dn{color:var(--teal)}
+.metric.special .num{color:var(--accent);font-style:italic}
+
+/* ============== Section heads ============== */
+.sec-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px;
+}
+.sec-head h2{
+  font-family:var(--display);font-size:32px;font-weight:400;letter-spacing:-.005em;
+}
+.sec-head h2 em{color:var(--accent)}
+.sec-head .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)}
+
+.kicker{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:6px;display:inline-block;
+  border-bottom:1px solid var(--accent);padding-bottom:2px;
+}
+
+/* ============== Two-col grid ============== */
+.two-col{display:grid;grid-template-columns:1.35fr 1fr;gap:48px}
+@media(max-width:1100px){.two-col{grid-template-columns:1fr;gap:36px}}
+
+/* ============== Paper cards ============== */
+.paper-list{display:flex;flex-direction:column}
+.paper{
+  padding:22px 0;
+  border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:60px 1fr 130px;gap:22px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.paper:hover{background:rgba(139,30,45,.025)}
+.paper:first-child{border-top:0}
+.paper .num-col{
+  font-family:var(--display);font-size:22px;color:var(--ink-mute);font-style:italic;
+  padding-top:4px;
+}
+.paper .main h3{
+  font-family:var(--display);font-size:24px;line-height:1.2;font-weight:400;letter-spacing:-.003em;
+  color:var(--ink);margin-bottom:8px;
+}
+.paper .main h3 em{font-style:italic;color:var(--accent)}
+.paper:hover .main h3{color:var(--accent-deep)}
+.paper .authors{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin-bottom:8px;line-height:1.45}
+.paper .meta-row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.06em}
+.paper .meta-row .sep{opacity:.5}
+.paper .excerpt{font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.55;max-width:62ch}
+
+.tag{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  padding:3px 8px;
+  border:1px solid var(--rule);
+  background:var(--paper-light);
+  color:var(--ink-soft);
+  border-radius:1px;
+}
+.tag.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tag.collab{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.tag.preprint{border-color:var(--ochre);color:var(--ochre)}
+.tag.hi-score{border-color:var(--accent);color:var(--accent);background:rgba(139,30,45,.05)}
+.tag.confirm-pending{border-color:var(--ink-mute);color:var(--ink-mute);font-style:italic}
+
+.paper .score-col{
+  text-align:right;
+  font-family:var(--display);
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;
+  gap:6px;
+}
+.paper .score-col .score{
+  font-size:42px;line-height:1;letter-spacing:-.02em;
+  color:var(--ink);font-style:italic;
+}
+.paper .score-col .score.hi{color:var(--accent)}
+.paper .score-col .score-lab{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+.paper .score-col .date{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+/* ============== Rankings sidebar ============== */
+.ranking{border-top:1px solid var(--ink)}
+.ranking-row{
+  display:grid;grid-template-columns:28px 1fr auto auto;
+  align-items:baseline;gap:14px;
+  padding:13px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;
+  transition:padding-left .2s;
+}
+.ranking-row:hover{padding-left:8px;background:rgba(139,30,45,.03)}
+.ranking-row .rank{font-family:var(--display);font-size:24px;font-style:italic;color:var(--ink-mute)}
+.ranking-row.top1 .rank,.ranking-row.top2 .rank,.ranking-row.top3 .rank{color:var(--accent)}
+.ranking-row .uni{font-family:var(--display);font-size:18px;line-height:1.1}
+.ranking-row .country{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;display:block;margin-top:3px}
+.ranking-row .count{font-family:var(--display);font-size:24px;font-style:italic;color:var(--ink);min-width:42px;text-align:right}
+.ranking-row .trend{
+  font-family:var(--mono);font-size:11px;color:var(--ink-mute);min-width:48px;text-align:right;
+}
+.ranking-row .trend .up{color:var(--accent)}
+.ranking-row .trend .dn{color:var(--teal)}
+
+.tab-switch{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--rule)}
+.tab-switch button{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 16px;color:var(--ink-mute);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.tab-switch button.on{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ============== Direction heat (bars) ============== */
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.bar-row{display:grid;grid-template-columns:170px 1fr 38px;gap:14px;align-items:center}
+.bar-row .lab{font-family:var(--body);font-size:13.5px;color:var(--ink-soft);text-align:right;font-style:italic}
+.bar-row .track{
+  height:18px;background:var(--paper-deep);position:relative;border:1px solid var(--rule);
+}
+.bar-row .fill{
+  height:100%;background:linear-gradient(90deg,var(--accent) 0%, var(--accent-deep) 100%);
+  position:relative;
+}
+.bar-row .fill::after{
+  content:"";position:absolute;right:-1px;top:-3px;bottom:-3px;width:1px;background:var(--ink);
+}
+.bar-row .num{font-family:var(--mono);font-size:12px;color:var(--ink);text-align:right;font-weight:500}
+
+/* ============== Collab list ============== */
+.collab-list{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+.collab-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:start;
+  padding:16px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;
+}
+.collab-item:hover .ctitle{color:var(--accent-deep)}
+.collab-num{font-family:var(--display);font-size:42px;line-height:.9;font-style:italic;color:var(--accent);min-width:64px}
+.collab-num small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-mute);font-style:normal;margin-top:4px;text-transform:uppercase}
+.ctitle{font-family:var(--display);font-size:21px;line-height:1.2;margin-bottom:6px}
+.cunis{font-family:var(--body);font-size:13px;color:var(--ink-soft);margin-bottom:6px;font-style:italic}
+.cmeta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-mute);text-transform:uppercase}
+.cdate{font-family:var(--mono);font-size:11px;color:var(--ink-mute);white-space:nowrap}
+
+/* ============== Filter bar ============== */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:14px 16px;
+  background:var(--paper-light);
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+  align-items:center;
+}
+.filter-bar .flabel{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-right:6px;
+}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  padding:5px 12px;border:1px solid var(--rule);background:var(--paper);
+  border-radius:1px;cursor:pointer;
+  transition:all .15s;
+}
+.chip:hover{border-color:var(--ink);}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on:hover{background:var(--accent);border-color:var(--accent)}
+
+.search{
+  flex:1;min-width:200px;
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--rule);background:var(--paper);
+  padding:8px 12px;
+}
+.search input{
+  flex:1;background:transparent;border:0;outline:0;
+  font:inherit;font-size:13.5px;color:var(--ink);
+}
+.search svg{flex:0 0 14px;color:var(--ink-mute)}
+.search input::placeholder{color:var(--ink-mute);font-style:italic}
+
+#view-papers .filter-bar{display:block}
+.paper-filter-toolbar{display:grid;gap:12px}
+.paper-filter-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.active-filter-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--rule);padding-top:10px}
+.filter-select{position:relative}
+.filter-select summary{
+  list-style:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink);
+  padding:7px 28px 7px 12px;border:1px solid var(--rule);background:var(--paper);
+  cursor:pointer;min-height:32px;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.filter-select summary::-webkit-details-marker{display:none}
+.filter-select summary::after{content:"⌄";position:absolute;right:10px;top:7px;color:var(--ink-mute)}
+.filter-select[open] summary{border-color:var(--ink);background:var(--paper-light)}
+.filter-select[open] summary::after{content:"⌃";color:var(--accent)}
+.filter-menu{
+  position:absolute;z-index:40;top:calc(100% + 6px);left:0;
+  width:max-content;min-width:240px;max-width:min(360px,88vw);max-height:340px;overflow:auto;
+  padding:10px;background:var(--paper-light);border:1px solid var(--ink);
+  box-shadow:0 12px 28px rgba(26,22,18,.14);
+}
+.filter-menu label{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;
+  font-size:13.5px;padding:6px 4px;color:var(--ink-soft);cursor:pointer;font-family:var(--body);
+}
+.filter-menu label:hover{color:var(--ink);background:rgba(139,30,45,.04)}
+.filter-menu label input{accent-color:var(--accent);width:13px;height:13px}
+.filter-menu label span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filter-menu label .ct{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);padding-left:12px}
+.score-select .filter-menu{min-width:260px}
+
+.sort-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:6px;
+}
+.sort-row .count{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.sort-options{display:flex;gap:18px;align-items:center}
+.sort-options .so{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-mute);
+  cursor:pointer;padding-bottom:2px;
+}
+.sort-options .so.on{color:var(--ink);border-bottom:1px solid var(--ink)}
+
+/* ============== Paper list filters ============== */
+.list-layout{display:block}
+.fside{display:none}
+.fside h4{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:12px;margin-top:22px;
+}
+.fside h4:first-child{margin-top:0}
+.fside label{
+  display:flex;align-items:center;gap:8px;
+  font-size:13.5px;padding:5px 0;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--body);
+}
+.fside label:hover{color:var(--ink)}
+.fside label input{accent-color:var(--accent);width:13px;height:13px}
+.fside label .ct{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute)}
+.slider-wrap{padding:8px 0}
+.slider-wrap input[type=range]{width:100%;accent-color:var(--accent)}
+.slider-vals{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+/* ============== University Table ============== */
+.uni-table{
+  width:100%;border-collapse:collapse;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.uni-table thead th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:10px 12px;border-bottom:1px solid var(--ink);
+  cursor:pointer;background:var(--paper-light);
+}
+.uni-table thead th:hover{color:var(--ink)}
+.uni-table thead th.num{text-align:right}
+.uni-table thead th .arr{margin-left:4px;color:var(--accent)}
+.uni-table tbody tr{border-bottom:1px solid var(--rule);cursor:pointer;transition:background .15s}
+.uni-table tbody tr:hover{background:rgba(139,30,45,.04)}
+.uni-table tbody td{padding:14px 12px;vertical-align:middle}
+.uni-table td.rank-cell{
+  font-family:var(--display);font-size:26px;font-style:italic;color:var(--ink-mute);
+  width:50px;
+}
+.uni-table tr.top3 td.rank-cell{color:var(--accent)}
+.uni-table td.uname{font-family:var(--display);font-size:20px;line-height:1.15;letter-spacing:-.005em}
+.uni-table td.uname .cn{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;margin-top:3px}
+.uni-table td.num{font-family:var(--mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.uni-table td.dirs{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);max-width:280px}
+.uni-table td.cr{font-family:var(--display);font-size:22px;font-style:italic}
+.cr-bar{
+  display:inline-block;width:50px;height:5px;background:var(--paper-deep);border:1px solid var(--rule);
+  margin-left:8px;vertical-align:middle;position:relative;
+}
+.cr-bar .crf{display:block;height:100%;background:var(--accent)}
+
+/* ============== Paper Detail ============== */
+.pd-grid{display:grid;grid-template-columns:1fr 320px;gap:50px}
+@media(max-width:1000px){.pd-grid{grid-template-columns:1fr}}
+.pd-title{
+  font-family:var(--display);font-size:clamp(36px,4.2vw,58px);line-height:1.05;
+  letter-spacing:-.012em;margin-bottom:24px;color:var(--ink);
+}
+.pd-title em{font-style:italic;color:var(--accent)}
+.pd-byline{
+  font-family:var(--body);font-style:italic;font-size:18px;color:var(--ink-soft);
+  line-height:1.45;margin-bottom:18px;max-width:60ch;
+}
+.pd-affil{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:.04em;line-height:1.7;margin-bottom:24px;
+}
+.pd-affil .num{
+  display:inline-block;width:18px;height:18px;border-radius:50%;
+  background:var(--ink);color:var(--paper);text-align:center;line-height:18px;
+  font-family:var(--mono);font-size:10px;margin-right:6px;vertical-align:middle;
+}
+.pd-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+
+.pd-abstract{
+  font-family:var(--body);font-size:17px;line-height:1.65;color:var(--ink);
+  border-left:3px double var(--ink);padding:4px 0 4px 20px;margin-bottom:30px;
+  max-width:64ch;
+}
+.pd-abstract::first-line{font-variant:small-caps;letter-spacing:.04em;color:var(--accent-deep)}
+
+.pd-block{margin-bottom:30px}
+.pd-block h3{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px;
+}
+.reason{
+  font-family:var(--body);font-style:italic;font-size:15.5px;line-height:1.6;color:var(--ink-soft);
+  max-width:62ch;
+}
+
+.score-bigbox{
+  border:2px solid var(--ink);
+  padding:20px 22px;background:var(--paper-light);
+  margin-bottom:24px;
+}
+.score-bigbox .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.score-bigbox .big{
+  font-family:var(--display);font-size:90px;line-height:.95;color:var(--accent);font-style:italic;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:8px;
+}
+.score-bigbox .big small{font-size:18px;color:var(--ink-mute);font-style:italic}
+.score-bigbox .desc{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+
+.aside-block{
+  border-top:1px solid var(--rule);padding:16px 0;
+}
+.aside-block .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+.aside-block .val{font-family:var(--display);font-size:18px;font-style:italic}
+.aside-block ul{list-style:none}
+.aside-block li{font-family:var(--mono);font-size:12px;color:var(--ink-soft);padding:4px 0;letter-spacing:.02em}
+.aside-block a.lnk{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11.5px;padding:8px 0;letter-spacing:.06em;
+  border-bottom:1px solid var(--rule-soft);
+}
+.aside-block a.lnk:last-child{border-bottom:0}
+.aside-block a.lnk:hover{color:var(--accent)}
+.aside-block a.lnk .arr{color:var(--ink-mute);transition:transform .15s}
+.aside-block a.lnk:hover .arr{transform:translateX(3px);color:var(--accent)}
+
+.similar{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.sim-item{padding:14px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.sim-item:hover .sim-t{color:var(--accent)}
+.sim-t{font-family:var(--display);font-size:17px;line-height:1.2;margin-bottom:4px}
+.sim-m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-mute);text-transform:uppercase}
+
+.back-link{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:18px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+}
+.back-link:hover{color:var(--accent)}
+
+/* ============== University Detail ============== */
+.ud-hero{
+  display:grid;grid-template-columns:1fr auto;gap:30px;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:32px 0;margin-bottom:30px;
+  background:var(--paper-light);padding-left:28px;padding-right:28px;
+}
+.ud-hero .country-stamp{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-mute);text-transform:uppercase;margin-bottom:14px;
+  display:flex;gap:14px;align-items:center;
+}
+.ud-hero .country-stamp .flag{
+  display:inline-block;width:24px;height:16px;background:var(--ink);border-radius:1px;
+}
+.ud-hero h1{
+  font-family:var(--display);font-size:clamp(48px,6vw,80px);line-height:.98;letter-spacing:-.015em;
+}
+.ud-hero h1 em{font-style:italic;color:var(--accent)}
+.ud-hero .cn{font-family:var(--display);font-size:30px;font-style:italic;color:var(--ink-mute);margin-top:6px}
+.ud-hero .aliases{font-family:var(--mono);font-size:11px;color:var(--ink-mute);margin-top:16px;letter-spacing:.04em;line-height:1.7}
+
+.ud-stats{display:flex;flex-direction:column;gap:14px;text-align:right;border-left:1px solid var(--rule);padding-left:30px}
+.ud-stat{display:flex;gap:14px;align-items:baseline;justify-content:flex-end}
+.ud-stat .v{font-family:var(--display);font-size:38px;font-style:italic;line-height:1;color:var(--ink)}
+.ud-stat .v.acc{color:var(--accent)}
+.ud-stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;min-width:80px;text-align:left}
+
+.ud-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:36px}
+@media(max-width:900px){.ud-grid{grid-template-columns:1fr}}
+
+.donut-row{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:center}
+.donut{position:relative;width:160px;height:160px}
+.donut svg{transform:rotate(-90deg);overflow:visible}
+.donut circle{fill:none;stroke-width:24;cx:80;cy:80;r:65}
+.donut .seg{transition:stroke-width .2s;stroke-linecap:butt}
+.donut .seg:hover{stroke-width:30}
+.donut .ctr{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.donut .ctr .num{font-family:var(--display);font-size:36px;font-style:italic;line-height:1;color:var(--ink)}
+.donut .ctr .lab{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;margin-top:4px}
+.donut-legend{display:flex;flex-direction:column;gap:6px}
+.donut-legend .dl{display:flex;align-items:center;gap:10px;font-size:13px;font-family:var(--body)}
+.donut-legend .dl .sw{width:12px;height:12px;flex:0 0 12px}
+.donut-legend .dl .pct{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-mute)}
+
+.partners-tbl{width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.partners-tbl tr{border-bottom:1px solid var(--rule);cursor:pointer}
+.partners-tbl tr:hover{background:rgba(139,30,45,.04)}
+.partners-tbl td{padding:10px 0;font-family:var(--body)}
+.partners-tbl td.u{font-family:var(--display);font-size:17px;font-style:italic}
+.partners-tbl td.n{font-family:var(--display);font-size:24px;font-style:italic;color:var(--accent);text-align:right;width:60px}
+.partners-tbl td.d{font-family:var(--mono);font-size:11px;color:var(--ink-mute);text-align:right;letter-spacing:.04em}
+
+/* ============== Footer ============== */
+footer{
+  border-top:3px double var(--ink);
+  padding:32px 36px;
+  margin-top:60px;background:var(--paper-light);
+}
+footer .row{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
+footer .col h5{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+footer .col p{font-family:var(--body);font-size:13.5px;color:var(--ink-soft);line-height:1.6;max-width:50ch}
+footer .col.brand{font-family:var(--display);font-size:32px;font-style:italic}
+footer .colophon{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.06em;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+
+
+
+/* ============== Phase 2 · Shared ============== */
+.p2-hero{
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+  padding:24px 28px;margin-bottom:30px;
+  position:relative;overflow:hidden;
+}
+.p2-hero::before{
+  content:"II";position:absolute;right:-10px;bottom:-40px;
+  font-family:var(--display);font-style:italic;font-size:200px;line-height:1;
+  color:var(--ink);opacity:.04;letter-spacing:-.02em;pointer-events:none;
+}
+.p2-hero h2{font-family:var(--display);font-size:48px;letter-spacing:-.01em;font-weight:400}
+.p2-hero h2 em{color:var(--accent)}
+.p2-hero .lead{
+  font-family:var(--body);font-style:italic;color:var(--ink-soft);
+  margin-top:10px;max-width:60ch;font-size:16px;line-height:1.55;
+}
+
+/* ============== Collaboration Network ============== */
+.net-wrap{
+  display:grid;grid-template-columns:1fr 320px;gap:32px;
+  margin-bottom:36px;
+}
+@media(max-width:1100px){.net-wrap{grid-template-columns:1fr}}
+
+.net-canvas{
+  border:1px solid var(--rule);background:var(--paper-light);
+  position:relative;
+}
+.net-canvas svg{display:block;width:100%;height:auto}
+.net-canvas .edge{stroke:var(--rule);stroke-width:1;fill:none;transition:stroke .15s, stroke-width .15s}
+.net-canvas .edge.cross{stroke:var(--accent);stroke-opacity:.55}
+.net-canvas .edge.thick{stroke-width:2}
+.net-canvas .edge.thicker{stroke-width:3}
+.net-canvas .edge.thickest{stroke-width:4}
+.net-canvas g.node circle{
+  stroke:var(--ink);stroke-width:1;transition:stroke-width .15s;
+}
+.net-canvas g.node:hover circle{stroke-width:2.5;cursor:pointer}
+.net-canvas g.node:hover ~ g.node circle{opacity:.35;transition:opacity .15s}
+.net-canvas g.node text{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;
+  fill:var(--ink);pointer-events:none;
+}
+.net-canvas g.node.us circle{fill:#1a1612}
+.net-canvas g.node.eu circle{fill:#a87436}
+.net-canvas g.node.asia circle{fill:#8b1e2d}
+
+.net-canvas .axis-label{
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;fill:var(--ink-mute);
+}
+
+.net-side{display:flex;flex-direction:column;gap:24px}
+.net-side .panel{
+  border:1px solid var(--rule);background:var(--paper-light);
+  padding:14px 16px;
+}
+.net-side .panel h4{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:10px;
+}
+.legend-item{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:3px 0;font-family:var(--body)}
+.legend-item .sw{width:14px;height:14px;flex:0 0 14px;border:1px solid var(--ink)}
+.legend-item .sw.us{background:#1a1612}
+.legend-item .sw.eu{background:#a87436}
+.legend-item .sw.asia{background:#8b1e2d}
+.legend-item .line-sw{width:24px;height:1px;background:var(--rule);flex:0 0 24px}
+.legend-item .line-sw.cross{background:var(--accent);opacity:.55;height:1.5px}
+.legend-item .size-row{display:flex;align-items:center;gap:6px}
+
+.insight-row{
+  display:grid;grid-template-columns:1fr auto;gap:8px;
+  padding:8px 0;border-bottom:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+}
+.insight-row:last-child{border-bottom:0}
+.insight-row .il{color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em;font-size:9.5px;align-self:center}
+.insight-row .iv{
+  font-family:var(--display);font-style:italic;font-size:15px;
+  color:var(--ink);text-align:right;letter-spacing:-.005em;
+}
+.insight-row .iv.acc{color:var(--accent)}
+
+.toppair-tbl{width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.toppair-tbl thead th{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:8px 4px;border-bottom:1px solid var(--ink);
+}
+.toppair-tbl thead th.r{text-align:right}
+.toppair-tbl td{padding:10px 4px;border-bottom:1px solid var(--rule);font-size:13px}
+.toppair-tbl tr:last-child td{border-bottom:0}
+.toppair-tbl td.pair{font-family:var(--display);font-size:15px;line-height:1.2}
+.toppair-tbl td.pair small{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);letter-spacing:.06em;display:block;margin-top:2px}
+.toppair-tbl td.n{font-family:var(--display);font-style:italic;font-size:22px;color:var(--accent);text-align:right}
+.toppair-tbl td.dir{font-family:var(--body);font-style:italic;font-size:12.5px;color:var(--ink-soft);text-align:right;max-width:130px}
+
+/* ============== Research Trends ============== */
+.trend-chart{
+  border:1px solid var(--rule);background:var(--paper-light);
+  padding:20px 24px;margin-bottom:30px;
+}
+.trend-chart .ct-head{
+  display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;
+}
+.trend-chart h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em}
+.trend-chart .note{font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:.06em;max-width:50ch;text-align:right}
+.trend-chart svg{display:block;width:100%;height:auto;font-family:var(--mono);font-size:10px}
+.trend-chart svg .grid{stroke:var(--rule-soft);stroke-width:.5}
+.trend-chart svg .axis-line{stroke:var(--ink);stroke-width:1}
+.trend-chart svg .axis-text{fill:var(--ink-mute);font-size:10px;letter-spacing:.04em}
+.trend-chart svg .line{fill:none;stroke-width:2;transition:stroke-width .15s}
+.trend-chart svg .line:hover{stroke-width:3.5}
+.trend-chart svg .dot{stroke:var(--paper-light);stroke-width:1.5}
+.trend-chart .legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)}
+.trend-chart .legend .li{display:flex;align-items:center;gap:8px;font-size:12px;font-family:var(--body)}
+.trend-chart .legend .li .sw{width:18px;height:3px}
+.trend-chart .legend .li .ct{font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-left:4px}
+
+.trend-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;margin-bottom:36px}
+@media(max-width:1000px){.trend-grid{grid-template-columns:1fr}}
+
+.trend-tbl{
+  width:100%;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.trend-tbl thead th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:500;
+  text-align:left;padding:9px 8px;border-bottom:1px solid var(--ink);
+  background:var(--paper-light);
+}
+.trend-tbl thead th.r{text-align:right}
+.trend-tbl td{padding:11px 8px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.trend-tbl td.dir{font-family:var(--display);font-style:italic;font-size:16px;line-height:1.2}
+.trend-tbl td.n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
+.trend-tbl td.delta{font-family:var(--display);font-style:italic;font-size:18px;text-align:right}
+.trend-tbl td.delta.up{color:var(--accent)}
+.trend-tbl td.delta.dn{color:var(--teal)}
+.trend-tbl td.delta.flat{color:var(--ink-mute)}
+.trend-tbl td.spark{text-align:right}
+.trend-tbl td.spark svg{display:inline-block;vertical-align:middle}
+
+.emerging{
+  border:1px solid var(--rule);padding:18px 20px;background:var(--paper-light);
+}
+.emerging h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em;margin-bottom:4px}
+.emerging .sub{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);margin-bottom:14px}
+.emerging .topic{
+  display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);
+}
+.emerging .topic:last-child{border-bottom:0}
+.emerging .topic .rank{font-family:var(--display);font-size:18px;color:var(--ink-mute);font-style:italic;min-width:28px}
+.emerging .topic .name{font-family:var(--display);font-size:17px;line-height:1.25;flex:1;font-style:italic}
+.emerging .topic .ct{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:500}
+
+.growth-schools{
+  border:1px solid var(--rule);padding:18px 20px;background:var(--paper-light);
+}
+.growth-schools h3{font-family:var(--display);font-size:24px;font-weight:400;letter-spacing:-.005em;margin-bottom:4px}
+.growth-schools .sub{font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink-soft);margin-bottom:14px}
+.growth-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule)}
+.growth-row:last-child{border-bottom:0}
+.growth-row .gn{font-family:var(--display);font-size:16px;font-style:italic}
+.growth-row .gv{font-family:var(--display);font-size:18px;font-style:italic;color:var(--accent)}
+.growth-row .gd{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.04em}
+
+/* ============== School Comparison ============== */
+.cmp-selector{
+  padding:18px 20px;background:var(--paper-light);
+  border:1px solid var(--rule);margin-bottom:30px;
+}
+.cmp-selector .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.cmp-selector .pool{display:flex;flex-wrap:wrap;gap:6px}
+.cmp-chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.02em;
+  padding:5px 11px;border:1px solid var(--rule);background:var(--paper);
+  cursor:pointer;transition:all .15s;border-radius:1px;
+}
+.cmp-chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cmp-chip:hover:not(.on){border-color:var(--ink)}
+.cmp-selector .status{
+  margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.08em;
+}
+.cmp-selector .reset{
+  color:var(--accent);border-bottom:1px solid var(--accent);
+  text-transform:uppercase;letter-spacing:.16em;cursor:pointer;padding-bottom:1px;
+}
+
+.cmp-grid{
+  display:grid;grid-template-columns:160px repeat(4, 1fr);gap:0;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  margin-bottom:30px;
+}
+@media(max-width:1100px){
+  .cmp-grid{grid-template-columns:130px repeat(4, 1fr)}
+}
+@media(max-width:780px){
+  .cmp-grid{grid-template-columns:110px repeat(2, 1fr);overflow-x:auto}
+}
+.cmp-row{display:contents}
+.cmp-cell{
+  padding:14px 14px;border-bottom:1px solid var(--rule);
+  border-right:1px solid var(--rule);
+  background:var(--paper);
+  font-family:var(--body);
+}
+.cmp-cell.head{
+  background:var(--paper-light);
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.cmp-cell.school-head{
+  background:var(--ink);color:var(--paper);
+  padding:18px 14px;text-align:center;
+  border-right:1px solid var(--rule-soft);
+}
+.cmp-cell.school-head .name{font-family:var(--display);font-size:22px;line-height:1.1;letter-spacing:-.005em}
+.cmp-cell.school-head .name em{font-style:italic;color:var(--accent)}
+.cmp-cell.school-head .meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;margin-top:4px;color:#cfc3a8}
+.cmp-cell .big{font-family:var(--display);font-style:italic;font-size:32px;color:var(--ink);line-height:1.1;letter-spacing:-.01em}
+.cmp-cell .big.acc{color:var(--accent)}
+.cmp-cell .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:3px;letter-spacing:.06em}
+.cmp-cell .dir-list{font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.cmp-cell .pmini{font-family:var(--body);font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+.cmp-cell .pmini b{color:var(--ink);font-weight:500}
+.cmp-cell .rep-paper{font-family:var(--display);font-size:14px;font-style:italic;line-height:1.3;color:var(--ink)}
+.cmp-cell .rep-paper:hover{color:var(--accent);cursor:pointer}
+.cmp-cell .rep-meta{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);margin-top:6px;letter-spacing:.04em}
+
+.cmp-cell.row-label{
+  background:var(--paper-deep);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);align-content:center;
+}
+
+/* mini direction bars used inside compare cell */
+.minibars{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.minibars .mb{display:grid;grid-template-columns:1fr 28px;gap:6px;align-items:center}
+.minibars .mb .ml{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);letter-spacing:.04em;text-transform:uppercase}
+.minibars .mb .mtrack{height:5px;background:var(--paper-deep);position:relative;border:1px solid var(--rule)}
+.minibars .mb .mfill{height:100%;background:var(--accent)}
+.minibars .mb .mn{font-family:var(--mono);font-size:10px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ============== Weekly Digest ============== */
+.weekly-hero{
+  border-top:3px double var(--ink);border-bottom:3px double var(--ink);
+  padding:30px 32px;margin-bottom:36px;background:var(--paper-light);
+  position:relative;
+}
+.weekly-hero .issue-no{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  border-bottom:1px solid var(--accent);padding-bottom:3px;display:inline-block;margin-bottom:12px;
+}
+.weekly-hero h1{
+  font-family:var(--display);font-size:clamp(48px,5.5vw,76px);line-height:.98;letter-spacing:-.012em;
+}
+.weekly-hero h1 em{font-style:italic;color:var(--accent)}
+.weekly-hero .lead{
+  font-family:var(--body);font-style:italic;font-size:18px;color:var(--ink-soft);line-height:1.5;
+  margin-top:14px;max-width:62ch;
+}
+.weekly-hero .export-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 16px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  margin-top:20px;cursor:pointer;
+  transition:background .15s;
+}
+.weekly-hero .export-btn:hover{background:var(--accent);border-color:var(--accent)}
+.weekly-hero .export-btn svg{width:13px;height:13px}
+
+.weekly-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:36px;
+}
+.weekly-strip .ws{
+  padding:14px 18px;border-right:1px solid var(--rule);
+}
+.weekly-strip .ws:last-child{border-right:0}
+.weekly-strip .ws .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.weekly-strip .ws .v{font-family:var(--display);font-style:italic;font-size:42px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.weekly-strip .ws .v.acc{color:var(--accent)}
+.weekly-strip .ws .d{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);margin-top:6px;letter-spacing:.04em}
+
+.weekly-body{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;margin-bottom:36px}
+@media(max-width:1000px){.weekly-body{grid-template-columns:1fr}}
+
+.weekly-section{margin-bottom:32px}
+.weekly-section h3{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px;
+}
+.weekly-headline{
+  display:grid;grid-template-columns:42px 1fr;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--rule);cursor:pointer;
+}
+.weekly-headline:hover .wh-t{color:var(--accent-deep)}
+.weekly-headline .wh-num{font-family:var(--display);font-size:30px;font-style:italic;color:var(--accent);line-height:.95}
+.weekly-headline .wh-t{
+  font-family:var(--display);font-size:20px;line-height:1.22;margin-bottom:5px;
+}
+.weekly-headline .wh-t em{font-style:italic;color:var(--accent-deep)}
+.weekly-headline .wh-m{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.04em;margin-bottom:6px}
+.weekly-headline .wh-c{
+  font-family:var(--body);font-style:italic;font-size:13.5px;color:var(--ink-soft);
+  line-height:1.5;max-width:62ch;
+}
+
+.weekly-mini{font-family:var(--body);font-size:13.5px;line-height:1.6;color:var(--ink)}
+.weekly-mini ul{list-style:none;padding:0}
+.weekly-mini ul li{
+  padding:8px 0;border-bottom:1px solid var(--rule-soft);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline;
+}
+.weekly-mini ul li:last-child{border-bottom:0}
+.weekly-mini ul li .ln{font-family:var(--display);font-style:italic;font-size:16px}
+.weekly-mini ul li .lv{font-family:var(--display);font-style:italic;font-size:18px;color:var(--accent)}
+.weekly-mini p{font-family:var(--body);font-size:14px;line-height:1.65;color:var(--ink);margin-bottom:8px}
+.weekly-mini p em{font-style:italic;color:var(--accent-deep)}
+
+.weekly-vs{
+  border-left:3px double var(--ink);padding:6px 0 6px 18px;margin-top:8px;
+  font-family:var(--body);font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.5;
+}
+
+.weekly-foot{
+  padding-top:24px;border-top:1px solid var(--ink);
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:.08em;
+  text-align:center;
+}
+
+/* ============== Direction Profile ============== */
+.dir-hero{
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:30px 28px;background:var(--paper-light);margin-bottom:30px;
+  display:grid;grid-template-columns:1.4fr 1fr;gap:36px;
+  position:relative;overflow:hidden;
+}
+@media(max-width:900px){.dir-hero{grid-template-columns:1fr}}
+.dir-hero::after{
+  content:"TRUST";position:absolute;right:-30px;bottom:-30px;
+  font-family:var(--display);font-style:italic;font-size:180px;line-height:1;
+  color:var(--ink);opacity:.04;letter-spacing:-.01em;pointer-events:none;
+}
+.dir-hero h1{font-family:var(--display);font-size:clamp(48px,6vw,80px);line-height:.98;letter-spacing:-.015em}
+.dir-hero h1 em{font-style:italic;color:var(--accent)}
+.dir-hero .definition{
+  font-family:var(--body);font-style:italic;font-size:16px;color:var(--ink-soft);
+  line-height:1.55;margin-top:14px;max-width:60ch;
+}
+.dir-stats{display:flex;flex-direction:column;gap:14px;border-left:1px solid var(--rule);padding-left:30px;align-self:start}
+.dir-stat{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline}
+.dir-stat .v{font-family:var(--display);font-size:34px;font-style:italic;line-height:1;letter-spacing:-.01em}
+.dir-stat .v.acc{color:var(--accent)}
+.dir-stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase}
+
+.dir-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;margin-bottom:36px}
+@media(max-width:1000px){.dir-grid{grid-template-columns:1fr}}
+
+.dir-tops table{
+  width:100%;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  border-collapse:collapse;
+}
+.dir-tops tr{border-bottom:1px solid var(--rule);cursor:pointer}
+.dir-tops tr:hover{background:rgba(139,30,45,.04)}
+.dir-tops td{padding:10px 4px;font-family:var(--body)}
+.dir-tops td.r{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-mute);width:38px}
+.dir-tops td.u{font-family:var(--display);font-size:17px;font-style:italic;line-height:1.2}
+.dir-tops td.n{font-family:var(--display);font-size:22px;font-style:italic;color:var(--accent);text-align:right;width:50px}
+.dir-tops td.pc{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);text-align:right;letter-spacing:.04em}
+
+.subtopics-chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0}
+.st-chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  padding:6px 11px;border:1px solid var(--ink);background:var(--paper);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.st-chip .ct{color:var(--accent);font-weight:500}
+.st-chip:hover{background:var(--paper-deep);cursor:pointer}
+
+.adjacent-list{display:flex;flex-direction:column;gap:0}
+.adj-row{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;
+  padding:10px 0;border-bottom:1px solid var(--rule);cursor:pointer;
+}
+.adj-row:last-child{border-bottom:0}
+.adj-row .an{font-family:var(--display);font-size:17px;font-style:italic;line-height:1.2}
+.adj-row .av{font-family:var(--display);font-size:18px;font-style:italic;color:var(--accent)}
+.adj-row .av small{font-family:var(--mono);font-size:9.5px;color:var(--ink-mute);font-style:normal;display:block;text-align:right;letter-spacing:.06em;margin-top:2px}
+
+
+
+/* ============== Misc ============== */
+.scroll-hint{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;
+  text-align:center;margin-top:30px;
+}
+.divider-orn{
+  text-align:center;font-family:var(--display);font-style:italic;color:var(--ink-mute);
+  margin:18px 0;letter-spacing:1em;font-size:14px;
+}
+
+.tag-chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+
+/* Subtle hover animation on rows */
+.paper{transition:background .15s, transform .25s}
+.paper:hover .num-col{color:var(--accent)}
+
+/* tabular nums everywhere appropriate */
+.uni-table td,.metric .num,.score,.ranking-row .count{font-variant-numeric:tabular-nums}
+
+html:not([data-live-ready="true"]) body > header,
+html:not([data-live-ready="true"]) body > main,
+html:not([data-live-ready="true"]) body > footer{visibility:hidden}
+.live-loading-screen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+  padding:8vw;
+  background:var(--paper);
+  color:var(--ink);
+}
+.live-loading-screen .kicker{color:var(--accent)}
+.live-loading-screen h1{
+  margin:0;
+  max-width:780px;
+  font-family:var(--serif);
+  font-size:clamp(42px,8vw,92px);
+  font-weight:500;
+  line-height:.96;
+  letter-spacing:0;
+}
+.live-loading-screen p{
+  margin:0;
+  max-width:680px;
+  font-size:20px;
+  line-height:1.6;
+  color:var(--ink-soft);
+}
+.live-loading-detail{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-mute);
+  letter-spacing:.05em;
+}
+html[data-live-ready="true"] .live-loading-screen{display:none}
+
+/* ============== Mobile tweaks ============== */
+@media(max-width:760px){
+  .masthead{padding:14px 18px 10px}
+  .title-row{grid-template-columns:1fr;gap:4px}
+  .title-row .side{display:none}
+  main{padding:24px 18px 60px}
+  .metrics-strip{grid-template-columns:repeat(3,1fr)}
+  .metric{padding:14px}
+  .metric .num{font-size:32px}
+  .paper{grid-template-columns:1fr;gap:8px}
+  .paper .num-col{font-size:14px;padding:0}
+  .paper .score-col{flex-direction:row;align-items:baseline;justify-content:flex-start;text-align:left;gap:14px;margin-top:8px}
+  .paper .score-col .score{font-size:24px}
+  .pd-title{font-size:32px}
+  .ud-hero{grid-template-columns:1fr;padding:24px 18px}
+  .ud-stats{border-left:0;border-top:1px solid var(--rule);padding-left:0;padding-top:18px;text-align:left}
+  .ud-stat{justify-content:flex-start}
+  .ranking-row{grid-template-columns:24px 1fr auto;gap:10px}
+  .ranking-row .trend{display:none}
+  nav.tabs button{padding:0 14px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="live-loading-screen" role="status" aria-live="polite">
+  <span class="kicker">Loading live data</span>
+  <h1>Loading real paper data</h1>
+  <div class="live-loading-detail">HCAI Research Radar · live data hydration</div>
+</div>
+
+<!-- ============================ MASTHEAD ============================ -->
+<header class="masthead">
+  <div class="topline">
+    <div class="left">
+      <span><span class="live-dot"></span>UPDATING · 00:00 BEIJING</span>
+    </div>
+    <div class="right">
+      <span>SUNDAY · MAY 31, 2026</span>
+      <span class="lang-switch"><a href="./hcai-radar-zh.html" class="ls-btn">中</a><a href="./hcai-radar-en.html" class="ls-btn active">EN</a></span>
+    </div>
+  </div>
+  <div class="title-row">
+    <div class="side left">
+      A daily map of how HCAI<br>research directions, questions<br>and findings evolve
+    </div>
+    <div>
+      <h1 class="wordmark">HCAI <em>Research</em> Radar</h1>
+      <div class="subtitle">A daily map of Human-Centered AI research · directions · questions · papers</div>
+    </div>
+    <div class="side right">
+      Edited from open scholarly<br>data sources · OpenAlex ·<br>arXiv · Semantic Scholar · Crossref
+    </div>
+  </div>
+  <div class="tabs-wrap"><button class="tabs-arrow tabs-arrow-l" aria-label="scroll left" tabindex="-1">‹</button><nav class="tabs">
+    <button data-view="home" class="active">Front Page</button>
+    <button data-view="papers">Papers</button>
+    <button data-view="universities">Directions</button>
+    <button data-view="paper-detail">Paper Detail</button>
+    <button data-view="uni-detail">Direction Profile</button>
+  <span class="tab-divider"></span><button data-view="collab">Direction Map</button><button data-view="trends">Research Trends</button><button data-view="compare">Compare Directions</button><button data-view="weekly">Weekly Digest</button><button data-view="direction">Direction Profile</button></nav><button class="tabs-arrow tabs-arrow-r" aria-label="scroll right" tabindex="-1">›</button></div>
+</header>
+
+<main>
+
+<!-- ============================ HOMEPAGE ============================ -->
+<section class="view active" id="view-home">
+
+  <!-- Hero metrics strip -->
+  <div class="metrics-strip">
+    <div class="metric special">
+      <div class="lab">Indexed Today</div>
+      <div class="num">12</div>
+      <div class="delta">vs yesterday <span class="up">+ 3</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">Past 7 Days</div>
+      <div class="num">86</div>
+      <div class="delta">vs prev 7d <span class="up">+ 18%</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">Past 30 Days</div>
+      <div class="num">312</div>
+      <div class="delta">vs prev 30d <span class="up">+ 11%</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">Directions</div>
+      <div class="num">18</div>
+      <div class="delta">primary · 142 sub-questions</div>
+    </div>
+    <div class="metric">
+      <div class="lab">New questions</div>
+      <div class="num">24</div>
+      <div class="delta">last 30 days · <span class="up">+ 9</span></div>
+    </div>
+    <div class="metric">
+      <div class="lab">Last Run</div>
+      <div class="num" style="font-size:22px;line-height:1.3;letter-spacing:0">00:00<br><small style="font-size:13px;color:var(--ink-mute);font-style:italic">BEIJING · MAY 31</small></div>
+      <div class="delta">all 4 sources <span class="up">OK</span></div>
+    </div>
+  </div>
+
+  <div class="divider-orn">· · ·</div>
+
+  <!-- TWO COL: today's papers + rankings -->
+  <div class="two-col">
+
+    <!-- LEFT: Today's new papers -->
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Indexed from today's pull · 00:00 Beijing</span>
+          <h2>Today's <em>Indexed Papers</em></h2>
+        </div>
+        <div class="meta">12 entries · sorted by HCAI score</div>
+      </div>
+
+      <div class="paper-list" id="todays-papers">
+        <!-- Paper 01 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">01</div>
+          <div class="main">
+            <h3><em>Calibrating</em> Reliance: How Clinicians Use AI-Generated Explanations in Diagnostic Decisions</h3>
+            <div class="authors">Maya R. Kapoor, Lin Wei, A. P. Sundaram, Daniel Foster, Sarah Greene, J. Mukherjee, R. Park, et al.</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Explainable AI</span>
+              <span class="tag">AI-assisted Decision</span>
+              <span class="tag preprint">arXiv preprint</span>
+            </div>
+            <p class="excerpt">A mixed-methods study with 84 radiologists across two hospitals examines how confidence intervals in AI explanations shift diagnostic agreement — finding under-reliance dominates ambiguous cases…</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">94</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·31</div>
+          </div>
+        </div>
+
+        <!-- Paper 02 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">02</div>
+          <div class="main">
+            <h3>When the Agent Drives: Designing <em>Handoff Moments</em> in LLM-Powered Co-Programming</h3>
+            <div class="authors">Jonas Berg, T. Yamamoto, Pei Chen, Eleanor Whitfield, M. de Sá</div>
+            <div class="meta-row">
+              <span class="tag primary">AI Agents</span>
+              <span class="tag">LLM User Study</span>
+              <span class="tag">Mixed-Initiative</span>
+            </div>
+            <p class="excerpt">Through three weeks of diary studies with 24 software engineers, the authors propose four canonical handoff patterns between human and agent — and their failure modes in production environments…</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">91</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·31</div>
+          </div>
+        </div>
+
+        <!-- Paper 03 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">03</div>
+          <div class="main">
+            <h3>"<em>It Listens, But Does It Hear?</em>" — Affective Mismatch in AI Mental-Health Chatbots</h3>
+            <div class="authors">Wen-Hua Zhou, R. Banerjee, K. Iwata, Sofia Allen</div>
+            <div class="meta-row">
+              <span class="tag">Single-school</span>
+              <span class="tag primary">AI in Mental Health</span>
+              <span class="tag">Affective Computing</span>
+              <span class="tag">LLM User Study</span>
+            </div>
+            <p class="excerpt">A 6-week field deployment with 142 university students documents systematic gaps between user-perceived empathy and clinician-rated appropriateness, with implications for safety guardrails…</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">89</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·30</div>
+          </div>
+        </div>
+
+        <!-- Paper 04 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">04</div>
+          <div class="main">
+            <h3>Algorithm <em>Appreciation</em> Reconsidered: When Users Prefer AI Despite Equal Accuracy</h3>
+            <div class="authors">Hannah Brooks, J. Tanaka, Ravi Iyengar, S. Ostrowski</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Algorithm Aversion</span>
+              <span class="tag">Human Factors</span>
+            </div>
+            <p class="excerpt">A pre-registered replication of Logg et al. (2019) across four task domains finds appreciation effects reverse under accountability framing — challenging the algorithm-appreciation generalization…</p>
+          </div>
+          <div class="score-col">
+            <div class="score hi">87</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·30</div>
+          </div>
+        </div>
+
+        <!-- Paper 05 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">05</div>
+          <div class="main">
+            <h3>Steering Multiple Minds: A <em>Control Interface</em> for Human Oversight of AI Agent Teams</h3>
+            <div class="authors">Ada Nakamura, Ben Olson, K. Pillai, Y. Zhao, M. Rashid</div>
+            <div class="meta-row">
+              <span class="tag primary">Multi-Agent Collaboration</span>
+              <span class="tag">AI Agents</span>
+              <span class="tag">AI UX Evaluation</span>
+              <span class="tag confirm-pending">affiliation pending</span>
+            </div>
+            <p class="excerpt">Introduces a visual control language for monitoring and intervening in agent teams; evaluated through controlled experiments with 96 participants across three task complexities…</p>
+          </div>
+          <div class="score-col">
+            <div class="score">82</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·29</div>
+          </div>
+        </div>
+
+        <!-- Paper 06 -->
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">06</div>
+          <div class="main">
+            <h3>Teachers as Co-Designers: Adapting <em>Generative AI</em> for Inclusive Classrooms</h3>
+            <div class="authors">L. Ferreira, Mei Lin, J. Hardcastle, P. Quattrocchi</div>
+            <div class="meta-row">
+              <span class="tag primary">AI in Education</span>
+              <span class="tag">Human-AI Collaboration</span>
+              <span class="tag">Responsible AI</span>
+            </div>
+            <p class="excerpt">Participatory design with 18 teachers across two countries surfaces tensions in adapting generative tools — including pedagogical authority, transparency, and equity considerations…</p>
+          </div>
+          <div class="score-col">
+            <div class="score">78</div>
+            <div class="score-lab">HCAI Score</div>
+            <div class="date">2026·05·29</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Sidebar with rankings + heat -->
+    <div>
+
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Hot &amp; Emerging</span>
+          <h2>Active <em>Directions</em></h2>
+        </div>
+      </div>
+
+      <div class="tab-switch" id="rank-tabs">
+        <button class="on" data-r="7">7-day</button>
+        <button data-r="30">30-day</button>
+        <button data-r="year">1-year</button>
+      </div>
+
+      <div class="ranking" id="ranking-list">
+        <div class="ranking-row top1" onclick="show('uni-detail')">
+          <div class="rank">01</div>
+          <div><div class="uni">Human-AI Interaction</div><span class="country">primary direction</span></div>
+          <div class="count">68</div>
+          <div class="trend"><span class="up">↑ 10</span></div>
+        </div>
+        <div class="ranking-row top2" onclick="show('uni-detail')">
+          <div class="rank">02</div>
+          <div><div class="uni">Trust &amp; Reliance</div><span class="country">trust calibration</span></div>
+          <div class="count">49</div>
+          <div class="trend"><span class="up">↑ 11</span></div>
+        </div>
+        <div class="ranking-row top3" onclick="show('uni-detail')">
+          <div class="rank">03</div>
+          <div><div class="uni">AI Agents</div><span class="country">high-growth</span></div>
+          <div class="count">44</div>
+          <div class="trend"><span class="up">↑ 13</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">04</div>
+          <div><div class="uni">Explainable AI</div><span class="country">with user study</span></div>
+          <div class="count">35</div>
+          <div class="trend"><span class="up">↑ 4</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">05</div>
+          <div><div class="uni">AI-assisted Decision</div><span class="country">decision support</span></div>
+          <div class="count">31</div>
+          <div class="trend"><span class="up">↑ 5</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">06</div>
+          <div><div class="uni">LLM User Study</div><span class="country">large-model UX</span></div>
+          <div class="count">29</div>
+          <div class="trend"><span class="up">↑ 8</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">07</div>
+          <div><div class="uni">Multi-Agent Collaboration</div><span class="country">team UX</span></div>
+          <div class="count">23</div>
+          <div class="trend"><span class="up">↑ 9</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">08</div>
+          <div><div class="uni">AI in Mental Health</div><span class="country">user-facing</span></div>
+          <div class="count">20</div>
+          <div class="trend"><span class="up">↑ 2</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">09</div>
+          <div><div class="uni">Responsible AI</div><span class="country">user / society lens</span></div>
+          <div class="count">17</div>
+          <div class="trend"><span class="up">↑ 2</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('uni-detail')">
+          <div class="rank">10</div>
+          <div><div class="uni">AI in Education</div><span class="country">human-in-the-loop</span></div>
+          <div class="count">15</div>
+          <div class="trend"><span class="up">↑ 3</span></div>
+        </div>
+      </div>
+
+      <button onclick="show('universities')" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:14px;border-bottom:1px solid var(--accent);padding-bottom:2px">See all 18 directions →</button>
+
+      <div class="sec-head" style="margin-top:46px">
+        <div>
+          <span class="kicker">Emerging questions</span>
+          <h2>Emerging <em>Questions</em></h2>
+        </div>
+      </div>
+      <div class="ranking" id="emerging-q">
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Human Control of AI Agents</div><span class="country">under AI Agents</span></div>
+          <div class="count" style="color:var(--accent)">18</div>
+          <div class="trend"><span class="up">+ 120%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">LLM Feedback in Education</div><span class="country">under AI in Education</span></div>
+          <div class="count" style="color:var(--accent)">15</div>
+          <div class="trend"><span class="up">+ 75%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Overreliance on AI Explanations</div><span class="country">under Trust / XAI</span></div>
+          <div class="count" style="color:var(--accent)">12</div>
+          <div class="trend"><span class="up">+ 60%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Agentic Workflow UX</div><span class="country">under AI Agents</span></div>
+          <div class="count" style="color:var(--accent)">11</div>
+          <div class="trend"><span class="up">+ 58%</span></div>
+        </div>
+        <div class="ranking-row" onclick="show('direction')">
+          <div class="rank">→</div>
+          <div><div class="uni" style="font-size:16px">Sycophancy in Chatbots</div><span class="country">under LLM User Study</span></div>
+          <div class="count" style="color:var(--accent)">9</div>
+          <div class="trend"><span class="up">+ 50%</span></div>
+        </div>
+      </div>
+
+      <!-- Direction heat -->
+      <div class="sec-head" style="margin-top:50px">
+        <div>
+          <span class="kicker">Topic heat · last 30 days</span>
+          <h2>Topic <em>Heat</em></h2>
+        </div>
+      </div>
+      <div class="bars">
+        <div class="bar-row"><div class="lab">Human-AI Interaction</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num">68</div></div>
+        <div class="bar-row"><div class="lab">Trust &amp; Reliance</div><div class="track"><div class="fill" style="width:72%"></div></div><div class="num">49</div></div>
+        <div class="bar-row"><div class="lab">AI Agents</div><div class="track"><div class="fill" style="width:64%"></div></div><div class="num">44</div></div>
+        <div class="bar-row"><div class="lab">Explainable AI</div><div class="track"><div class="fill" style="width:52%"></div></div><div class="num">35</div></div>
+        <div class="bar-row"><div class="lab">AI-assisted Decision</div><div class="track"><div class="fill" style="width:46%"></div></div><div class="num">31</div></div>
+        <div class="bar-row"><div class="lab">LLM User Study</div><div class="track"><div class="fill" style="width:43%"></div></div><div class="num">29</div></div>
+        <div class="bar-row"><div class="lab">Multi-Agent Collab</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="num">23</div></div>
+        <div class="bar-row"><div class="lab">AI in Mental Health</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="num">20</div></div>
+        <div class="bar-row"><div class="lab">Responsible AI</div><div class="track"><div class="fill" style="width:25%"></div></div><div class="num">17</div></div>
+        <div class="bar-row"><div class="lab">AI in Education</div><div class="track"><div class="fill" style="width:22%"></div></div><div class="num">15</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider-orn">· · ·</div>
+
+  <!-- LATEST COLLAB PAPERS -->
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Latest high-relevance</span>
+      <h2>Latest <em>High-Relevance Papers</em> · HCAI ≥ 85</h2>
+    </div>
+    <div class="meta">Sorted by HCAI score · across all directions</div>
+  </div>
+
+  <div class="collab-list">
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">94<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">Calibrating Reliance: How Clinicians Use AI-Generated Explanations in Diagnostic Decisions</div>
+        <div class="cunis">Directions · Trust &amp; Reliance / XAI / Decision Support</div>
+        <div class="cmeta">Question · whether users over-rely on AI explanations · 84 radiologists · user experiment</div>
+      </div>
+      <div class="cdate">2026·05·31</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">91<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">When the Agent Drives: Designing Handoff Moments in LLM-Powered Co-Programming</div>
+        <div class="cunis">Directions · AI Agents / Human Control / Mixed-Initiative</div>
+        <div class="cmeta">Question · how humans control AI agents · 24 engineers · diary study 3 weeks</div>
+      </div>
+      <div class="cdate">2026·05·31</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">89<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">"It Listens, But Does It Hear?" — Affective Mismatch in AI Mental-Health Chatbots</div>
+        <div class="cunis">Directions · AI in Mental Health / Affective Computing</div>
+        <div class="cmeta">Question · gap between perceived empathy and clinical appropriateness · 142 students · 6-week field</div>
+      </div>
+      <div class="cdate">2026·05·30</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">87<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">Algorithm Appreciation Reconsidered: When Users Prefer AI Despite Equal Accuracy</div>
+        <div class="cunis">Directions · Trust &amp; Reliance / Algorithm Aversion</div>
+        <div class="cmeta">Question · how accountability framing shifts reliance · pre-registered replication · 4 task domains</div>
+      </div>
+      <div class="cdate">2026·05·30</div>
+    </div>
+    <div class="collab-item" onclick="show('paper-detail')">
+      <div class="collab-num">86<small>HCAI</small></div>
+      <div>
+        <div class="ctitle">Persuasive Defaults: How AI-Generated Recommendations Reshape Consumer Reasoning Online</div>
+        <div class="cunis">Directions · AI UX Evaluation / Human Factors</div>
+        <div class="cmeta">Question · persuasive effects of generative defaults · N=1,247 · three experiments</div>
+      </div>
+      <div class="cdate">2026·05·28</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">END OF FRONT PAGE · TURN TO PAPERS LIST →</div>
+
+</section>
+
+
+<!-- ============================ PAPERS LIST ============================ -->
+<section class="view" id="view-papers">
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Filterable database</span>
+      <h2>All <em>Papers</em></h2>
+    </div>
+    <div class="meta">312 papers · last 30 days</div>
+  </div>
+
+  <div class="list-layout">
+
+    <!-- Filter sidebar -->
+    <aside class="fside">
+
+      <h4>Publication Date</h4>
+      <label><input type="radio" name="time" /> Published today<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> Published in 7 days<span class="ct">0</span></label>
+      <label><input type="radio" name="time" checked /> Published in 30 days<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> Published in 90 days<span class="ct">0</span></label>
+      <label><input type="radio" name="time" /> Published in 1 year<span class="ct">0</span></label>
+
+      <h4>HCAI Score</h4>
+      <div class="slider-wrap">
+        <input type="range" min="50" max="100" value="70" />
+        <div class="slider-vals"><span>50</span><span>≥ <strong>70</strong></span><span>100</span></div>
+      </div>
+
+      <h4>Research Direction</h4>
+      <label><input type="checkbox" checked /> Human-AI Interaction<span class="ct">68</span></label>
+      <label><input type="checkbox" /> Trust &amp; Reliance<span class="ct">49</span></label>
+      <label><input type="checkbox" /> AI Agents<span class="ct">44</span></label>
+      <label><input type="checkbox" /> Explainable AI<span class="ct">35</span></label>
+      <label><input type="checkbox" /> AI-assisted Decision<span class="ct">31</span></label>
+      <label><input type="checkbox" /> LLM User Study<span class="ct">29</span></label>
+      <label><input type="checkbox" /> Multi-Agent Collab.<span class="ct">23</span></label>
+      <label><input type="checkbox" /> AI in Mental Health<span class="ct">20</span></label>
+      <label><input type="checkbox" /> Responsible AI<span class="ct">17</span></label>
+      <label><input type="checkbox" /> AI in Education<span class="ct">15</span></label>
+
+      <h4>Research Question</h4>
+      <label><input type="checkbox" /> Trust calibration<span class="ct">28</span></label>
+      <label><input type="checkbox" /> Overreliance<span class="ct">21</span></label>
+      <label><input type="checkbox" /> Human control of agents<span class="ct">18</span></label>
+      <label><input type="checkbox" /> Explanation understanding<span class="ct">16</span></label>
+      <label><input type="checkbox" /> AI feedback interpretation<span class="ct">15</span></label>
+      <label><input type="checkbox" /> AI acceptance<span class="ct">12</span></label>
+      <label><input type="checkbox" /> Role allocation<span class="ct">10</span></label>
+
+      <h4>Method</h4>
+      <label><input type="checkbox" /> User experiment<span class="ct">142</span></label>
+      <label><input type="checkbox" /> Interview<span class="ct">68</span></label>
+      <label><input type="checkbox" /> Survey<span class="ct">54</span></label>
+      <label><input type="checkbox" /> Log analysis<span class="ct">38</span></label>
+      <label><input type="checkbox" /> Prototype<span class="ct">71</span></label>
+      <label><input type="checkbox" /> Field study<span class="ct">29</span></label>
+      <label><input type="checkbox" /> Diary study<span class="ct">14</span></label>
+
+      <h4>Application Context</h4>
+      <label><input type="checkbox" /> Healthcare<span class="ct">42</span></label>
+      <label><input type="checkbox" /> Education<span class="ct">31</span></label>
+      <label><input type="checkbox" /> Programming<span class="ct">28</span></label>
+      <label><input type="checkbox" /> Writing<span class="ct">22</span></label>
+      <label><input type="checkbox" /> Mental health<span class="ct">20</span></label>
+      <label><input type="checkbox" /> Team collaboration<span class="ct">18</span></label>
+      <label><input type="checkbox" /> Recommendation<span class="ct">12</span></label>
+
+      <h4>User Group</h4>
+      <label><input type="checkbox" /> General users<span class="ct">98</span></label>
+      <label><input type="checkbox" /> Students<span class="ct">62</span></label>
+      <label><input type="checkbox" /> Clinicians<span class="ct">31</span></label>
+      <label><input type="checkbox" /> Developers<span class="ct">27</span></label>
+      <label><input type="checkbox" /> Teachers<span class="ct">14</span></label>
+      <label><input type="checkbox" /> Designers<span class="ct">9</span></label>
+
+      <h4>AI System Type</h4>
+      <label><input type="checkbox" /> LLM<span class="ct">128</span></label>
+      <label><input type="checkbox" /> AI Agent<span class="ct">52</span></label>
+      <label><input type="checkbox" /> Decision support<span class="ct">38</span></label>
+      <label><input type="checkbox" /> Generative AI tool<span class="ct">36</span></label>
+      <label><input type="checkbox" /> Recommender<span class="ct">14</span></label>
+
+      <h4>Contribution Type</h4>
+      <label><input type="checkbox" /> Empirical finding<span class="ct">182</span></label>
+      <label><input type="checkbox" /> System design<span class="ct">71</span></label>
+      <label><input type="checkbox" /> Evaluation framework<span class="ct">31</span></label>
+      <label><input type="checkbox" /> Theoretical model<span class="ct">18</span></label>
+      <label><input type="checkbox" /> Design implication<span class="ct">42</span></label>
+
+      <h4>Status</h4>
+      <label><input type="checkbox" /> Open Access<span class="ct">208</span></label>
+      <label><input type="checkbox" /> Preprint<span class="ct">122</span></label>
+      <label><input type="checkbox" /> Published<span class="ct">190</span></label>
+
+    </aside>
+
+    <!-- Right: filter chips + sort + list -->
+    <div>
+      <div class="filter-bar">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="text" placeholder="Search titles, authors, keywords…">
+        </div>
+        <span class="flabel">REGION</span>
+        <span class="chip on">All</span>
+        <span class="chip">US</span>
+        <span class="chip">UK / EU</span>
+        <span class="chip">CN</span>
+        <span class="chip">JP</span>
+        <span class="chip">SG</span>
+      </div>
+
+      <div class="sort-row">
+        <div class="count">312 papers total · showing 1–10</div>
+        <div class="sort-options">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:.18em;text-transform:uppercase">SORT</span>
+          <span class="so on">Latest</span>
+          <span class="so">HCAI Score</span>
+          <span class="so">Citations</span>
+          <span class="so">Schools</span>
+        </div>
+      </div>
+
+      <div class="paper-list">
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">01</div>
+          <div class="main">
+            <h3><em>Calibrating</em> Reliance: How Clinicians Use AI-Generated Explanations in Diagnostic Decisions</h3>
+            <div class="authors">Maya R. Kapoor, Lin Wei, A. P. Sundaram et al. · Stanford / CMU / U-Washington</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Explainable AI</span>
+              <span class="tag hi-score">HI score ≥ 90</span>
+              <span>arXiv:2406.18234</span><span class="sep">·</span><span>2026·05·31</span>
+            </div>
+            <p class="excerpt">A mixed-methods study with 84 radiologists examines how AI confidence shifts diagnostic agreement, finding under-reliance dominates ambiguous cases…</p>
+          </div>
+          <div class="score-col"><div class="score hi">94</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·31</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">02</div>
+          <div class="main">
+            <h3>When the Agent Drives: Designing <em>Handoff Moments</em> in LLM-Powered Co-Programming</h3>
+            <div class="authors">Jonas Berg, T. Yamamoto, Pei Chen et al. · CMU / Georgia Tech</div>
+            <div class="meta-row">
+              <span class="tag primary">AI Agents</span>
+              <span class="tag">LLM User Study</span>
+              <span>CHI 2026 LBW</span><span class="sep">·</span><span>2026·05·31</span>
+            </div>
+            <p class="excerpt">Diary studies with 24 software engineers propose four canonical handoff patterns and their failure modes in production environments.</p>
+          </div>
+          <div class="score-col"><div class="score hi">91</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·31</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">03</div>
+          <div class="main">
+            <h3>"<em>It Listens, But Does It Hear?</em>" — Affective Mismatch in AI Mental-Health Chatbots</h3>
+            <div class="authors">Wen-Hua Zhou, R. Banerjee, K. Iwata · Zhejiang University</div>
+            <div class="meta-row">
+              <span class="tag">Single-school</span>
+              <span class="tag primary">AI in Mental Health</span>
+              <span class="tag">Affective Computing</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+            </div>
+            <p class="excerpt">A 6-week field deployment with 142 students documents systematic gaps between user-perceived empathy and clinician-rated appropriateness.</p>
+          </div>
+          <div class="score-col"><div class="score hi">89</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·30</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">04</div>
+          <div class="main">
+            <h3>Algorithm <em>Appreciation</em> Reconsidered: When Users Prefer AI Despite Equal Accuracy</h3>
+            <div class="authors">Hannah Brooks, J. Tanaka, Ravi Iyengar · Northwestern / U-Tokyo</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Algorithm Aversion</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+            </div>
+            <p class="excerpt">A pre-registered replication of Logg et al. (2019) across four task domains finds appreciation effects reverse under accountability framing.</p>
+          </div>
+          <div class="score-col"><div class="score hi">87</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·30</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">05</div>
+          <div class="main">
+            <h3>Persuasive Defaults: How <em>AI-Generated</em> Recommendations Reshape Consumer Reasoning Online</h3>
+            <div class="authors">A. Bhattacharya, L. Tremblay, R. Goh · U-Michigan / Berkeley / NUS</div>
+            <div class="meta-row">
+              <span class="tag primary">AI UX Evaluation</span>
+              <span class="tag">Human Factors</span>
+              <span>CHI 2026</span><span class="sep">·</span><span>2026·05·28</span>
+            </div>
+            <p class="excerpt">Three experiments (N=1,247) show LLM-generated framings systematically narrow consideration sets even when users believe they are unaffected.</p>
+          </div>
+          <div class="score-col"><div class="score">86</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·28</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">06</div>
+          <div class="main">
+            <h3>Steering Multiple Minds: A <em>Control Interface</em> for Human Oversight of AI Agent Teams</h3>
+            <div class="authors">Ada Nakamura, Ben Olson, K. Pillai · MIT / Cornell / ETH / U-Tokyo</div>
+            <div class="meta-row">
+              <span class="tag primary">Multi-Agent Collaboration</span>
+              <span class="tag confirm-pending">affiliation pending</span>
+              <span>UIST 2026</span><span class="sep">·</span><span>2026·05·29</span>
+            </div>
+            <p class="excerpt">A visual control language for monitoring and intervening in agent teams, evaluated with 96 participants across three task complexities.</p>
+          </div>
+          <div class="score-col"><div class="score">82</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·29</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">07</div>
+          <div class="main">
+            <h3>Mental Models of Generative AI: A <em>Cross-Cultural</em> User Study</h3>
+            <div class="authors">Y. Saito, P. Andersson, M. Chowdhury · U-Tokyo / KTH / IIIT-D</div>
+            <div class="meta-row">
+              <span class="tag primary">Human-AI Interaction</span>
+              <span class="tag">LLM User Study</span>
+              <span>arXiv:2405.14021</span><span class="sep">·</span><span>2026·05·27</span>
+            </div>
+            <p class="excerpt">Interviews with 60 participants across Japan, Sweden and India reveal divergent mental models for LLM agency, error attribution and trust formation.</p>
+          </div>
+          <div class="score-col"><div class="score">81</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·27</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">08</div>
+          <div class="main">
+            <h3>Teachers as Co-Designers: Adapting <em>Generative AI</em> for Inclusive Classrooms</h3>
+            <div class="authors">L. Ferreira, Mei Lin, J. Hardcastle · UCL / NTU</div>
+            <div class="meta-row">
+              <span class="tag primary">AI in Education</span>
+              <span class="tag">Responsible AI</span>
+              <span>CHI 2026</span><span class="sep">·</span><span>2026·05·29</span>
+            </div>
+            <p class="excerpt">Participatory design with 18 teachers across two countries surfaces tensions around pedagogical authority, transparency and equity.</p>
+          </div>
+          <div class="score-col"><div class="score">78</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·29</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">09</div>
+          <div class="main">
+            <h3>The <em>Quiet</em> Hand-Off: Cognitive Load Patterns in AI-Assisted Surgical Robotics</h3>
+            <div class="authors">R. Singh, T. Sato, Y. Liu · Imperial College / U-Tokyo / SJTU</div>
+            <div class="meta-row">
+              <span class="tag primary">Human Factors</span>
+              <span class="tag">AI-assisted Decision</span>
+              <span>FAccT 2026</span><span class="sep">·</span><span>2026·05·26</span>
+            </div>
+            <p class="excerpt">Eye-tracking and EEG data from 28 surgeons in simulated procedures characterize cognitive load shifts at agent-takeover moments.</p>
+          </div>
+          <div class="score-col"><div class="score">77</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·26</div></div>
+        </div>
+
+        <div class="paper" onclick="show('paper-detail')">
+          <div class="num-col">10</div>
+          <div class="main">
+            <h3>Beyond Accuracy: <em>Trust Calibration</em> in Long-Term AI Companion Apps</h3>
+            <div class="authors">S. Park, N. Oliveira, F. Müller · KAIST / EPFL / TUM</div>
+            <div class="meta-row">
+              <span class="tag primary">Trust &amp; Reliance</span>
+              <span class="tag">Affective Computing</span>
+              <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·25</span>
+            </div>
+            <p class="excerpt">12-month longitudinal data from 312 users shows trust trajectories diverging at three distinct interaction phases, contradicting accuracy-driven models.</p>
+          </div>
+          <div class="score-col"><div class="score">75</div><div class="score-lab">HCAI Score</div><div class="date">2026·05·25</div></div>
+        </div>
+
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:14px;margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)">
+        <span style="cursor:pointer">‹ Prev</span>
+        <span style="color:var(--ink);border-bottom:1px solid var(--ink)">1</span>
+        <span style="cursor:pointer">2</span>
+        <span style="cursor:pointer">3</span>
+        <span>…</span>
+        <span style="cursor:pointer">32</span>
+        <span style="cursor:pointer">Next ›</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================ UNIVERSITY LIST ============================ -->
+<section class="view" id="view-universities">
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Phase I · 18 primary directions</span>
+      <h2>Research <em>Directions</em></h2>
+    </div>
+    <div class="meta">Default · by 30-day paper count</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">SCOPE</span>
+    <span class="chip on">All 18</span>
+    <span class="chip">Strong 22</span>
+    <span class="chip">Mid 13</span>
+    <span class="flabel" style="margin-left:24px">SORT</span>
+    <span class="chip on">30-day</span>
+    <span class="chip">7-day</span>
+    <span class="chip">Growth</span>
+    <span class="chip">Avg score</span>
+  </div>
+
+  <table class="uni-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Direction</th>
+        <th>Tier</th>
+        <th class="num">Today <span class="arr">↓</span></th>
+        <th class="num">7-day</th>
+        <th class="num">30-day</th>
+        <th class="num">1-year</th>
+        <th class="num">Questions</th>
+        <th class="num">Growth</th>
+        <th class="num">Ø Score</th>
+        <th>Top Questions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">01</td>
+        <td class="uname">Human-AI Interaction<span class="cn">primary direction</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">5</td><td class="num">18</td><td class="num">68</td><td class="num">412</td>
+        <td class="num">24</td>
+        <td class="cr">+ 17%<span class="cr-bar"><span class="crf" style="width:62%"></span></span></td>
+        <td class="num">82</td>
+        <td class="dirs">collaboration · role allocation · control · mental models</td>
+      </tr>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">02</td>
+        <td class="uname">Trust &amp; Reliance<span class="cn">trust calibration</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">3</td><td class="num">11</td><td class="num">49</td><td class="num">204</td>
+        <td class="num">18</td>
+        <td class="cr">+ 29%<span class="cr-bar"><span class="crf" style="width:72%"></span></span></td>
+        <td class="num">84</td>
+        <td class="dirs">overreliance · calibration · appreciation · explanation effects</td>
+      </tr>
+      <tr class="top3" onclick="show('uni-detail')">
+        <td class="rank-cell">03</td>
+        <td class="uname">AI Agents<span class="cn">high-growth</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">4</td><td class="num">12</td><td class="num">44</td><td class="num">186</td>
+        <td class="num">16</td>
+        <td class="cr">+ 42%<span class="cr-bar"><span class="crf" style="width:88%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">human control · handoff moments · agentic workflow</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">04</td>
+        <td class="uname">Explainable AI<span class="cn">with user study</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">2</td><td class="num">9</td><td class="num">35</td><td class="num">198</td>
+        <td class="num">14</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:42%"></span></span></td>
+        <td class="num">79</td>
+        <td class="dirs">understanding · length effect · confidence display</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">05</td>
+        <td class="uname">AI-assisted Decision<span class="cn">decision support</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">2</td><td class="num">8</td><td class="num">31</td><td class="num">156</td>
+        <td class="num">12</td>
+        <td class="cr">+ 19%<span class="cr-bar"><span class="crf" style="width:52%"></span></span></td>
+        <td class="num">80</td>
+        <td class="dirs">role allocation · acceptance · override behavior</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">06</td>
+        <td class="uname">LLM User Study<span class="cn">large-model UX</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">1</td><td class="num">7</td><td class="num">29</td><td class="num">142</td>
+        <td class="num">13</td>
+        <td class="cr">+ 38%<span class="cr-bar"><span class="crf" style="width:82%"></span></span></td>
+        <td class="num">78</td>
+        <td class="dirs">sycophancy · mental models · cross-cultural use</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">07</td>
+        <td class="uname">Multi-Agent Collab.<span class="cn">team UX</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">1</td><td class="num">6</td><td class="num">23</td><td class="num">96</td>
+        <td class="num">9</td>
+        <td class="cr">+ 100%<span class="cr-bar"><span class="crf" style="width:100%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">oversight · team task · trust propagation</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">08</td>
+        <td class="uname">AI in Mental Health<span class="cn">user-facing</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">mid</td>
+        <td class="num">1</td><td class="num">5</td><td class="num">20</td><td class="num">108</td>
+        <td class="num">10</td>
+        <td class="cr">+ 11%<span class="cr-bar"><span class="crf" style="width:38%"></span></span></td>
+        <td class="num">76</td>
+        <td class="dirs">affective mismatch · help-seeking · long-term trust</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">09</td>
+        <td class="uname">Responsible AI<span class="cn">user / society lens</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">1</td><td class="num">4</td><td class="num">17</td><td class="num">88</td>
+        <td class="num">8</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:40%"></span></span></td>
+        <td class="num">77</td>
+        <td class="dirs">accountability · fairness perception · transparency needs</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">10</td>
+        <td class="uname">AI in Education<span class="cn">human-in-the-loop</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">mid</td>
+        <td class="num">1</td><td class="num">4</td><td class="num">15</td><td class="num">94</td>
+        <td class="num">9</td>
+        <td class="cr">+ 25%<span class="cr-bar"><span class="crf" style="width:65%"></span></span></td>
+        <td class="num">75</td>
+        <td class="dirs">LLM feedback · pacing · teacher re-design</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">11</td>
+        <td class="uname">Affective Computing<span class="cn">affect / emotion</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">mid</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">14</td><td class="num">76</td>
+        <td class="num">7</td>
+        <td class="cr">+ 0%<span class="cr-bar"><span class="crf" style="width:25%"></span></span></td>
+        <td class="num">74</td>
+        <td class="dirs">recognition · empathy design · mis-aligned responses</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">12</td>
+        <td class="uname">Human Factors<span class="cn">cognitive ergonomics</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">12</td><td class="num">82</td>
+        <td class="num">9</td>
+        <td class="cr">+ 33%<span class="cr-bar"><span class="crf" style="width:78%"></span></span></td>
+        <td class="num">78</td>
+        <td class="dirs">cognitive load · situation awareness · error recovery</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">13</td>
+        <td class="uname">Algorithm Aversion<span class="cn">aversion / appreciation</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">1</td><td class="num">3</td><td class="num">11</td><td class="num">54</td>
+        <td class="num">6</td>
+        <td class="cr">+ 83%<span class="cr-bar"><span class="crf" style="width:95%"></span></span></td>
+        <td class="num">81</td>
+        <td class="dirs">accountability framing · accuracy perception · acceptance</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">14</td>
+        <td class="uname">AI UX Evaluation<span class="cn">UX of AI</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">0</td><td class="num">3</td><td class="num">10</td><td class="num">68</td>
+        <td class="num">7</td>
+        <td class="cr">+ 11%<span class="cr-bar"><span class="crf" style="width:38%"></span></span></td>
+        <td class="num">76</td>
+        <td class="dirs">evaluation frameworks · heuristics · long-term use</td>
+      </tr>
+      <tr onclick="show('uni-detail')">
+        <td class="rank-cell">15</td>
+        <td class="uname">Mixed-Initiative<span class="cn">initiative-switching</span></td>
+        <td class="mono" style="font-size:11px;color:var(--ink-mute);letter-spacing:.1em">strong</td>
+        <td class="num">0</td><td class="num">2</td><td class="num">9</td><td class="num">52</td>
+        <td class="num">6</td>
+        <td class="cr">+ 13%<span class="cr-bar"><span class="crf" style="width:42%"></span></span></td>
+        <td class="num">79</td>
+        <td class="dirs">initiative handoff · control granularity</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="scroll-hint">Showing top 15 of 18 directions · TURN PAGE FOR MORE</div>
+
+</section>
+
+
+<!-- ============================ PAPER DETAIL ============================ -->
+<section class="view" id="view-paper-detail">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="pd-grid">
+    <article>
+
+      <span class="kicker">Section · Trust &amp; Reliance</span>
+      <h1 class="pd-title">Calibrating <em>Reliance:</em> How Clinicians Use AI-Generated Explanations in Diagnostic Decisions</h1>
+
+      <p class="pd-byline">By Maya R. Kapoor, Lin Wei, A. P. Sundaram, Daniel Foster, Sarah Greene, J. Mukherjee, R. Park, &amp; seven others. Published 31 May 2026 on arXiv as a CHI 2026 LBW pre-print.</p>
+
+      <div class="pd-affil">
+        <div><span class="num">1</span>Stanford HAI · Stanford University</div>
+        <div><span class="num">2</span>Human-Computer Interaction Institute · Carnegie Mellon University</div>
+        <div><span class="num">3</span>Paul G. Allen School of CSE · University of Washington</div>
+      </div>
+
+      <div class="pd-tags">
+        <span class="tag primary">Trust &amp; Reliance</span>
+        <span class="tag">Explainable AI</span>
+        <span class="tag">AI-assisted Decision Making</span>
+        <span class="tag">Human Factors</span>
+        <span class="tag preprint">arXiv preprint</span>
+        <span class="tag hi-score">HI Score ≥ 90</span>
+      </div>
+
+      <p class="pd-abstract">We report on a mixed-methods study examining how confidence intervals embedded in AI-generated explanations shift diagnostic decisions in clinical radiology. Across 84 radiologists at two hospitals, we find that the dominant failure mode under ambiguity is not over-reliance but a systematic under-reliance — clinicians discount well-calibrated AI outputs when explanation length exceeds working-memory thresholds. We articulate three design principles for reliance calibration: temporal pacing, evidence framing, and contextual disagreement surfacing. Implications for clinical AI deployment and explanation interface design are discussed.</p>
+
+      <div class="pd-block">
+        <h3>Why HCAI · Classification Reasoning</h3>
+        <p class="reason">This paper satisfies several strong-relevance criteria simultaneously: the study object is <em>real human interaction with an AI decision-support system</em>; it presents a mixed-methods empirical study with 84 clinical users; it focuses on core research questions including <em>trust calibration</em>, <em>explanation understanding</em>, and <em>reliance behavior</em>; and it derives interpretable UX-oriented design principles. The abstract is free of algorithm-benchmark bias and surfaces multi-dimensional content — user experiment, AI system type, and evaluation metrics (trust, reliance, cognitive load). Across 7 scoring dimensions the paper receives <strong>94</strong>.</p>
+      </div>
+
+      <div class="pd-block">
+        <h3>Similar Work in This Direction</h3>
+        <div class="similar">
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">Beyond Accuracy: Trust Calibration in Long-Term AI Companion Apps</div><div class="sim-m">KAIST / EPFL / TUM · score 75 · 2026·05·25</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">Algorithm Appreciation Reconsidered: When Users Prefer AI Despite Equal Accuracy</div><div class="sim-m">Northwestern / U-Tokyo · score 87 · 2026·05·30</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">The Quiet Hand-Off: Cognitive Load in AI-Assisted Surgical Robotics</div><div class="sim-m">Imperial / U-Tokyo / SJTU · score 77 · 2026·05·26</div></div>
+          <div class="sim-item" onclick="show('paper-detail')"><div class="sim-t">From Disagreement to Decision: A Framework for Surfacing Clinician–AI Conflict</div><div class="sim-m">UCL / Oxford · score 73 · 2026·05·22</div></div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Aside column -->
+    <aside>
+
+      <div class="score-bigbox">
+        <div class="lab">HCAI Relevance Score</div>
+        <div class="big">94<small>/100</small></div>
+        <div class="desc">Definitively HCAI · auto-classified · 90+ high confidence</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Research Questions</div>
+        <ul style="list-style:none">
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">Do users over-rely on AI-generated explanations?</li>
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">How does explanation length affect trust calibration?</li>
+          <li style="font-family:var(--body);font-size:14px;color:var(--ink);padding:6px 0;line-height:1.45">Does an accountability frame correct reliance behavior?</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Application Context</div>
+        <div class="val">Clinical radiology diagnosis</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">User Group</div>
+        <div class="val">Clinicians · 84 radiologists at 2 hospitals</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">AI System Type</div>
+        <div class="val">AI decision support · with explanation</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Interaction Mode</div>
+        <div class="val">AI-assisted decision making</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Research Method</div>
+        <div class="val">Mixed methods · user experiment + semi-structured interviews</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Evaluation Metrics</div>
+        <ul style="font-family:var(--mono);font-size:11.5px;letter-spacing:.04em">
+          <li>· trust</li>
+          <li>· reliance</li>
+          <li>· diagnostic accuracy</li>
+          <li>· cognitive load</li>
+          <li>· decision time</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Contribution Type</div>
+        <div class="val">Empirical finding + design implication</div>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Read · Links</div>
+        <a class="lnk"><span>arXiv preprint</span><span class="arr">→</span></a>
+        <a class="lnk"><span>PDF (12 MB)</span><span class="arr">→</span></a>
+        <a class="lnk"><span>Project page</span><span class="arr">→</span></a>
+        <a class="lnk"><span>DOI · 10.48550/…</span><span class="arr">→</span></a>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Data Sources</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em">
+          <li>✓ arXiv · primary</li>
+          <li>✓ OpenAlex · matched DOI</li>
+          <li>✓ Semantic Scholar · 0 citations</li>
+          <li>– Crossref · pending</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Affiliations</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)">
+          <li>· Stanford University</li>
+          <li>· Carnegie Mellon University</li>
+          <li>· University of Washington</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Data Quality</div>
+        <ul style="font-family:var(--mono);font-size:11px;letter-spacing:.04em">
+          <li style="color:var(--teal)">✓ Auto-classification passed</li>
+          <li style="color:var(--teal)">✓ Research questions extracted</li>
+          <li style="color:var(--teal)">✓ Abstract complete</li>
+          <li style="color:var(--teal)">✓ DOI consistent</li>
+        </ul>
+      </div>
+
+      <div class="aside-block">
+        <div class="lab">Published</div>
+        <div class="val">2026·05·31 · arXiv</div>
+      </div>
+
+    </aside>
+  </div>
+
+</section>
+
+
+<!-- ============================ UNIVERSITY DETAIL ============================ -->
+<section class="view" id="view-uni-detail">
+
+  <div class="back-link" onclick="show('universities')">‹ BACK TO DIRECTIONS</div>
+
+  <div class="ud-hero">
+    <div>
+      <div class="country-stamp">
+        <span class="flag" style="background:var(--accent)"></span>
+        PRIMARY DIRECTION · TIER · STRONG
+        <span style="margin-left:10px">·</span>
+        <span>RANK <strong>02</strong> · 30-day</span>
+      </div>
+      <h1>Trust &amp; <em>Reliance</em></h1>
+      <div class="cn">trust calibration in AI</div>
+      <div class="aliases">
+        DEFINITION · Research on how users form, calibrate, and adjust trust in AI<br>
+        outputs — including over-reliance, under-reliance, and how explanation design,<br>
+        confidence display, and accountability framing shape reliance behavior.<br>
+        ALSO INDEXED AS · Trust in AI · Reliance · Overreliance · Algorithm Aversion · Algorithm Appreciation
+      </div>
+    </div>
+    <div class="ud-stats">
+      <div class="ud-stat"><div class="v acc">11</div><div class="l">7-day</div></div>
+      <div class="ud-stat"><div class="v">49</div><div class="l">30-day</div></div>
+      <div class="ud-stat"><div class="v">204</div><div class="l">1-year</div></div>
+      <div class="ud-stat"><div class="v">18</div><div class="l">Questions</div></div>
+      <div class="ud-stat"><div class="v acc">+ 29%</div><div class="l">vs prev 30</div></div>
+      <div class="ud-stat"><div class="v">84</div><div class="l">Ø HCAI Score</div></div>
+    </div>
+  </div>
+
+  <div class="ud-grid">
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Question composition</span>
+          <h2>Research <em>Questions</em></h2>
+        </div>
+      </div>
+
+      <div class="donut-row">
+        <div class="donut">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="65" stroke="#e8e1d2" stroke-width="24" fill="none"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#8b1e2d" stroke-width="24" fill="none"
+              stroke-dasharray="114.4 294.0" stroke-dashoffset="0"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#a87436" stroke-width="24" fill="none"
+              stroke-dasharray="85.8 322.6" stroke-dashoffset="-114.4"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#2c3e60" stroke-width="24" fill="none"
+              stroke-dasharray="65.3 343.1" stroke-dashoffset="-200.2"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#2d5a5a" stroke-width="24" fill="none"
+              stroke-dasharray="53.1 355.3" stroke-dashoffset="-265.5"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#6d1422" stroke-width="24" fill="none"
+              stroke-dasharray="44.9 363.5" stroke-dashoffset="-318.6"/>
+            <circle class="seg" cx="80" cy="80" r="65" stroke="#3a342c" stroke-width="24" fill="none"
+              stroke-dasharray="44.9 363.5" stroke-dashoffset="-363.5"/>
+          </svg>
+          <div class="ctr"><div class="num">204</div><div class="lab">papers · 1Y</div></div>
+        </div>
+        <div class="donut-legend">
+          <div class="dl"><span class="sw" style="background:#8b1e2d"></span>Over- / under-reliance <span class="pct">57 · 28%</span></div>
+          <div class="dl"><span class="sw" style="background:#a87436"></span>Trust calibration <span class="pct">43 · 21%</span></div>
+          <div class="dl"><span class="sw" style="background:#2c3e60"></span>Explanation effects <span class="pct">33 · 16%</span></div>
+          <div class="dl"><span class="sw" style="background:#2d5a5a"></span>Aversion / Appreciation <span class="pct">27 · 13%</span></div>
+          <div class="dl"><span class="sw" style="background:#6d1422"></span>Accountability framing <span class="pct">22 · 11%</span></div>
+          <div class="dl"><span class="sw" style="background:#3a342c"></span>Others (6 questions) <span class="pct">22 · 11%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Content structure</span>
+          <h2>Frequent <em>Content</em></h2>
+        </div>
+      </div>
+      <table class="partners-tbl">
+        <tr><td class="u">User experiment</td><td class="d">method</td><td class="n">68%</td></tr>
+        <tr><td class="u">Survey + behavior log</td><td class="d">method</td><td class="n">31%</td></tr>
+        <tr><td class="u">Healthcare decision</td><td class="d">context</td><td class="n">28%</td></tr>
+        <tr><td class="u">AI writing / coding aid</td><td class="d">context</td><td class="n">19%</td></tr>
+        <tr><td class="u">Recommender decisions</td><td class="d">context</td><td class="n">14%</td></tr>
+        <tr><td class="u">Clinicians</td><td class="d">user group</td><td class="n">22%</td></tr>
+        <tr><td class="u">General users</td><td class="d">user group</td><td class="n">51%</td></tr>
+        <tr><td class="u">trust</td><td class="d">metric</td><td class="n">91%</td></tr>
+        <tr><td class="u">reliance</td><td class="d">metric</td><td class="n">62%</td></tr>
+        <tr><td class="u">cognitive load</td><td class="d">metric</td><td class="n">28%</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Representative papers</span>
+      <h2>Recent <em>Papers</em></h2>
+    </div>
+    <div class="meta">Last 7 days · 11 papers</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">TIME</span>
+    <span class="chip on">7-day</span>
+    <span class="chip">30-day</span>
+    <span class="chip">90-day</span>
+    <span class="chip">1-year</span>
+    <span class="flabel" style="margin-left:24px">QUESTION</span>
+    <span class="chip on">All</span>
+    <span class="chip">Overreliance</span>
+    <span class="chip">Calibration</span>
+    <span class="chip">Explanation</span>
+    <span class="chip">Accountability</span>
+  </div>
+
+  <div class="paper-list">
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">01</div>
+      <div class="main">
+        <h3>Calibrating <em>Reliance:</em> How Clinicians Use AI-Generated Explanations in Diagnostic Decisions</h3>
+        <div class="authors">Maya R. Kapoor, A. P. Sundaram et al. · Question · do users over-rely on AI explanations</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">User experiment</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">N = 84 clinicians</span>
+          <span>arXiv preprint</span><span class="sep">·</span><span>2026·05·31</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score hi">94</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">02</div>
+      <div class="main">
+        <h3>Algorithm <em>Appreciation</em> Reconsidered: When Users Prefer AI Despite Equal Accuracy</h3>
+        <div class="authors">Hannah Brooks, J. Tanaka et al. · Question · accountability framing &amp; reliance</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">Pre-registered replication</span>
+          <span class="tag">4 task domains</span>
+          <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·30</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score hi">87</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">03</div>
+      <div class="main">
+        <h3>Beyond Accuracy: <em>Trust Calibration</em> in Long-Term AI Companion Apps</h3>
+        <div class="authors">S. Park, N. Oliveira et al. · Question · trust divergence over long-term use</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">12-month longitudinal</span>
+          <span class="tag">N = 312</span>
+          <span>CSCW 2026</span><span class="sep">·</span><span>2026·05·25</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score">75</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+    <div class="paper" onclick="show('paper-detail')">
+      <div class="num-col">04</div>
+      <div class="main">
+        <h3>From Disagreement to Decision: A Framework for Surfacing <em>Clinician–AI Conflict</em></h3>
+        <div class="authors">M. Patel, L. Akhter et al. · Question · how to surface disagreement</div>
+        <div class="meta-row">
+          <span class="tag primary">Trust &amp; Reliance</span>
+          <span class="tag">Prototype</span>
+          <span class="tag">Healthcare</span>
+          <span>FAccT 2026</span><span class="sep">·</span><span>2026·05·22</span>
+        </div>
+      </div>
+      <div class="score-col"><div class="score">73</div><div class="score-lab">HCAI</div></div>
+    </div>
+
+  </div>
+
+  <div class="sec-head" style="margin-top:36px">
+    <div>
+      <span class="kicker">Adjacent directions · most co-tagged</span>
+      <h2>Adjacent <em>Directions</em></h2>
+    </div>
+  </div>
+  <div class="adjacent-list" style="border-top:1px solid var(--ink)">
+    <div class="adj-row" onclick="show('uni-detail')"><div class="an">Explainable AI</div><div class="av">32<small>co-occurrence</small></div></div>
+    <div class="adj-row" onclick="show('uni-detail')"><div class="an">AI-assisted Decision</div><div class="av">28<small>co-occurrence</small></div></div>
+    <div class="adj-row" onclick="show('uni-detail')"><div class="an">Human-AI Interaction</div><div class="av">24<small>co-occurrence</small></div></div>
+    <div class="adj-row" onclick="show('uni-detail')"><div class="an">Algorithm Aversion</div><div class="av">18<small>co-occurrence</small></div></div>
+    <div class="adj-row" onclick="show('uni-detail')"><div class="an">Human Factors</div><div class="av">14<small>co-occurrence</small></div></div>
+  </div>
+
+  <div class="scroll-hint">Showing 4 / 49 · LOAD MORE PAPERS →</div>
+
+</section>
+
+
+
+<section class="view" id="view-collab">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · How directions relate</span>
+    <h2>Direction <em>Map</em></h2>
+    <p class="lead">18 primary directions · relationships derived from shared questions, methods, and application contexts</p>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">TIME</span>
+    <span class="chip">30-day</span>
+    <span class="chip">90-day</span>
+    <span class="chip on">1-year</span>
+    <span class="flabel" style="margin-left:24px">RELATION</span>
+    <span class="chip on">All</span>
+    <span class="chip">Co-occurrence</span>
+    <span class="chip">Method borrowing</span>
+    <span class="chip">Evolution</span>
+    <span class="flabel" style="margin-left:24px">TIER</span>
+    <span class="chip on">All</span>
+    <span class="chip">Core</span>
+    <span class="chip">Method</span>
+    <span class="chip">Applied</span>
+  </div>
+
+  <div class="net-wrap">
+    <div class="net-canvas">
+      <svg viewBox="0 0 970 540" xmlns="http://www.w3.org/2000/svg"><text class="axis-label" x="40" y="40">CORE</text><text class="axis-label" x="500" y="40" text-anchor="middle">METHOD / EVAL</text><text class="axis-label" x="900" y="40" text-anchor="end">APPLIED</text><line x1="370" y1="20" x2="370" y2="510" stroke="var(--rule-soft)" stroke-dasharray="3 4"/><line x1="730" y1="20" x2="730" y2="510" stroke="var(--rule-soft)" stroke-dasharray="3 4"/><line class="edge thicker" x1="280" y1="180" x2="300" y2="320"/><line class="edge thicker" x1="280" y1="180" x2="170" y2="260"/><line class="edge thicker" x1="300" y1="320" x2="170" y2="260"/><line class="edge thick" x1="280" y1="180" x2="150" y2="410"/><line class="edge thick" x1="150" y1="410" x2="300" y2="320"/><line class="edge thicker" x1="500" y1="270" x2="280" y2="180"/><line class="edge thick" x1="500" y1="270" x2="300" y2="320"/><line class="edge thick" x1="500" y1="270" x2="170" y2="260"/><line class="edge thicker cross" x1="500" y1="270" x2="680" y2="180"/><line class="edge thick cross" x1="500" y1="270" x2="560" y2="430"/><line class="edge thick cross" x1="500" y1="270" x2="420" y2="440"/><line class="edge thicker" x1="680" y1="180" x2="820" y2="250"/><line class="edge thick" x1="680" y1="180" x2="740" y2="360"/><line class="edge" x1="820" y1="250" x2="740" y2="360"/><line class="edge thick" x1="680" y1="180" x2="560" y2="430"/><line class="edge thick cross" x1="640" y1="90" x2="500" y2="270"/><line class="edge thick" x1="640" y1="90" x2="680" y2="180"/><line class="edge" x1="640" y1="90" x2="380" y2="80"/><line class="edge cross" x1="380" y1="80" x2="500" y2="270"/><line class="edge cross" x1="380" y1="80" x2="300" y2="320"/><line class="edge cross" x1="380" y1="80" x2="870" y2="470"/><line class="edge thick" x1="870" y1="120" x2="870" y2="470"/><line class="edge cross" x1="870" y1="120" x2="500" y2="270"/><line class="edge cross" x1="870" y1="120" x2="280" y2="180"/><line class="edge thick cross" x1="890" y1="380" x2="640" y2="90"/><line class="edge cross" x1="890" y1="380" x2="500" y2="270"/><line class="edge thick" x1="870" y1="470" x2="870" y2="120"/><line class="edge" x1="780" y1="470" x2="870" y2="470"/><line class="edge cross" x1="780" y1="470" x2="680" y2="180"/><line class="edge thick cross" x1="60" y1="340" x2="640" y2="90"/><line class="edge cross" x1="60" y1="340" x2="500" y2="270"/><line class="edge cross" x1="80" y1="170" x2="500" y2="270"/><line class="edge" x1="80" y1="170" x2="890" y2="380"/><line class="edge thick cross" x1="560" y1="430" x2="280" y2="180"/><line class="edge" x1="560" y1="430" x2="680" y2="180"/><line class="edge thick cross" x1="420" y1="440" x2="500" y2="270"/><line class="edge cross" x1="420" y1="440" x2="280" y2="180"/><line class="edge thick" x1="150" y1="410" x2="280" y2="180"/><line class="edge" x1="150" y1="410" x2="500" y2="270"/><g class="node us"><circle cx="500" cy="270" r="26"/><text x="500" y="307" text-anchor="middle">Human-AI Interaction</text></g><g class="node us"><circle cx="280" cy="180" r="22"/><text x="280" y="213" text-anchor="middle">Trust &amp; Reliance</text></g><g class="node us"><circle cx="300" cy="320" r="19"/><text x="300" y="350" text-anchor="middle">Explainable AI</text></g><g class="node us"><circle cx="170" cy="260" r="18"/><text x="170" y="289" text-anchor="middle">AI-assisted Decision</text></g><g class="node us"><circle cx="150" cy="410" r="15"/><text x="150" y="436" text-anchor="middle">Algorithm Aversion</text></g><g class="node eu"><circle cx="680" cy="180" r="22"/><text x="680" y="213" text-anchor="middle">AI Agents</text></g><g class="node eu"><circle cx="820" cy="250" r="17"/><text x="820" y="278" text-anchor="middle">Multi-Agent Collab.</text></g><g class="node eu"><circle cx="740" cy="360" r="15"/><text x="740" y="386" text-anchor="middle">Mixed-Initiative</text></g><g class="node eu"><circle cx="560" cy="430" r="17"/><text x="560" y="458" text-anchor="middle">Human Factors</text></g><g class="node eu"><circle cx="420" cy="440" r="15"/><text x="420" y="466" text-anchor="middle">AI UX Evaluation</text></g><g class="node eu"><circle cx="640" cy="90" r="18"/><text x="640" y="119" text-anchor="middle">LLM User Study</text></g><g class="node eu"><circle cx="380" cy="80" r="16"/><text x="380" y="107" text-anchor="middle">Responsible AI</text></g><g class="node asia"><circle cx="870" cy="120" r="16"/><text x="870" y="147" text-anchor="middle">AI in Mental Health</text></g><g class="node asia"><circle cx="890" cy="380" r="16"/><text x="890" y="407" text-anchor="middle">AI in Education</text></g><g class="node asia"><circle cx="870" cy="470" r="14"/><text x="870" y="495" text-anchor="middle">Affective Computing</text></g><g class="node asia"><circle cx="780" cy="470" r="12"/><text x="780" y="493" text-anchor="middle">Social Robotics</text></g><g class="node asia"><circle cx="60" cy="340" r="14"/><text x="60" y="365" text-anchor="middle">Generative AI Tools</text></g><g class="node asia"><circle cx="80" cy="170" r="13"/><text x="80" y="194" text-anchor="middle">AI-mediated Comm.</text></g></svg>
+    </div>
+    <div class="net-side">
+
+      <div class="panel">
+        <h4>Legend</h4>
+        <div class="legend-item"><span class="sw us"></span>Core directions (trust / decision / explanation / interaction)</div>
+        <div class="legend-item"><span class="sw eu"></span>Method / evaluation / factors</div>
+        <div class="legend-item"><span class="sw asia"></span>Applied contexts (mental health / education / affect)</div>
+        <div class="legend-item" style="margin-top:8px"><span class="line-sw"></span>Within-cluster</div>
+        <div class="legend-item"><span class="line-sw cross"></span>Cross-cluster (evolution / borrowing)</div>
+        <div class="legend-item" style="margin-top:8px;font-style:italic;color:var(--ink-mute);font-size:11.5px">Node size · 1Y paper count</div>
+      </div>
+
+      <div class="panel">
+        <h4>Relationship Insights</h4>
+        <div class="insight-row"><span class="il">Most central</span><span class="iv acc">Human-AI Interaction · degree 11</span></div>
+<div class="insight-row"><span class="il">Strongest pair</span><span class="iv">Trust × XAI · 32 co-occurring papers</span></div>
+<div class="insight-row"><span class="il">Fastest evolution</span><span class="iv acc">AI Agents → Multi-Agent Collab. · + 100%</span></div>
+<div class="insight-row"><span class="il">Newest link</span><span class="iv">LLM User Study × Responsible AI · 9 / 30d</span></div>
+<div class="insight-row"><span class="il">Isolated</span><span class="iv">0 · every direction has neighbors</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <div>
+      <span class="kicker">Top Direction Co-occurrences</span>
+      <h2>Top <em>Co-occurring Pairs</em></h2>
+    </div>
+    <div class="meta">Last 12 months · by joint paper count</div>
+  </div>
+
+  <table class="toppair-tbl">
+    <thead><tr>
+      <th>Direction pair</th>
+      <th class="r">Main shared content</th>
+      <th class="r">Co-occur (1Y)</th>
+    </tr></thead>
+    <tbody><tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × Explainable AI<small>cross-cluster</small></td><td class="dir">explanation effects on trust</td><td class="n">32</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × AI-assisted Decision<small>cross-cluster</small></td><td class="dir">diagnostic / decision reliance</td><td class="n">28</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI Agents × Multi-Agent Collab.<small>cross-cluster</small></td><td class="dir">human oversight of agents</td><td class="n">21</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI Agents × Mixed-Initiative<small>cross-cluster</small></td><td class="dir">handoff / initiative switching</td><td class="n">18</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Explainable AI × AI-assisted Decision<small>cross-cluster</small></td><td class="dir">explanation + recommendation</td><td class="n">17</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">LLM User Study × Responsible AI<small>cross-cluster</small></td><td class="dir">sycophancy / bias / misuse</td><td class="n">14</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Trust &amp; Reliance × Algorithm Aversion<small>cross-cluster</small></td><td class="dir">accountability framing</td><td class="n">13</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI in Mental Health × Affective Computing<small>cross-cluster</small></td><td class="dir">empathy / mis-alignment</td><td class="n">12</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">AI in Education × LLM User Study<small>cross-cluster</small></td><td class="dir">LLM feedback in learning</td><td class="n">11</td></tr>
+<tr onclick="show('uni-detail')"><td class="pair">Human Factors × AI Agents<small>cross-cluster</small></td><td class="dir">cognitive load / error recovery</td><td class="n">10</td></tr></tbody>
+  </table>
+
+</section>
+
+<section class="view" id="view-trends">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · 30 days vs previous 30</span>
+    <h2>Research <em>Trends</em></h2>
+    <p class="lead">18 sub-directions · 6-month window</p>
+  </div>
+
+  <div class="filter-bar">
+    <span class="flabel">GRANULARITY</span>
+    <span class="chip">7-day</span>
+    <span class="chip on">30-day</span>
+    <span class="chip">90-day</span>
+    <span class="chip">1-year</span>
+  </div>
+
+  <div class="trend-chart">
+    <div class="ct-head">
+      <h3>Top 6 directions · monthly volume</h3>
+      <div class="note">Monthly count of papers first entering the dashboard in each direction</div>
+    </div>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="38" y1="270.0" x2="842" y2="270.0"/><text class="axis-text" x="30" y="273.0" text-anchor="end">0</text><line class="grid" x1="38" y1="207.0" x2="842" y2="207.0"/><text class="axis-text" x="30" y="210.0" text-anchor="end">20</text><line class="grid" x1="38" y1="144.0" x2="842" y2="144.0"/><text class="axis-text" x="30" y="147.0" text-anchor="end">40</text><line class="grid" x1="38" y1="81.0" x2="842" y2="81.0"/><text class="axis-text" x="30" y="84.0" text-anchor="end">60</text><line class="grid" x1="38" y1="18.0" x2="842" y2="18.0"/><text class="axis-text" x="30" y="21.0" text-anchor="end">80</text><text class="axis-text" x="38.0" y="286" text-anchor="middle">Jun</text><text class="axis-text" x="111.1" y="286" text-anchor="middle">Jul</text><text class="axis-text" x="184.2" y="286" text-anchor="middle">Aug</text><text class="axis-text" x="257.3" y="286" text-anchor="middle">Sep</text><text class="axis-text" x="330.4" y="286" text-anchor="middle">Oct</text><text class="axis-text" x="403.5" y="286" text-anchor="middle">Nov</text><text class="axis-text" x="476.5" y="286" text-anchor="middle">Dec</text><text class="axis-text" x="549.6" y="286" text-anchor="middle">Jan</text><text class="axis-text" x="622.7" y="286" text-anchor="middle">Feb</text><text class="axis-text" x="695.8" y="286" text-anchor="middle">Mar</text><text class="axis-text" x="768.9" y="286" text-anchor="middle">Apr</text><text class="axis-text" x="842.0" y="286" text-anchor="middle">May</text><line class="axis-line" x1="38" y1="270" x2="842" y2="270"/><path class="line" stroke="#8b1e2d" d="M 38.0,150.3 L 111.1,137.7 L 184.2,128.2 L 257.3,109.4 L 330.4,96.8 L 403.5,87.3 L 476.5,77.9 L 549.6,71.6 L 622.7,65.2 L 695.8,68.4 L 768.9,62.1 L 842.0,55.8"/><circle class="dot" cx="842.0" cy="55.8" r="4" fill="#8b1e2d"/><path class="line" stroke="#a87436" d="M 38.0,200.7 L 111.1,194.4 L 184.2,181.8 L 257.3,172.3 L 330.4,166.1 L 403.5,159.8 L 476.5,150.3 L 549.6,144.0 L 622.7,137.7 L 695.8,131.4 L 768.9,125.1 L 842.0,115.6"/><circle class="dot" cx="842.0" cy="115.6" r="4" fill="#a87436"/><path class="line" stroke="#2c3e60" d="M 38.0,232.2 L 111.1,222.8 L 184.2,213.3 L 257.3,200.7 L 330.4,184.9 L 403.5,172.3 L 476.5,162.9 L 549.6,156.6 L 622.7,150.3 L 695.8,144.0 L 768.9,137.7 L 842.0,131.4"/><circle class="dot" cx="842.0" cy="131.4" r="4" fill="#2c3e60"/><path class="line" stroke="#2d5a5a" d="M 38.0,181.8 L 111.1,184.9 L 184.2,181.8 L 257.3,178.7 L 330.4,175.5 L 403.5,172.3 L 476.5,175.5 L 549.6,169.2 L 622.7,166.1 L 695.8,166.1 L 768.9,162.9 L 842.0,159.8"/><circle class="dot" cx="842.0" cy="159.8" r="4" fill="#2d5a5a"/><path class="line" stroke="#6d1422" d="M 38.0,213.3 L 111.1,207.0 L 184.2,203.8 L 257.3,197.6 L 330.4,194.4 L 403.5,191.2 L 476.5,188.1 L 549.6,184.9 L 622.7,181.8 L 695.8,178.7 L 768.9,175.5 L 842.0,172.3"/><circle class="dot" cx="842.0" cy="172.3" r="4" fill="#6d1422"/><path class="line" stroke="#1a1612" d="M 38.0,254.2 L 111.1,244.8 L 184.2,235.3 L 257.3,225.9 L 330.4,216.4 L 403.5,210.2 L 476.5,203.8 L 549.6,197.6 L 622.7,191.2 L 695.8,188.1 L 768.9,181.8 L 842.0,178.7"/><circle class="dot" cx="842.0" cy="178.7" r="4" fill="#1a1612"/></svg>
+    <div class="legend"><div class="li"><span class="sw" style="background:#8b1e2d"></span>Human-AI Interaction<span class="ct">68</span></div> <div class="li"><span class="sw" style="background:#a87436"></span>Trust & Reliance<span class="ct">49</span></div> <div class="li"><span class="sw" style="background:#2c3e60"></span>AI Agents<span class="ct">44</span></div> <div class="li"><span class="sw" style="background:#2d5a5a"></span>Explainable AI<span class="ct">35</span></div> <div class="li"><span class="sw" style="background:#6d1422"></span>AI-assisted Decision<span class="ct">31</span></div> <div class="li"><span class="sw" style="background:#1a1612"></span>LLM User Study<span class="ct">29</span></div></div>
+  </div>
+
+  <div class="trend-grid">
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Direction movement</span>
+          <h2>Direction <em>Δ</em></h2>
+        </div>
+        <div class="meta">Direction Δ · 30 days vs previous 30</div>
+      </div>
+      <table class="trend-tbl">
+        <thead><tr>
+          <th>Direction</th>
+          <th class="r">30-day</th>
+          <th class="r">Prev 30-day</th>
+          <th class="r">Δ</th>
+          <th class="r">Trend</th>
+        </tr></thead>
+        <tbody><tr><td class="dir">Human-AI Interaction</td><td class="n">68</td><td class="n">58</td><td class="delta up">+ 10</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.4 23.3,14.1 34.4,11.8 45.6,8.7 56.7,5.6 67.9,4.1 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Trust & Reliance</td><td class="n">49</td><td class="n">38</td><td class="delta up">+ 11</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.1 23.3,16.2 34.4,13.4 45.6,11.5 56.7,7.7 67.9,3.9 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI Agents</td><td class="n">44</td><td class="n">31</td><td class="delta up">+ 13</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.9 23.3,15.6 34.4,12.5 45.6,11.0 56.7,7.2 67.9,4.1 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Explainable AI</td><td class="n">35</td><td class="n">31</td><td class="delta up">+ 4</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,17.7 34.4,14.3 45.6,14.3 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI-assisted Decision</td><td class="n">31</td><td class="n">26</td><td class="delta up">+ 5</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.6 23.3,16.6 34.4,14.3 45.6,12.1 56.7,7.7 67.9,5.4 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">LLM User Study</td><td class="n">29</td><td class="n">21</td><td class="delta up">+ 8</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.3 23.3,15.7 34.4,13.0 45.6,11.7 56.7,7.7 67.9,3.7 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Multi-Agent Collab.</td><td class="n">23</td><td class="n">14</td><td class="delta up">+ 9</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.5 23.3,15.1 34.4,12.8 45.6,11.6 56.7,8.1 67.9,4.5 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI in Mental Health</td><td class="n">20</td><td class="n">18</td><td class="delta up">+ 2</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,16.0 23.3,16.0 34.4,16.0 45.6,11.0 56.7,11.0 67.9,6.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Responsible AI</td><td class="n">17</td><td class="n">15</td><td class="delta up">+ 2</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,14.3 34.4,11.0 45.6,7.7 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI in Education</td><td class="n">15</td><td class="n">12</td><td class="delta up">+ 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,14.3 34.4,11.0 45.6,11.0 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Affective Computing</td><td class="n">14</td><td class="n">14</td><td class="delta flat">—</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,11.0 23.3,1.0 34.4,1.0 45.6,1.0 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Human Factors</td><td class="n">12</td><td class="n">9</td><td class="delta up">+ 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,17.7 23.3,17.7 34.4,14.3 45.6,11.0 56.7,7.7 67.9,4.3 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Algorithm Aversion</td><td class="n">11</td><td class="n">6</td><td class="delta up">+ 5</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,18.5 23.3,18.5 34.4,16.0 45.6,13.5 56.7,8.5 67.9,6.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">AI UX Evaluation</td><td class="n">10</td><td class="n">9</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,7.7 34.4,7.7 45.6,7.7 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Mixed-Initiative</td><td class="n">9</td><td class="n">8</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,14.3 23.3,14.3 34.4,7.7 45.6,7.7 56.7,1.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Conversational UX</td><td class="n">8</td><td class="n">11</td><td class="delta dn">− 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,1.0 12.1,1.0 23.3,1.0 34.4,6.0 45.6,6.0 56.7,11.0 67.9,16.0 79.0,21.0"/><circle cx="79.0" cy="21.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Robotics UX</td><td class="n">7</td><td class="n">6</td><td class="delta up">+ 1</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,21.0 12.1,21.0 23.3,11.0 34.4,11.0 45.6,11.0 56.7,11.0 67.9,1.0 79.0,1.0"/><circle cx="79.0" cy="1.0" r="2" fill="var(--accent)"/></svg></td></tr><tr><td class="dir">Privacy & Surveillance</td><td class="n">6</td><td class="n">9</td><td class="delta dn">− 3</td><td class="spark"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="var(--accent)" stroke-width="1.4" points="1.0,1.0 12.1,1.0 23.3,6.0 34.4,6.0 45.6,6.0 56.7,11.0 67.9,16.0 79.0,21.0"/><circle cx="79.0" cy="21.0" r="2" fill="var(--accent)"/></svg></td></tr></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <div class="emerging">
+        <h3>Emerging Topics</h3>
+        <div class="sub">First appearing frequently in last 90 days · algorithm + human review</div>
+        <div class="topic"><div class="rank">01</div><div class="name">Agentic Workflow UX</div><div class="ct">+ 19</div></div><div class="topic"><div class="rank">02</div><div class="name">AI Companionship Longitudinal</div><div class="ct">+ 14</div></div><div class="topic"><div class="rank">03</div><div class="name">LLM Pair Programming Failure</div><div class="ct">+ 13</div></div><div class="topic"><div class="rank">04</div><div class="name">Cross-Cultural LLM Mental Models</div><div class="ct">+ 11</div></div><div class="topic"><div class="rank">05</div><div class="name">AI Authorship & Attribution</div><div class="ct">+ 10</div></div><div class="topic"><div class="rank">06</div><div class="name">Sycophancy in Chatbots</div><div class="ct">+ 9</div></div>
+      </div>
+
+      <div class="growth-schools">
+        <h3>High-Growth Schools</h3>
+        <div class="sub">Increase in 30-day paper count vs previous 30 days</div>
+        <div class="growth-row"><span class="gn">Zhejiang University</span><span class="gv">+ 12</span><span class="gd">Trust · LLM UX</span></div><div class="growth-row"><span class="gn">UCL</span><span class="gv">+ 9</span><span class="gd">AI Mental Health · Ethics</span></div><div class="growth-row"><span class="gn">Carnegie Mellon</span><span class="gv">+ 8</span><span class="gd">Agents · Repair</span></div><div class="growth-row"><span class="gn">KAIST</span><span class="gv">+ 6</span><span class="gd">Trust Calibration</span></div><div class="growth-row"><span class="gn">Cornell</span><span class="gv">+ 5</span><span class="gd">CSCW · UX</span></div><div class="growth-row"><span class="gn">U-Tokyo</span><span class="gv">+ 5</span><span class="gd">Multi-Agent · Human Factors</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<section class="view" id="view-compare">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="p2-hero">
+    <span class="kicker">Phase II · Side-by-side · 2–5 directions</span>
+    <h2>Direction <em>Comparison</em></h2>
+    <p class="lead">Comparing 4 directions · how research questions, methods, contexts, metrics and entry points differ</p>
+  </div>
+
+  <div class="cmp-selector">
+    <div class="lab">Select directions to compare (up to 5)</div>
+    <div class="pool"><span class="cmp-chip on">Trust &amp; Reliance</span><span class="cmp-chip on">AI Agents</span><span class="cmp-chip on">Explainable AI</span><span class="cmp-chip on">LLM User Study</span><span class="cmp-chip ">AI-assisted Decision</span><span class="cmp-chip ">Multi-Agent Collab.</span><span class="cmp-chip ">AI in Mental Health</span><span class="cmp-chip ">AI in Education</span><span class="cmp-chip ">Human Factors</span><span class="cmp-chip ">Algorithm Aversion</span><span class="cmp-chip ">Responsible AI</span><span class="cmp-chip ">Affective Computing</span></div>
+    <div class="status">
+      <span>Selected · 4 / 5</span>
+      <span class="reset">Reset</span>
+    </div>
+  </div>
+
+  <div class="cmp-grid">
+    <div class="cmp-cell head" style="background:var(--ink)"></div>
+    <div class="cmp-cell school-head"><div class="name">Trust &amp; <em>Reliance</em></div><div class="meta">Strong · Primary</div></div><div class="cmp-cell school-head"><div class="name"><em>AI</em> Agents</div><div class="meta">Strong · High-growth</div></div><div class="cmp-cell school-head"><div class="name">Explainable <em>AI</em></div><div class="meta">Strong · with User Study</div></div><div class="cmp-cell school-head"><div class="name"><em>LLM</em> User Study</div><div class="meta">Strong · Newer</div></div>
+    <div class="cmp-cell row-label">30-day / 1-year</div><div class="cmp-cell"><div><div class="big">49</div><div class="sub">30-day</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">204</div><div class="sub">1-year</div></div></div><div class="cmp-cell"><div><div class="big">44</div><div class="sub">30-day</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">186</div><div class="sub">1-year</div></div></div><div class="cmp-cell"><div><div class="big">35</div><div class="sub">30-day</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">198</div><div class="sub">1-year</div></div></div><div class="cmp-cell"><div><div class="big">29</div><div class="sub">30-day</div></div><div style="margin-top:10px"><div class="big" style="font-size:24px;color:var(--ink-mute)">142</div><div class="sub">1-year</div></div></div><div class="cmp-cell row-label">Growth</div><div class="cmp-cell"><div class="big acc">+ 29%</div><div class="sub">vs prev 30</div></div><div class="cmp-cell"><div class="big acc">+ 42%</div><div class="sub">vs prev 30</div></div><div class="cmp-cell"><div class="big acc">+ 13%</div><div class="sub">vs prev 30</div></div><div class="cmp-cell"><div class="big acc">+ 38%</div><div class="sub">vs prev 30</div></div><div class="cmp-cell row-label">Ø HCAI Score</div><div class="cmp-cell"><div class="big acc">84</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">81</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">79</div><div class="sub">/ 100</div></div><div class="cmp-cell"><div class="big acc">78</div><div class="sub">/ 100</div></div><div class="cmp-cell row-label">Top Research Questions</div><div class="cmp-cell"><p class="pmini">Over-reliance · trust calibration · explanation effects · appreciation · accountability framing</p></div><div class="cmp-cell"><p class="pmini">Human control · handoff moments · agentic workflow · error recovery</p></div><div class="cmp-cell"><p class="pmini">Understanding · length effect · confidence display · perceived transparency</p></div><div class="cmp-cell"><p class="pmini">Sycophancy · cross-cultural mental models · repair loop · long-term use</p></div><div class="cmp-cell row-label">Methodology lean</div><div class="cmp-cell"><p class="pmini">User experiment <b>68%</b> · survey + log <b>31%</b> · longitudinal <b>11%</b></p></div><div class="cmp-cell"><p class="pmini">Prototype <b>52%</b> · user experiment <b>43%</b> · diary / field <b>22%</b></p></div><div class="cmp-cell"><p class="pmini">User experiment <b>74%</b> · explanation UI eval <b>32%</b> · heuristics <b>18%</b></p></div><div class="cmp-cell"><p class="pmini">User experiment <b>62%</b> · interview <b>41%</b> · field <b>27%</b></p></div><div class="cmp-cell row-label">Common contexts</div><div class="cmp-cell"><p class="pmini">Healthcare · AI writing / coding · recommender</p></div><div class="cmp-cell"><p class="pmini">Programming · office tasks · multi-agent teams</p></div><div class="cmp-cell"><p class="pmini">Healthcare · finance · recommender · legal</p></div><div class="cmp-cell"><p class="pmini">Writing · programming · learning · everyday chat</p></div><div class="cmp-cell row-label">Common metrics</div><div class="cmp-cell"><p class="pmini">trust · reliance · accuracy · cognitive load · decision time</p></div><div class="cmp-cell"><p class="pmini">control · task completion · efficiency · trust handoff</p></div><div class="cmp-cell"><p class="pmini">comprehension · satisfaction · trust · reliance</p></div><div class="cmp-cell"><p class="pmini">trust · usefulness · authorship · over-trust · perceived accuracy</p></div><div class="cmp-cell row-label">Psychology entry</div><div class="cmp-cell"><p class="pmini">Judgment &amp; decision · trust theory · dual-process · working memory</p></div><div class="cmp-cell"><p class="pmini">Situation awareness · mental models · human factors · automation theory</p></div><div class="cmp-cell"><p class="pmini">Cognitive psychology · attention · information display · individual differences</p></div><div class="cmp-cell"><p class="pmini">Conversational pragmatics · cross-cultural psych · metacognition</p></div><div class="cmp-cell row-label">Representative paper</div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">Calibrating Reliance: How Clinicians Use AI Explanations</div><div class="rep-meta">Stanford · CMU · UW · HCAI 94</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">When the Agent Drives: Handoff Moments in Co-Programming</div><div class="rep-meta">CMU · GA Tech · HCAI 91</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">Visualizing High-Dimensional Feature Explanations</div><div class="rep-meta">UW · MIT · HCAI 82</div></div><div class="cmp-cell"><div class="rep-paper" onclick="show('paper-detail')">Mental Models of Generative AI: A Cross-Cultural Study</div><div class="rep-meta">UTokyo · KTH · IIIT-D · HCAI 81</div></div>
+  </div>
+
+</section>
+
+<section class="view" id="view-weekly">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="weekly-hero">
+    <span class="issue-no">Phase II · 2026 · Week 22 · May 25 – 31</span>
+    <h1>This Week in <em>HCAI</em> Research</h1>
+    <p class="lead">Compiled from HCAI papers added or updated between May 25 and May 31. 86 entries this week, spanning 14 of the 18 directions, with 5 new research questions surfacing.</p>
+    <button class="export-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+      Copy as Markdown
+    </button>
+  </div>
+
+  <div class="weekly-strip">
+    <div class="ws"><div class="l">New this week</div><div class="v acc">86</div><div class="d">vs 78 last week · + 10%</div></div>
+    <div class="ws"><div class="l">Collaborations</div><div class="v">38</div><div class="d">44% · 6-week high</div></div>
+    <div class="ws"><div class="l">Active directions</div><div class="v">14 / 18</div><div class="d">4 directions no new entries</div></div>
+    <div class="ws"><div class="l">Emerging topics</div><div class="v">2</div><div class="d">Agentic Workflow · LLM Pair Failure</div></div>
+  </div>
+
+  <div class="weekly-body">
+
+    <div>
+
+      <div class="weekly-section">
+        <h3>Headlines</h3>
+        <div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">01</div><div><div class="wh-t">Calibrating Reliance: How Clinicians Use <em>AI-Generated</em> Explanations</div><div class="wh-m">Stanford · CMU · UW · arXiv · HCAI 94</div><div class="wh-c">The strongest entry this week — a mixed-methods study with 84 radiologists that lays out three concrete design principles for reliance calibration.</div></div></div><div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">02</div><div><div class="wh-t">When the Agent Drives: Designing <em>Handoff Moments</em> in LLM Co-Programming</div><div class="wh-m">CMU · Georgia Tech · CHI 2026 LBW · HCAI 91</div><div class="wh-c">Three-week diary study with 24 engineers breaks the often-aspirational "seamless handoff" into four canonical, observable patterns.</div></div></div><div class="weekly-headline" onclick="show('paper-detail')"><div class="wh-num">03</div><div><div class="wh-t">Steering Multiple Minds: A <em>Control Interface</em> for Human Oversight of Agent Teams</div><div class="wh-m">MIT · Cornell · ETH · U-Tokyo · UIST 2026 · HCAI 82</div><div class="wh-c">Most ambitious of this week's 4-school papers — supervising agent teams is shaping up to be a defining 2026 HCI theme.</div></div></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>Notable Papers</h3>
+        <div class="weekly-mini">
+          <ul><li><span class="ln">Calibrating Reliance: How Clinicians Use AI Explanations</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">Stanford × CMU × UW</span></li><li><span class="ln">Steering Multiple Minds: Control Interface for Agent Teams</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">MIT × Cornell × ETH × U-Tokyo</span></li><li><span class="ln">When the Agent Drives: Handoff Moments in Co-Programming</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">CMU × Georgia Tech</span></li><li><span class="ln">Persuasive Defaults: AI Recommendations Reshape Reasoning</span><span class="lv" style="color:var(--ink-mute);font-size:11.5px;font-family:var(--mono);letter-spacing:.04em">U-Michigan × Berkeley × NUS</span></li></ul>
+        </div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>China · Research Update</h3>
+        <div class="weekly-mini"><p><em>Zhejiang University</em> added 9 papers this week, concentrated in <em>trust calibration</em> and <em>affective computing</em>; two of them — collaborations with CMU and Imperial — sit in the high-score band. <em>Tsinghua</em> added 6, mostly in <em>AI Agents</em> and <em>multi-agent</em> work. <em>SJTU</em>, <em>PKU</em> and <em>HKU</em> each contributed 3–5 entries.</p><p>The strongest China-overseas pair this week is <em>Imperial × SJTU</em> (AI-assisted surgery), followed by <em>UCL × Tsinghua</em> (responsible AI / ethics).</p></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>Overseas · Research Update</h3>
+        <div class="weekly-mini"><p><em>CMU</em> and <em>Stanford</em> together account for 23% of this week's new entries (12 + 11). <em>UCL</em> continues strong output in <em>AI mental health</em> with 6 new papers. <em>U-Tokyo</em> participated in this week's 4-school paper, making it the most-collaborated Asian node this period.</p><p>One small signal worth watching: both <em>EPFL</em> and <em>KAIST</em> entered the trust-calibration direction this week — worth seeing if it persists next issue.</p></div>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="weekly-section">
+        <h3>Most Active Directions</h3>
+        <div class="weekly-mini"><ul><li><span class="ln">Carnegie Mellon</span><span class="lv">12</span></li><li><span class="ln">Stanford</span><span class="lv">11</span></li><li><span class="ln">Zhejiang</span><span class="lv">9</span></li><li><span class="ln">UW</span><span class="lv">8</span></li><li><span class="ln">MIT</span><span class="lv">7</span></li><li><span class="ln">UCL</span><span class="lv">6</span></li><li><span class="ln">Tsinghua</span><span class="lv">6</span></li></ul></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>High-Frequency Directions</h3>
+        <div class="weekly-mini"><ul><li><span class="ln">Trust & Reliance</span><span class="lv">14</span></li><li><span class="ln">AI Agents</span><span class="lv">12</span></li><li><span class="ln">Human-AI Interaction</span><span class="lv">11</span></li><li><span class="ln">LLM User Study</span><span class="lv">9</span></li><li><span class="ln">AI-assisted Decision</span><span class="lv">7</span></li><li><span class="ln">AI in Mental Health</span><span class="lv">5</span></li></ul></div>
+      </div>
+
+      <div class="weekly-section">
+        <h3>Vs Last Week</h3>
+        <div class="weekly-vs">86 new entries this week, <em>up 10.3% from 78 last week</em>. Direction coverage rose from 12 to 14 of the 18 primary directions, a 6-week high. The clearest direction movement is <em>AI Agents</em>, with 12 new entries this week — 1.6× the trailing 4-week average.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="weekly-foot">Editor: HCAI Research Radar · auto-compiled + human review</div>
+
+</section>
+
+<section class="view" id="view-direction">
+
+  <div class="back-link" onclick="show('home')">‹ BACK TO FRONT PAGE</div>
+
+  <div class="dir-hero">
+    <div>
+      <span class="kicker">Phase II · Sub-direction Profile · Trust & Reliance</span>
+      <h1>Trust <em>&amp; Reliance</em></h1>
+      <p class="definition">Research on how users form, calibrate, and adjust trust in AI outputs — including over-reliance, under-reliance, and how explanation design, confidence display, and accountability framing shape reliance behavior.</p>
+    </div>
+    <div class="dir-stats">
+      <div class="dir-stat"><div class="v acc">49</div><div class="l">30-day</div></div>
+      <div class="dir-stat"><div class="v">204</div><div class="l">1-year</div></div>
+      <div class="dir-stat"><div class="v">22</div><div class="l">Active directions</div></div>
+      <div class="dir-stat"><div class="v acc">+ 11</div><div class="l">vs prev 30</div></div>
+      <div class="dir-stat"><div class="v">84</div><div class="l">Avg HCAI</div></div>
+      <div class="dir-stat"><div class="v acc">61%</div><div class="l">Collab rate</div></div>
+    </div>
+  </div>
+
+  <div class="trend-chart">
+    <div class="ct-head">
+      <h3>12-month trajectory</h3>
+      <div class="note">Monthly paper count in this direction over 12 months</div>
+    </div>
+    <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="40" y1="174.0" x2="742" y2="174.0"/><text class="axis-text" x="32" y="177.0" text-anchor="end">0</text><line class="grid" x1="40" y1="121.3" x2="742" y2="121.3"/><text class="axis-text" x="32" y="124.3" text-anchor="end">20</text><line class="grid" x1="40" y1="68.7" x2="742" y2="68.7"/><text class="axis-text" x="32" y="71.7" text-anchor="end">40</text><line class="grid" x1="40" y1="16.0" x2="742" y2="16.0"/><text class="axis-text" x="32" y="19.0" text-anchor="end">60</text><text class="axis-text" x="40.0" y="190" text-anchor="middle">Jun</text><text class="axis-text" x="103.8" y="190" text-anchor="middle">Jul</text><text class="axis-text" x="167.6" y="190" text-anchor="middle">Aug</text><text class="axis-text" x="231.5" y="190" text-anchor="middle">Sep</text><text class="axis-text" x="295.3" y="190" text-anchor="middle">Oct</text><text class="axis-text" x="359.1" y="190" text-anchor="middle">Nov</text><text class="axis-text" x="422.9" y="190" text-anchor="middle">Dec</text><text class="axis-text" x="486.7" y="190" text-anchor="middle">Jan</text><text class="axis-text" x="550.5" y="190" text-anchor="middle">Feb</text><text class="axis-text" x="614.4" y="190" text-anchor="middle">Mar</text><text class="axis-text" x="678.2" y="190" text-anchor="middle">Apr</text><text class="axis-text" x="742.0" y="190" text-anchor="middle">May</text><line class="axis-line" x1="40" y1="174" x2="742" y2="174"/><path d="M 40.0,174 40.0,116.1 L 103.8,110.8 L 167.6,100.3 L 231.5,92.4 L 295.3,87.1 L 359.1,81.8 L 422.9,73.9 L 486.7,68.7 L 550.5,63.4 L 614.4,58.1 L 678.2,52.9 L 742.0,45.0 L 742.0,174 Z" fill="var(--accent)" fill-opacity=".08"/><path class="line" stroke="var(--accent)" d="M 40.0,116.1 L 103.8,110.8 L 167.6,100.3 L 231.5,92.4 L 295.3,87.1 L 359.1,81.8 L 422.9,73.9 L 486.7,68.7 L 550.5,63.4 L 614.4,58.1 L 678.2,52.9 L 742.0,45.0"/><circle class="dot" cx="40.0" cy="116.1" r="3" fill="var(--accent)"/><circle class="dot" cx="103.8" cy="110.8" r="3" fill="var(--accent)"/><circle class="dot" cx="167.6" cy="100.3" r="3" fill="var(--accent)"/><circle class="dot" cx="231.5" cy="92.4" r="3" fill="var(--accent)"/><circle class="dot" cx="295.3" cy="87.1" r="3" fill="var(--accent)"/><circle class="dot" cx="359.1" cy="81.8" r="3" fill="var(--accent)"/><circle class="dot" cx="422.9" cy="73.9" r="3" fill="var(--accent)"/><circle class="dot" cx="486.7" cy="68.7" r="3" fill="var(--accent)"/><circle class="dot" cx="550.5" cy="63.4" r="3" fill="var(--accent)"/><circle class="dot" cx="614.4" cy="58.1" r="3" fill="var(--accent)"/><circle class="dot" cx="678.2" cy="52.9" r="3" fill="var(--accent)"/><circle class="dot" cx="742.0" cy="45.0" r="3" fill="var(--accent)"/></svg>
+  </div>
+
+  <div class="dir-grid">
+    <div class="dir-tops">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Most Active Directions in This Direction</span>
+          <h2>Active <em>Schools</em></h2>
+        </div>
+        <div class="meta">Last 1Y · % of direction</div>
+      </div>
+      <table>
+        <tbody><tr onclick="show('uni-detail')"><td class="r">01</td><td class="u">Stanford</td><td class="pc">8.8%</td><td class="n">18</td></tr><tr onclick="show('uni-detail')"><td class="r">02</td><td class="u">Carnegie Mellon</td><td class="pc">7.8%</td><td class="n">16</td></tr><tr onclick="show('uni-detail')"><td class="r">03</td><td class="u">UW</td><td class="pc">6.9%</td><td class="n">14</td></tr><tr onclick="show('uni-detail')"><td class="r">04</td><td class="u">MIT</td><td class="pc">5.4%</td><td class="n">11</td></tr><tr onclick="show('uni-detail')"><td class="r">05</td><td class="u">UCL</td><td class="pc">4.9%</td><td class="n">10</td></tr><tr onclick="show('uni-detail')"><td class="r">06</td><td class="u">Zhejiang</td><td class="pc">4.4%</td><td class="n">9</td></tr><tr onclick="show('uni-detail')"><td class="r">07</td><td class="u">ETH</td><td class="pc">3.9%</td><td class="n">8</td></tr><tr onclick="show('uni-detail')"><td class="r">08</td><td class="u">Cornell</td><td class="pc">3.4%</td><td class="n">7</td></tr><tr onclick="show('uni-detail')"><td class="r">09</td><td class="u">KAIST</td><td class="pc">2.9%</td><td class="n">6</td></tr><tr onclick="show('uni-detail')"><td class="r">10</td><td class="u">U-Tokyo</td><td class="pc">2.5%</td><td class="n">5</td></tr></tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Adjacent Directions</span>
+          <h2>Adjacent <em>Directions</em></h2>
+        </div>
+      </div>
+      <div class="adjacent-list"><div class="adj-row" onclick="show('direction')"><div class="an">Explainable AI</div><div class="av">32<small>co-occurrence</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">AI-assisted Decision</div><div class="av">28<small>co-occurrence</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Human-AI Interaction</div><div class="av">24<small>co-occurrence</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Algorithm Aversion</div><div class="av">18<small>co-occurrence</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Affective Computing</div><div class="av">11<small>co-occurrence</small></div></div><div class="adj-row" onclick="show('direction')"><div class="an">Responsible AI</div><div class="av">9<small>co-occurrence</small></div></div></div>
+
+      <div class="sec-head" style="margin-top:36px">
+        <div>
+          <span class="kicker">Related Sub-Topics</span>
+          <h2>Sub-<em>Topics</em></h2>
+        </div>
+      </div>
+      <div class="subtopics-chips"><span class="st-chip">Trust calibration<span class="ct">18</span></span><span class="st-chip">Reliance behavior<span class="ct">14</span></span><span class="st-chip">Algorithm aversion<span class="ct">11</span></span><span class="st-chip">Confidence display<span class="ct">9</span></span><span class="st-chip">Explanation length<span class="ct">7</span></span><span class="st-chip">Accountability framing<span class="ct">6</span></span><span class="st-chip">Under-reliance<span class="ct">6</span></span><span class="st-chip">Over-reliance<span class="ct">5</span></span><span class="st-chip">Disagreement surfacing<span class="ct">5</span></span><span class="st-chip">Longitudinal trust<span class="ct">4</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec-head" style="margin-top:36px">
+    <div>
+      <span class="kicker">Representative Papers in This Direction</span>
+      <h2>Representative <em>Papers</em></h2>
+    </div>
+    <div class="meta">Top 4 by HCAI score</div>
+  </div>
+  <div class="paper-list"><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px"><em>Calibrating Reliance:</em> How Clinicians Use AI-Generated Explanations</h3><div class="meta-row" style="margin-top:6px"><span>Stanford × CMU × UW · arXiv · HCAI 94</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">Algorithm <em>Appreciation</em> Reconsidered: Preferring AI Despite Equal Accuracy</h3><div class="meta-row" style="margin-top:6px"><span>Northwestern × U-Tokyo · CSCW 2026 · HCAI 87</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">Beyond Accuracy: <em>Trust Calibration</em> in Long-Term AI Companion Apps</h3><div class="meta-row" style="margin-top:6px"><span>KAIST × EPFL × TUM · CSCW 2026 · HCAI 75</span></div></div></div><div class="paper" onclick="show('paper-detail')" style="grid-template-columns:1fr"><div class="main"><h3 style="font-size:21px">From Disagreement to Decision: A Framework for <em>Clinician–AI Conflict</em></h3><div class="meta-row" style="margin-top:6px"><span>UCL × Oxford · FAccT 2026 · HCAI 73</span></div></div></div></div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="row">
+    <div class="col brand">
+      HCAI <span style="color:var(--accent)">Research</span> Radar
+      <div style="font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-top:8px;letter-spacing:.18em">— EST. 2026 —</div>
+    </div>
+    <div class="col">
+      <h5>About</h5>
+      <p>Every day at 00:00 Asia/Shanghai we pull HCAI-related papers newly added or updated in the past 72 hours from OpenAlex, arXiv, Semantic Scholar and Crossref. They are then normalized to host institutions, flagged for cross-school collaboration, scored against the HCAI rubric, and surfaced on the dashboard.</p>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>NEXT UPDATE · 2026·06·01 · 00:00 BEIJING</span>
+    <span>DATA SOURCES · 4/4 OK · LAST RUN · 00:00 BEIJING</span>
+  </div>
+</footer>
+
+<script>
+function show(view){
+  document.querySelectorAll('section.view').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.addEventListener('click',()=>show(b.dataset.view));
+});
+
+// Rank tab pseudo-toggle
+document.querySelectorAll('#rank-tabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#rank-tabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+  });
+});
+
+// Sort options & chips toggle
+document.querySelectorAll('.sort-options .so').forEach(s=>{
+  s.addEventListener('click',()=>{
+    s.parentElement.querySelectorAll('.so').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');
+  });
+});
+document.querySelectorAll('.filter-bar').forEach(bar=>{
+  bar.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      // toggle within sibling chip group
+      let prev=c.previousElementSibling, group=[c];
+      while(prev && prev.classList && prev.classList.contains('chip')){group.unshift(prev);prev=prev.previousElementSibling}
+      let next=c.nextElementSibling;
+      while(next && next.classList && next.classList.contains('chip')){group.push(next);next=next.nextElementSibling}
+      group.forEach(g=>g.classList.remove('on'));
+      c.classList.add('on');
+    });
+  });
+});
+
+// Pulse the live dot a touch slower if user prefers reduced motion
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('.live-dot').forEach(d=>d.style.animation='none');
+}
+
+// Editorial nav-tabs scroll controller
+(function(){
+  const wrap = document.querySelector('.tabs-wrap');
+  if (!wrap) return;
+  const nav = wrap.querySelector('nav.tabs');
+  const al = wrap.querySelector('.tabs-arrow-l');
+  const ar = wrap.querySelector('.tabs-arrow-r');
+
+  function update(){
+    const sl = nav.scrollLeft;
+    const max = nav.scrollWidth - nav.clientWidth;
+    // 2px tolerance for sub-pixel rounding
+    wrap.classList.toggle('can-left',  sl > 2);
+    wrap.classList.toggle('can-right', sl < max - 2);
+  }
+  function step(dir){
+    // scroll by ~70% of viewport width, snap to nearest tab boundary
+    const dx = Math.floor(nav.clientWidth * 0.7) * dir;
+    nav.scrollBy({left:dx, behavior:'smooth'});
+  }
+  al.addEventListener('click', ()=>step(-1));
+  ar.addEventListener('click', ()=>step(+1));
+  nav.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+
+  // Bring the active tab into view on load
+  const active = nav.querySelector('button.active');
+  if(active){
+    const tabCenter = active.offsetLeft + active.offsetWidth/2;
+    const target   = tabCenter - nav.clientWidth/2;
+    nav.scrollLeft = Math.max(0, target);
+  }
+  update();
+
+  // When show(view) is called, also center the newly active tab
+  const _origShow = window.show;
+  window.show = function(view){
+    _origShow.call(this, view);
+    const t = nav.querySelector('button[data-view="'+view+'"]');
+    if(t){
+      const tc = t.offsetLeft + t.offsetWidth/2;
+      nav.scrollTo({left: Math.max(0, tc - nav.clientWidth/2), behavior:'smooth'});
+    }
+    update();
+  };
+})();
+
+</script>
+
+<script src="/public/hcai-live.js?v=20260626-citations1" defer></script>
+</body>
+</html>

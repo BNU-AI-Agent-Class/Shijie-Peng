@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+.env
+data/db.json
+data/*.tmp
+coverage/
+dist/
+*.log
+.secrets/
