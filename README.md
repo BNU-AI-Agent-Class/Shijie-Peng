@@ -2,6 +2,11 @@
 
 面向 HCAI / Human-AI Interaction / Human-Centered AI 的研究方向追踪系统。当前版本包含可上线网站所需的静态原型托管、REST API、文件型数据仓库、真实学术数据源抓取、HCAI 打分、方向归类、待审池、更新日志和每日定时更新任务。
 
+## 运行
+
+npm install
+npm run dev
+
 ## 真实数据运行
 
 复制 `.env.example` 为 `.env` 后打开实时抓取：
