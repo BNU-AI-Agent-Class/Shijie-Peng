@@ -2,21 +2,19 @@
 
 面向 HCAI / Human-AI Interaction / Human-Centered AI 的研究方向追踪系统。当前版本包含可上线网站所需的静态原型托管、REST API、文件型数据仓库、真实学术数据源抓取、HCAI 打分、方向归类、待审池、更新日志和每日定时更新任务。
 
-## 本地演示
+## 运行
 
 ```bash
-npm run seed
+npm install
 npm run dev
 ```
 
-打开：
+启动后可访问：
 
-- 中文原型：http://localhost:3000/
-- 英文原型：http://localhost:3000/en
+- 中文首页：http://localhost:3000/
+- 英文首页：http://localhost:3000/en
 - 健康检查：http://localhost:3000/health
 - API 概览：http://localhost:3000/api/meta
-
-`npm run seed` 会写入演示数据，便于本地调试 UI 和 API。生产环境不要依赖 seed 数据。
 
 ## 真实数据运行
 
