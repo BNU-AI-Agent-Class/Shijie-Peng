@@ -4,7 +4,8 @@
 
 ## 运行
 
-```npm install
+```
+npm install
 npm run dev
 ```
 
